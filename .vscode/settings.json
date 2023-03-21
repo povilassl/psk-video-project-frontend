@@ -1,4 +1,1 @@
-{
-  "appService.defaultWebAppToDeploy": "/subscriptions/6129fea6-1007-43ca-8d7a-808d50cb46a5/resourceGroups/PSKVideoProjectResourceGroup/providers/Microsoft.Web/sites/PSKVideoProjectFrontendAppService",
-  "appService.deploySubpath": "."
-}
+{}
