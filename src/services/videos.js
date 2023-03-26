@@ -3,15 +3,16 @@ import axios from "axios";
 
 export async function getAllVideos() {
   
-    const response = 
-        await axios.get(`${apiUrl}videos`)
-        .then((response) => { console.log(response); })
-        .catch((error) => { console.log(error); })
-
-    return response.json();
+    return await axios.get(`${apiUrl}/Videos`)
 }
 
+export async function uploadVideo(video) {
+    return await axios.post(`${apiUrl}/Videos`, video)
+}
+
+
+// To test if API is working
 export async function getTest() {
     
-    return await axios.get(`${apiUrl}Test`)
+    return await axios.get(`${apiUrl}/Test`)
 }

@@ -1,7 +1,6 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import { getTest } from "./services/videos";
-import {apiUrl} from "./services/config";
 
 
 //NERADAU KUR KA GALECIAU PAKEISTI:D
@@ -13,11 +12,13 @@ function App() {
   const [test, setTest] = useState([]);
   
   useEffect(() => {
-    getTest().then((response) => console.log(response)).catch((error) => console.log(error));
+      .then((response) => { setTest(response.data);})
+      .catch((error) => { console.log(error); })
   }, []);
 
   return (
     <div className="App">
+      {test}
     </div>
   );
 }
