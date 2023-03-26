@@ -4,7 +4,9 @@ import { getTest } from "./services/videos";
 
 
 //NERADAU KUR KA GALECIAU PAKEISTI:D
-//TESTUOJU, PS NIEKAS MAN NEPATINKA CIA, NIEKO NESUPRANTU :DD
+//TESTUOJU, PS NIEKAS MAN NEPATINKA CIA, NIEKO NESUPRANTU :DD\
+
+// (-_-)
 
 function App() {
 
@@ -12,6 +14,7 @@ function App() {
   const [test, setTest] = useState([]);
   
   useEffect(() => {
+    getTest()
       .then((response) => { setTest(response.data);})
       .catch((error) => { console.log(error); })
   }, []);
