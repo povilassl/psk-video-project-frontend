@@ -1,8 +1,8 @@
-export const Video = ({ video, key }) => {
+export const Video = ({ video }) => {
     return (
         <div>
-            <h3>video stuff</h3>
-            <p>video stuff stuff</p>
+            <h3>{video.videoName}</h3>
+            <p>{video.likeCount}</p>
         </div>
     );
 }
