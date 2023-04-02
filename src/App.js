@@ -1,11 +1,16 @@
 import "./App.css";
-import { VideoList } from "./components/videoList";
+import {VideoList} from "./components/VideoList";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { VideoPage } from "./components/VideoPage";
 
 function App() {
   return (
-    <div className="App">
-      <VideoList />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<VideoList />} />
+        <Route path="/video/:videoId" element={<VideoPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

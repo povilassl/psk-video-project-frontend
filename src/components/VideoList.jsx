@@ -1,17 +1,17 @@
 import { getAllVideos } from "../services/videos";
 import React, { useState, useEffect } from 'react';
-import { Video } from "./video";
+import { Video } from "./Video";
 
 export const VideoList = () => {
 
     /* Container for videos in various fetch states */
     let container = () => {
         if (videos.state === 'fetching') {
-            return <p className="fetch_loading">Loading...</p>;
+            return <div className="fetch_loading_container">Loading...</div>;
         }
     
         else if (videos.state === 'failed') {
-            return <p className="fetch_failed">Failed to fetch data.</p>;
+            return <div className="fetch_failed_container">Failed to fetch data.</div>;
         }
         else if (videos.state === 'fetched') {
             return (
@@ -36,12 +36,13 @@ export const VideoList = () => {
         // to not fetch videos again if they are already fetched
         if (!videos.data) {
             setVideos({ ...videos, state: "fetching" })
+            
             getAllVideos()
                 .then((response) => { setVideos({ state: "fetched", data: response.data }) })
                 .catch((error) => { setVideos({ ...videos, state: "failed" }) })
         }
     }, []);
-
+console.log(videos);
     /* results */
     return(
         <div className="videos_container">
