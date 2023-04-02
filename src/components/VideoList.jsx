@@ -42,7 +42,6 @@ export const VideoList = () => {
                 .catch((error) => { setVideos({ ...videos, state: "failed" }) })
         }
     }, []);
-console.log(videos);
     /* results */
     return(
         <div className="videos_container">
