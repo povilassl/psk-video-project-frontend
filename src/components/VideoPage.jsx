@@ -20,7 +20,7 @@ export const VideoPage = () => {
                     <h3>Name: {video.data.videoName}</h3>
                     <img src={video.data.thumbnailUrl} alt="thumbnail" />
                     <p>Likes: {video.data.likeCount}</p>
-                    <p>Dsilikes: {video.data.dislikeCount}</p>
+                    <p>Dislikes: {video.data.dislikeCount}</p>
                     <p>Username: {video.data.username}</p>
                 </div>
             );
