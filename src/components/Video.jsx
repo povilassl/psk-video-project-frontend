@@ -5,6 +5,7 @@ export const Video = ({ video }) => {
         <div>
             <h3>Name: {video.videoName}</h3>
             <img src={video.thumbnailUrl} alt="thumbnail" />
+            <p>Views: {video.viewCount}</p>
             <p>Likes: {video.likeCount}</p>
             <p>Dsilikes: {video.dislikeCount}</p>
             <p>Username: {video.username}</p>
