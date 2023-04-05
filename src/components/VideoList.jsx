@@ -33,31 +33,30 @@ export const VideoList = () => {
         }
     );
 
-    //const [videoCount, setVideoCount] = useState(0);
+  //const [videoCount, setVideoCount] = useState(0);
 
-    useEffect(() => {
-        // to not fetch videos again if they are already fetched
-        if (!videos.data) {
-            setVideos({ ...videos, state: "fetching" })
-            
-            //TODO: lazy loading (fetching x videos at a time), rn it fetches all videos
-            getVideoCount()
-                .then( (response) =>
-                    {
-                        getAllVideos(0, response.data)
-                        .then((response) => { setVideos({ state: "fetched", data: response.data }) })
-                        .catch((error) => { setVideos({ ...videos, state: "failed" }) })
-                    }
-                )
-                .catch((error) => { setVideos({ ...videos, state: "failed" }) })
-            
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-    /* results */
-    return(
-        <div className="videos_container">
-            {container()}
-        </div>
-    )
-}
+  useEffect(() => {
+    // to not fetch videos again if they are already fetched
+    if (!videos.data) {
+      setVideos({ ...videos, state: "fetching" });
+
+      //TODO: lazy loading (fetching x videos at a time), rn it fetches all videos
+      getVideoCount()
+        .then((response) => {
+          getAllVideos(0, response.data)
+            .then((response) => {
+              setVideos({ state: "fetched", data: response.data });
+            })
+            .catch((error) => {
+              setVideos({ ...videos, state: "failed" });
+            });
+        })
+        .catch((error) => {
+          setVideos({ ...videos, state: "failed" });
+        });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  /* results */
+  return <div className="videos_container">{container()}</div>;
+};

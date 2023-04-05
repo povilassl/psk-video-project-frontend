@@ -5,29 +5,25 @@ import { Comment } from "./Comment";
 
 export const CommentSection = () => {
 
-    /* Container for video in various fetch states */
-    let container = () => {
-        if (comments.state === 'fetching') {
-            return <div className="fetch_loading_container">Loading...</div>;
-        }
-
-        else if (comments.state === 'failed') {
-            return <div className="fetch_failed_container">Failed to fetch data.</div>;
-        }
-
-        else if (comments.state === 'fetched') {
-            return (
-                <div className="comments_fetched_container">
-                    <h4>Comments:</h4>
-                    {comments.data.map((item) => (
-                        <Comment key={item.id} comment={item} />
-                    ))}
-                </div>
-            );
-        
-            
-        }
+  /* Container for comments in various fetch states */
+  let container = () => {
+    if (comments.state === "fetching") {
+      return <div className="fetch_loading_container">Loading...</div>;
+    } else if (comments.state === "failed") {
+      return (
+        <div className="fetch_failed_container">Failed to fetch data.</div>
+      );
+    } else if (comments.state === "fetched") {
+      return (
+        <div className="comments_fetched_container">
+          <h4>Comments:</h4>
+          {comments.data.map((item) => (
+            <Comment key={item.id} comment={item} />
+          ))}
+        </div>
+      );
     }
+  };
 
     const { videoId } = useParams();
  
