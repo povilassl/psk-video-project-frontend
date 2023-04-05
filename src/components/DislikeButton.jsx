@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import cn from "classnames";
 import { useParams } from "react-router-dom";
-import { addLike, removeLike } from "../services/videoInteractions";
+import { addDislike, removeDislike } from "../services/videoInteractions";
 
 import "../css/likeButtonStyle.scss";
 
-const LikeButton = () => {
+  const DislikeButton = () => {
     const { videoId } = useParams();
     const [liked, setLiked] = useState(null);
     //const [clicked, setClicked] = useState(false);
@@ -14,13 +14,13 @@ const LikeButton = () => {
     {
         if(liked)
         {
-          addLike(videoId)
-            .catch((error) => {console.log(error)}); 
+            addDislike(videoId)
+                .catch((error) => {console.log(error)}); 
         }
         else
         {
-          removeLike(videoId)
-            .catch((error) => {console.log(error)});
+            removeDislike(videoId)
+                .catch((error) => {console.log(error)});
         }
     }
 
@@ -36,11 +36,11 @@ const LikeButton = () => {
           liked,
         })}>
         <div className="like-button">
-          <span>Like</span>
+          <span>Dislike</span>
           <span className={cn("suffix", { liked })}>d</span>
         </div>
       </button>
     );
   };
   
-  export default LikeButton;
+  export default DislikeButton;

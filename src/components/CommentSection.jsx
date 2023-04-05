@@ -48,6 +48,7 @@ export const CommentSection = () => {
                 .then((response) => { setComments({ state: "fetched", data: response.data })})
                 .catch((error) => { setComments({ ...comments, state: "failed" })});
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     console.log(comments);
     return (

@@ -3,7 +3,8 @@ import { getAllVideos } from "../services/videos";
 import { useEffect, useState } from "react";
 import { CommentSection } from "./CommentSection";
 import { increaseViewCount } from "../services/videoInteractions";
-import { LikeButton } from "../components/LikeButton";
+import LikeButton from "../components/LikeButton";
+import DislikeButton from "../components/DislikeButton";
 
 export const VideoPage = () => {
 
@@ -27,11 +28,11 @@ export const VideoPage = () => {
                     <p>Views: {video.data.viewCount}</p>
                     <div >
                         <span style={spanStyle}>
-                            <LikeButton >Like</LikeButton>
+                            <LikeButton/>
                         </span>
                         <span style={spanStyle}>{video.data.likeCount}</span>
                         <span style={spanStyle}>
-                            <button >Dislike</button>
+                            <DislikeButton/>
                         </span>
                         <span style={spanStyle}>{video.data.dislikeCount}</span>
                     </div>
@@ -47,8 +48,6 @@ export const VideoPage = () => {
         }
     }
 
-    var likeButtonStyle ;
-    var dislikeButtonStyle;
     const spanStyle = { display: 'inline-block', padding: '5px'};
     const { videoId } = useParams();
 
@@ -70,9 +69,6 @@ export const VideoPage = () => {
         alert('Your view has been counted after 10 second of waiting in this page');        
       }
 
-    window.onload = function() {
-        setTimeout(myFunc, 10000);
-      }
 
     useEffect(() => {
         // to not fetch videos again if they are already fetched
@@ -83,7 +79,9 @@ export const VideoPage = () => {
                     setVideo({ state: "fetched", data: response.data.filter((item) => item.id === Number(videoId))[0] })                })
                 .catch((error) => { setVideo({ ...video, state: "failed" })});            
         }
-
+        var timer = setTimeout(myFunc, 10000);
+        return () => clearTimeout(timer);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     console.log(video);

@@ -3,7 +3,7 @@ import axios from "axios";
 
 export async function getAllVideos(start = 0, count = 20) {
 
-    return await axios.get(`${apiUrl}/Video/GetListOfVideos?startIndex=${start}&endIndex=${count}`)
+    return await axios.get(`${apiUrl}/Video/GetListOfVideos?startIndex=${start}&count=${count}`)
 }
 
 export async function uploadVideo(video) {
