@@ -23,12 +23,16 @@ export const VideoPage = () => {
                 <div className="video_fetched_container">
                     <h3>Name: {video.data.videoName}</h3>
                     <img src={video.data.thumbnailUrl} alt="thumbnaill" />
-                    //TODO: polling for new likes/dislikes
+                    {
+                        //TODO: polling for new likes/dislikes
+                    }
                     <p>Likes: {video.data.likeCount}</p>
                     <p>Dislikes: {video.data.dislikeCount}</p>
                     <p>Username: {video.data.username}</p>
 
-                    //TODO: refetch comments after posting a new one
+                    {
+                        //TODO: refetch comments after posting a new one}
+                    }
                     <CommentForm videoId={videoId}/>
                     {video.data.hasComments === true &&
                         //TODO: polling for new comments
