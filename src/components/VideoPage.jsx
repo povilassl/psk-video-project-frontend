@@ -1,8 +1,12 @@
 import { useParams } from "react-router-dom";
 import { getAllVideos } from "../services/videos";
 import { useEffect, useState } from "react";
+import { CommentSection } from "./CommentSection";
+import { CommentForm } from "./CommentForm";
 
 export const VideoPage = () => {
+
+    const { videoId } = useParams();
 
     /* Container for video in various fetch states */
     let container = () => {
@@ -18,16 +22,29 @@ export const VideoPage = () => {
             return (
                 <div className="video_fetched_container">
                     <h3>Name: {video.data.videoName}</h3>
-                    <img src={video.data.thumbnailUrl} alt="thumbnail" />
+                    <img src={video.data.thumbnailUrl} alt="thumbnaill" />
+                    {
+                        //TODO: polling for new likes/dislikes
+                    }
                     <p>Likes: {video.data.likeCount}</p>
                     <p>Dislikes: {video.data.dislikeCount}</p>
                     <p>Username: {video.data.username}</p>
+
+                    {
+                        //TODO: refetch comments after posting a new one}
+                    }
+                    <CommentForm videoId={videoId}/>
+                    {video.data.hasComments === true &&
+                        //TODO: polling for new comments
+                        <CommentSection />
+                    }
+                    {video.data.hasComments === false &&
+                        <h4>There are no comments for this video</h4>
+                    }
                 </div>
             );
         }
     }
-
-    const { videoId } = useParams();
 
     /* Fetching videos */
     const [video, setVideo] = useState(
@@ -40,14 +57,14 @@ export const VideoPage = () => {
     useEffect(() => {
         // to not fetch videos again if they are already fetched
         if (!video.data) {
-            setVideo({ ...video, state: "fetching" })
+            setVideo({ ...video, state: "fetching" });
             getAllVideos()
                 .then((response) => { setVideo({ state: "fetched", data: response.data.filter((item) => item.id === Number(videoId))[0] })})
-                .catch((error) => { setVideo({ ...video, state: "failed" })})
+                .catch((error) => { setVideo({ ...video, state: "failed" })});
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    console.log(video)
+    console.log(video);
     return (
         <div>
             {container()}
