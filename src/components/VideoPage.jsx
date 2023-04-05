@@ -2,8 +2,11 @@ import { useParams } from "react-router-dom";
 import { getAllVideos } from "../services/videos";
 import { useEffect, useState } from "react";
 import { CommentSection } from "./CommentSection";
+import { CommentForm } from "./CommentForm";
 
 export const VideoPage = () => {
+
+    const { videoId } = useParams();
 
     /* Container for video in various fetch states */
     let container = () => {
@@ -20,11 +23,16 @@ export const VideoPage = () => {
                 <div className="video_fetched_container">
                     <h3>Name: {video.data.videoName}</h3>
                     <img src={video.data.thumbnailUrl} alt="thumbnaill" />
+                    //TODO: polling for new likes/dislikes
                     <p>Likes: {video.data.likeCount}</p>
                     <p>Dislikes: {video.data.dislikeCount}</p>
                     <p>Username: {video.data.username}</p>
+
+                    //TODO: refetch comments after posting a new one
+                    <CommentForm videoId={videoId}/>
                     {video.data.hasComments === true &&
-                        <CommentSection></CommentSection>
+                        //TODO: polling for new comments
+                        <CommentSection />
                     }
                     {video.data.hasComments === false &&
                         <h4>There are no comments for this video</h4>
@@ -33,8 +41,6 @@ export const VideoPage = () => {
             );
         }
     }
-
-    const { videoId } = useParams();
 
     /* Fetching videos */
     const [video, setVideo] = useState(

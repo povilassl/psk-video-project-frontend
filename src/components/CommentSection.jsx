@@ -5,7 +5,7 @@ import { Comment } from "./Comment";
 
 export const CommentSection = () => {
 
-    /* Container for video in various fetch states */
+    /* Container for comments in various fetch states */
     let container = () => {
         if (comments.state === 'fetching') {
             return <div className="fetch_loading_container">Loading...</div>;
@@ -41,7 +41,7 @@ export const CommentSection = () => {
     );
 
     useEffect(() => {
-        // to not fetch videos again if they are already fetched
+        // to not fetch comments again if they are already fetched
         if (!comments.data) {
             setComments({ ...comments, state: "fetching" });
             getVideoComments(videoId)
