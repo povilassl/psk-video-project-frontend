@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+import cn from "classnames";
 import { ReactComponent as Hand } from "./hand.svg";
 
 const LikeButton = () => {

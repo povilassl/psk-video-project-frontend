@@ -3,6 +3,7 @@ import { getAllVideos } from "../services/videos";
 import { useEffect, useState } from "react";
 import { CommentSection } from "./CommentSection";
 import { increaseViewCount } from "../services/videoInteractions";
+import { LikeButton } from "../components/LikeButton";
 
 export const VideoPage = () => {
 
@@ -26,7 +27,7 @@ export const VideoPage = () => {
                     <p>Views: {video.data.viewCount}</p>
                     <div >
                         <span style={spanStyle}>
-                            <button >Like</button>
+                            <LikeButton >Like</LikeButton>
                         </span>
                         <span style={spanStyle}>{video.data.likeCount}</span>
                         <span style={spanStyle}>
