@@ -1,13 +1,16 @@
 import "./App.css";
-
-//NERADAU KUR KA GALECIAU PAKEISTI:D
-//TESTUOJU, PS NIEKAS MAN NEPATINKA CIA, NIEKO NESUPRANTU :DD
+import {VideoList} from "./components/VideoList";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { VideoPage } from "./components/VideoPage";
 
 function App() {
   return (
-    <div className="App">
-      PSK
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<VideoList />} />
+        <Route path="/video/:videoId" element={<VideoPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
