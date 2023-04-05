@@ -45,6 +45,7 @@ export const VideoPage = () => {
                 .then((response) => { setVideo({ state: "fetched", data: response.data.filter((item) => item.id === Number(videoId))[0] })})
                 .catch((error) => { setVideo({ ...video, state: "failed" })})
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     console.log(video)
     return (

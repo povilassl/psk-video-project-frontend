@@ -41,6 +41,7 @@ export const VideoList = () => {
                 .then((response) => { setVideos({ state: "fetched", data: response.data }) })
                 .catch((error) => { setVideos({ ...videos, state: "failed" }) })
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     /* results */
     return(
