@@ -23,11 +23,11 @@ export const VideoPage = () => {
                     <p>Likes: {video.data.likeCount}</p>
                     <p>Dislikes: {video.data.dislikeCount}</p>
                     <p>Username: {video.data.username}</p>
-                    {video.data.hasComments == true &&
+                    {video.data.hasComments === true &&
                         <CommentSection></CommentSection>
                     }
-                    {video.data.hasComments == false &&
-                        <p>Komentarų nėra</p>
+                    {video.data.hasComments === false &&
+                        <h4>There are no comments for this video</h4>
                     }
                 </div>
             );

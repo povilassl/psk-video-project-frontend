@@ -18,7 +18,7 @@ export const CommentSection = () => {
         else if (comments.state === 'fetched') {
             return (
                 <div className="comments_fetched_container">
-                    <p>Komentarai:</p>
+                    <h4>Comments:</h4>
                     {comments.data.map((item) => (
                         <Comment key={item.id} comment={item} />
                     ))}
