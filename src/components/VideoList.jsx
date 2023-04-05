@@ -29,8 +29,8 @@ export const VideoList = () => {
     data: null,
   });
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const [videoCount, setVideoCount] = useState(0);
+
+  //const [videoCount, setVideoCount] = useState(0);
 
   useEffect(() => {
     // to not fetch videos again if they are already fetched
