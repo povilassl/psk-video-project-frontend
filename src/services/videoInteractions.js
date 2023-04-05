@@ -7,5 +7,5 @@ export async function getVideoComments(videoId) {
 }
 
 export async function getVideoCount() {
-    return await axios.get(`${apiUrl}/Video/VideoInteractions/GetCountOfAllVideos`)
+    return await axios.get(`${apiUrl}/VideoInteractions/GetCountOfAllVideos`)
 }
