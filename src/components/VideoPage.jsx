@@ -6,11 +6,13 @@ import { CommentForm } from "./CommentForm";
 import { increaseViewCount } from "../services/videoInteractions";
 import LikeButton from "../components/LikeButton";
 import DislikeButton from "../components/DislikeButton";
+import "../css/commonStyles.css";
+import "../css/videoListPage.css";
+import Header from "./Header";
 
 export const VideoPage = () => {
 
     const { videoId } = useParams();
-    const spanStyle = { display: 'inline-block', padding: '5px'};
 
     /* Container for video in various fetch states */
     let container = () => {
@@ -25,20 +27,21 @@ export const VideoPage = () => {
         else if (video.state === 'fetched') {
             return (
                 <div className="video_fetched_container">
-                    <h3>Name: {video.data.videoName}</h3>
-                    <img src={video.data.thumbnailUrl} alt="thumbnaill" />
+                    <h3>{video.data.videoName}</h3>
                     {
                         //TODO: polling for new likes/dislikes
                     }
-                    <p>Views: {video.data.viewCount}</p>
-                    <div >
-                        <span style={spanStyle}><LikeButton/></span>
-                        <span style={spanStyle}>{video.data.likeCount}</span>
-                        <span style={spanStyle}><DislikeButton/></span>
-                        <span style={spanStyle}>{video.data.dislikeCount}</span>
+                    <p>Uploaded by: {video.data.username}</p>
+                    <div style={{marginLeft: '5px'}}>
+                        <span className="logoSpan"><img className='Logo' src = {require("../assets/eye.png")} alt='eye logo'/></span>
+                        <span className="numberSpan">{video.data.viewCount} </span>
                     </div>
-                    <p>Username: {video.data.username}</p>
-
+                    <div >
+                        <span className="inlineSpan"><LikeButton/></span>
+                        <span className="inlineSpan">{video.data.likeCount}</span>
+                        <span className="inlineSpan"><DislikeButton/></span>
+                        <span className="inlineSpan">{video.data.dislikeCount}</span>
+                    </div>
                     {
                         //TODO: refetch comments after posting a new one}
                     }
@@ -63,14 +66,16 @@ export const VideoPage = () => {
         }
     );
 
-    //TODO: live peržiūrų kitimas?
-    //Vėliau turėtų peržiūrų padidinimas priklausyti nuo video peržiūrėjimo trukmės
-    var myFunc = function() {
-        increaseViewCount(videoId)
-                .catch((error) => {console.log(error)});     
-    }
 
     useEffect(() => {
+
+        //TODO: live peržiūrų kitimas?
+        //Vėliau turėtų peržiūrų padidinimas priklausyti nuo video peržiūrėjimo trukmės
+        var myFunc = function() {
+            increaseViewCount(videoId)
+                    .catch((error) => {console.log(error)});     
+        }
+
         // to not fetch videos again if they are already fetched
         if (!video.data) {
             setVideo({ ...video, state: "fetching" });
@@ -85,6 +90,7 @@ export const VideoPage = () => {
     console.log(video);
     return (
         <div>
+            <Header/>
             {container()}
         </div>
     );
