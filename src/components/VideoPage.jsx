@@ -67,10 +67,7 @@ export const VideoPage = () => {
     //Vėliau turėtų peržiūrų padidinimas priklausyti nuo video peržiūrėjimo trukmės
     var myFunc = function() {
         increaseViewCount(videoId)
-                .catch((error) => {console.log(error)});
-         
-        //alertas panaudotas grynai veikimo tikrinimui
-        alert('Your view has been counted after 10 second of waiting in this page');        
+                .catch((error) => {console.log(error)});     
     }
 
     useEffect(() => {
