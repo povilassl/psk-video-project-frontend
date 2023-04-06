@@ -3,10 +3,14 @@ import { getAllVideos } from "../services/videos";
 import { useEffect, useState } from "react";
 import { CommentSection } from "./CommentSection";
 import { CommentForm } from "./CommentForm";
+import { increaseViewCount } from "../services/videoInteractions";
+import LikeButton from "../components/LikeButton";
+import DislikeButton from "../components/DislikeButton";
 
 export const VideoPage = () => {
 
     const { videoId } = useParams();
+    const spanStyle = { display: 'inline-block', padding: '5px'};
 
     /* Container for video in various fetch states */
     let container = () => {
@@ -26,8 +30,13 @@ export const VideoPage = () => {
                     {
                         //TODO: polling for new likes/dislikes
                     }
-                    <p>Likes: {video.data.likeCount}</p>
-                    <p>Dislikes: {video.data.dislikeCount}</p>
+                    <p>Views: {video.data.viewCount}</p>
+                    <div >
+                        <span style={spanStyle}><LikeButton/></span>
+                        <span style={spanStyle}>{video.data.likeCount}</span>
+                        <span style={spanStyle}><DislikeButton/></span>
+                        <span style={spanStyle}>{video.data.dislikeCount}</span>
+                    </div>
                     <p>Username: {video.data.username}</p>
 
                     {
@@ -54,6 +63,16 @@ export const VideoPage = () => {
         }
     );
 
+    //TODO: live peržiūrų kitimas?
+    //Vėliau turėtų peržiūrų padidinimas priklausyti nuo video peržiūrėjimo trukmės
+    var myFunc = function() {
+        increaseViewCount(videoId)
+                .catch((error) => {console.log(error)});
+         
+        //alertas panaudotas grynai veikimo tikrinimui
+        alert('Your view has been counted after 10 second of waiting in this page');        
+    }
+
     useEffect(() => {
         // to not fetch videos again if they are already fetched
         if (!video.data) {
@@ -62,7 +81,9 @@ export const VideoPage = () => {
                 .then((response) => { setVideo({ state: "fetched", data: response.data.filter((item) => item.id === Number(videoId))[0] })})
                 .catch((error) => { setVideo({ ...video, state: "failed" })});
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        var timer = setTimeout(myFunc, 10000);
+        return () => clearTimeout(timer);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     console.log(video);
     return (
