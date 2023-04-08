@@ -1,4 +1,5 @@
 import { RepliesSection } from "./RepliesSection";
+import { ReplyForm } from "./ReplyForm";
 
 export const Comment = ({ comment }) => {
 
@@ -14,7 +15,7 @@ export const Comment = ({ comment }) => {
             {comment.hasComments === false &&
                 <p>There are no replies for this comment</p>
             }
-            <p>Write reply:</p> 
+            <ReplyForm comment_id={comment.id}/>
             {comment.hasComments === true &&
                 //TODO: add button, which will show/load replies
                 <RepliesSection comment_id={comment.id}/>

@@ -23,7 +23,7 @@ export const ReplyForm = ({comment_id}) => {
 
     return (
         <div>
-            <h4>Comment on the video:</h4>
+            <p>Write reply:</p> 
             {replyData.status === 'success' && (
                 <p style={{ color: 'green' }}>Comment posted successfully!</p>
             )}
