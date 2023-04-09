@@ -1,0 +1,9 @@
+.thumbnail_container{
+    width: 300px;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 5px;
+    text-align: center;
+    position: relative;
+}
