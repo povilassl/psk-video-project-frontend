@@ -41,3 +41,16 @@ export async function addDislike(videoId) {
 export async function removeDislike(videoId) {
   return await axios.post(`${apiUrl}/VideoInteractions/RemoveDislike`,videoId)
 }
+export async function getCommentReplies(commentId) {
+    return await axios.get(`${apiUrl}/VideoInteractions/GetCommentReplies?commentId=${commentId}`)
+}
+
+export async function postReplyToComment(commentId, comment, username) {
+    let data = {
+        commentId: commentId,
+        comment: comment,
+        username: username
+    }
+
+    return await axios.post(`${apiUrl}/VideoInteractions/ReplyToAComment`, data)
+}
