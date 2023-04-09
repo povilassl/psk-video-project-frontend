@@ -39,8 +39,6 @@ export const VideoPage = () => {
 
             return (
                 <div className="video_fetched_container">
-
-
                     <AzureMediaPlayer src={video.data.videoURL} options={options}/>
                     <h3>{video.data.videoName}</h3>
                     {
