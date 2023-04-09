@@ -17,7 +17,7 @@ export const RepliesSection = ({ comment_id }) => {
                 <div className="comments_fetched_container" style={{marginLeft: '20px'}}>
                     <h4>Replies:</h4>
                     {comments.data.map((item) => (
-                        <Comment key={item.id} comment={item}/>
+                        <Comment key={item.id} comment={item} isReply={true}/>
                     ))}
                 </div>
             );
