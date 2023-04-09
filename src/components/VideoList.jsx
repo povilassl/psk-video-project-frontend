@@ -2,6 +2,8 @@ import { getAllVideos } from "../services/videos";
 import React, { useState, useEffect } from "react";
 import { Video } from "./Video";
 import { getVideoCount } from "../services/videoInteractions";
+import "../css/videoListPage.css";
+import Header from "./Header";
 
 export const VideoList = () => {
   /* Container for videos in various fetch states */
@@ -55,5 +57,5 @@ export const VideoList = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   /* results */
-  return <div className="videos_container">{container()}</div>;
+  return <div className="videos_container"> <Header/> {container()}</div>;
 };

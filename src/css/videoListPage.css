@@ -1,0 +1,32 @@
+div.videos_fetched_container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: 10px; 
+    grid-column-gap: 10px;
+}
+
+div.oneVideoDiv{
+    background-color: #f8f8f8;
+    box-shadow: 0 0 3px #666;
+    text-align: center;
+}
+
+img.Logo{
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+
+}
+
+div span.logoSpan{
+    display: inline-block;
+    padding: 0px;
+    vertical-align: middle;
+}
+
+div span.numberSpan{
+    display: inline-block;
+    margin-right: 25px;
+    padding: 5px;
+    vertical-align: middle;
+}

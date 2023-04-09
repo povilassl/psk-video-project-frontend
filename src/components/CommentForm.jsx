@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { postCommentOnVideo } from '../services/videoInteractions';
+import "../css/videoLikeDislikeButtonStyle.scss";
+import "../css/oneVideoPage.css";
 
 export const CommentForm = ({videoId}) => {
     const [commentData, setCommentData] = useState({
@@ -31,16 +33,20 @@ export const CommentForm = ({videoId}) => {
                 <p style={{ color: 'red' }}>Failed to post comment!</p>
             )}
             <form onSubmit={handleSubmit}>
-                <textarea
+                <textarea 
+                    className='commentTextArea'
                     value={commentData.comment}
                     onChange={(event) =>
                         setCommentData({ ...commentData, comment: event.target.value })
                     }
                     placeholder="Type your comment here..."
                 />
-                <button type="submit" disabled={commentData.status === 'submitting'}>
-                    {commentData.status === 'submitting' ? 'Submitting...' : 'Submit'}
-                </button>
+                <div>
+                    <button className='sumbitCommentButton' type="submit" disabled={commentData.status === 'submitting'} >
+                        {commentData.status === 'submitting' ? 'Submitting...' : 'Submit'}   
+                    </button>
+                </div>
+               
             </form>
         </div>
     );

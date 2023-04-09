@@ -1,0 +1,5 @@
+div span.inlineSpan{
+    display: inline-block;
+    padding: 5px;
+    vertical-align: middle;
+}
