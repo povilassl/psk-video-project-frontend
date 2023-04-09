@@ -36,12 +36,8 @@ export const VideoPage = () => {
                         <span className="logoSpan"><img className='Logo' src = {require("../assets/eye.png")} alt='eye logo'/></span>
                         <span className="numberSpan">{video.data.viewCount} </span>
                     </div>
-                    <div >
-                        <span className="inlineSpan"><LikeButton/></span>
-                        <span className="inlineSpan">{video.data.likeCount}</span>
-                        <span className="inlineSpan"><DislikeButton/></span>
-                        <span className="inlineSpan">{video.data.dislikeCount}</span>
-                    </div>
+                    <span className="inlineSpan"><LikeButton param={video.data.likeCount}/></span>
+                    <span className="inlineSpan"><DislikeButton param={video.data.dislikeCount}/></span> 
                     {
                         //TODO: refetch comments after posting a new one}
                     }

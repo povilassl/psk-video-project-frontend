@@ -21,6 +21,7 @@ div.header{
     height:30px;
     margin-left: 5px;
     margin-right: 10px;
+    cursor: pointer;
   }
 
   div.header .right{

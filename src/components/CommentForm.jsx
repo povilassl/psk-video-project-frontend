@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { postCommentOnVideo } from '../services/videoInteractions';
-import "../css/likeButtonStyle.scss";
+import "../css/videoLikeDislikeButtonStyle.scss";
 import "../css/oneVideoPage.css";
 
 export const CommentForm = ({videoId}) => {

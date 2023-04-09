@@ -1,13 +1,17 @@
-import "../css/header.css";
+import "../css/allPagesHeader.css";
 
 const Header = () => {
+    function handleClick() {
+        window.location.href = "/";
+      }
+
     return (
-        <div class="header">
-            <div class="left"/>
-            <div class="text">
-                <span>VIDEOTEKA</span>
+        <div className="header">
+            <div className="left"/>
+            <div className="text">
+                <span onClick={handleClick}>VIDEOTEKA</span>
             </div>
-            <div class="right"></div>
+            <div className="right"/>
         </div>
     );
   };

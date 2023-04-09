@@ -3,43 +3,57 @@ import cn from "classnames";
 import { useParams } from "react-router-dom";
 import { addDislike, removeDislike } from "../services/videoInteractions";
 
-import "../css/likeButtonStyle.scss";
+import "../css/videoLikeDislikeButtonStyle.scss";
 
-  const DislikeButton = () => {
+  const DislikeButton = (dislikeCount) => {
     const { videoId } = useParams();
-    const [liked, setLiked] = useState(null);
+    const [disliked, setLiked] = useState(null);
     //const [clicked, setClicked] = useState(false);
-  
-    function addOrRemove(liked)
+    const [changingClassName, setClass] = useState('like-button-wrapper');
+    const [dislikes, setDislikesCount] = useState(dislikeCount.param);
+
+    function addOrRemove(disliked)
     {
-        if(liked)
+        if(disliked)
         {
             addDislike(videoId)
-                .catch((error) => {console.log(error)}); 
+                .then(
+                  setLiked(disliked),
+                  setClass(cn("like-button-wrapper", {
+                    disliked})),
+                  setDislikesCount(dislikes+1)
+                )
+                .catch((error) => {console.log(error)});      
         }
         else
         {
             removeDislike(videoId)
-                .catch((error) => {console.log(error)});
+                .then(
+                  setLiked(disliked),
+                  setClass(cn("like-button-wrapper", {
+                    disliked})),
+                  setDislikesCount(dislikes-1)
+                )
+                .catch((error) => {console.log(error)});         
         }
     }
 
     return (
-      <button
-        onClick={() => {
-          setLiked(!liked);
-          addOrRemove(!liked)
-          
-        }}
-        //onAnimationEnd={() => setClicked(false)}
-        className={cn("like-button-wrapper", {
-          liked,
-        })}>
-        <div className="like-button">
-          <span>Dislike</span>
-          <span className={cn("suffix", { liked })}>d</span>
-        </div>
-      </button>
+      <div>
+        <span className="inlineSpan">
+        <button
+          onClick={() => {
+            addOrRemove(!disliked)       
+          }}
+          className={changingClassName}>
+          <div className="like-button">
+            <span>Dislike</span>
+            <span className={cn("suffix", { disliked })}>d</span>
+          </div>
+        </button>
+        </span>
+        <span className="inlineSpan">{dislikes}</span>
+      </div>
     );
   };
   

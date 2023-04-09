@@ -15,6 +15,7 @@ $primary: #54a0ff;
   font-size: 13px;
   font-weight: 600;
   background-color: transparent;
+  will-change: background-color;
 
   &::before {
     content: "";
@@ -37,6 +38,12 @@ $primary: #54a0ff;
     }
   }
 
+  &.disliked {
+    &::before {
+      background-color: $primary;
+    }
+  }
+
   .like-button {
     display: flex;
     align-items: center;
@@ -51,6 +58,11 @@ $primary: #54a0ff;
     transform: translateX(15px);
 
     &.liked {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    &.disliked {
       opacity: 1;
       transform: translateX(0);
     }
