@@ -9,6 +9,7 @@ import DislikeButton from "../components/DislikeButton";
 import "../css/commonStyles.css";
 import "../css/videoListPage.css";
 import Header from "./Header";
+import AzureMediaPlayer from './VideoPlayer';
 
 export const VideoPage = () => {
 
@@ -25,23 +26,37 @@ export const VideoPage = () => {
         }
 
         else if (video.state === 'fetched') {
+
+            const options = {
+                nativeControlsForTouch: false,
+                autoplay: true,
+                controls: true,
+                width: '640',
+                height: '400',
+                logo: { enabled: false },
+                poster: ''
+            };
+
             return (
                 <div className="video_fetched_container">
+
+
+                    <AzureMediaPlayer src={video.data.videoURL} options={options}/>
                     <h3>{video.data.videoName}</h3>
                     {
                         //TODO: polling for new likes/dislikes
                     }
                     <p>Uploaded by: {video.data.username}</p>
-                    <div style={{marginLeft: '5px'}}>
-                        <span className="logoSpan"><img className='Logo' src = {require("../assets/eye.png")} alt='eye logo'/></span>
+                    <div style={{ marginLeft: '5px' }}>
+                        <span className="logoSpan"><img className='Logo' src={require("../assets/eye.png")} alt='eye logo' /></span>
                         <span className="numberSpan">{video.data.viewCount} </span>
                     </div>
-                    <span className="inlineSpan"><LikeButton param={video.data.likeCount}/></span>
-                    <span className="inlineSpan"><DislikeButton param={video.data.dislikeCount}/></span> 
+                    <span className="inlineSpan"><LikeButton param={video.data.likeCount} /></span>
+                    <span className="inlineSpan"><DislikeButton param={video.data.dislikeCount} /></span>
                     {
                         //TODO: refetch comments after posting a new one}
                     }
-                    <CommentForm videoId={videoId}/>
+                    <CommentForm videoId={videoId} />
                     {video.data.hasComments === true &&
                         //TODO: polling for new comments
                         <CommentSection />
@@ -67,17 +82,17 @@ export const VideoPage = () => {
 
         //TODO: live peržiūrų kitimas?
         //Vėliau turėtų peržiūrų padidinimas priklausyti nuo video peržiūrėjimo trukmės
-        var myFunc = function() {
+        var myFunc = function () {
             increaseViewCount(videoId)
-                    .catch((error) => {console.log(error)});     
+                .catch((error) => { console.log(error) });
         }
 
         // to not fetch videos again if they are already fetched
         if (!video.data) {
             setVideo({ ...video, state: "fetching" });
             getAllVideos()
-                .then((response) => { setVideo({ state: "fetched", data: response.data.filter((item) => item.id === Number(videoId))[0] })})
-                .catch((error) => { setVideo({ ...video, state: "failed" })});
+                .then((response) => { setVideo({ state: "fetched", data: response.data.filter((item) => item.id === Number(videoId))[0] }) })
+                .catch((error) => { setVideo({ ...video, state: "failed" }) });
         }
         var timer = setTimeout(myFunc, 10000);
         return () => clearTimeout(timer);
@@ -86,7 +101,7 @@ export const VideoPage = () => {
     console.log(video);
     return (
         <div>
-            <Header/>
+            <Header />
             {container()}
         </div>
     );
