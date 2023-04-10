@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 import "../css/videoListPage.css";
 import "../css/commonStyles.css";
+import "../css/thumbnail.css"
 
 export const Video = ({ video }) => {
+    console.log(video);
     return (
         <div className="oneVideoDiv">
             <h3> {video.videoName}</h3>
-            <img src={video.thumbnailUrl} alt="thumbnail" />
+            <img className="thumbnail_container" src={video.thumbnailURL} alt="thumbnail" />
             <p>Uploaded by: {video.username}</p>
             <div> 
                 <span className="logoSpan"><img className='Logo' src = {require("../assets/eye.png")} alt='eye logo'/></span>
