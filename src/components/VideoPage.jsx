@@ -8,7 +8,6 @@ import LikeButton from "../components/LikeButton";
 import DislikeButton from "../components/DislikeButton";
 import "../css/commonStyles.css";
 import "../css/videoListPage.css";
-import Header from "./Header";
 
 export const VideoPage = () => {
 
@@ -86,7 +85,6 @@ export const VideoPage = () => {
     console.log(video);
     return (
         <div>
-            <Header/>
             {container()}
         </div>
     );
