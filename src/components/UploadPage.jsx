@@ -33,6 +33,7 @@ export function UploadPage() {
         setUploadState('success');
       } catch (error) {
         setUploadState('failed');
+        console.log(error);
       }
     };
 
@@ -41,7 +42,7 @@ export function UploadPage() {
             <h1>Video Upload</h1>
             {uploadState === 'failed' && (
                 <p className="error-message">
-                    Please fill in all fields and select the video and thumbnail files.
+                    Please fill in all fields and select the video and thumbnail files. Or there may be an error with the server...
                 </p>
             )}
             {uploadState === 'uploading' && <p className="uploading-message">Uploading...</p>}
