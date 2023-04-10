@@ -1,19 +1,25 @@
 import "../css/allPagesHeader.css";
 
 const Header = () => {
-    function handleClick() {
-        window.location.href = "/";
-      }
+  function handleClick_up() {
+    window.location.href = "/video/upload";
+  }
 
-    return (
-        <div className="header">
-            <div className="left"/>
-            <div className="text">
-                <span onClick={handleClick}>VIDEOTEKA</span>
-            </div>
-            <div className="right"/>
-        </div>
-    );
-  };
-  
+  function handleClick() {
+    window.location.href = "/";
+  }
+
+  return (
+    <div className="header">
+      <div className="left" />
+      <div className="text">
+        <span style={{display: 'inline-flex'}}>
+        <span onClick={handleClick}>VIDEOTEKA /</span>
+        <span onClick={handleClick_up}> Upload</span></span>
+      </div>
+      <div className="right" />
+    </div>
+  );
+};
+
 export default Header;
