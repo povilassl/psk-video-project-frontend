@@ -1,9 +1,11 @@
 import { format } from "date-fns";
 import "../../../css/VideoPage/oneVideoPage.css";
-import { RepliesSection } from "../Replies/RepliesSection";
 import { ReplyForm } from "../Replies/ReplyForm";
+import { LoadToggleButtonProvider } from "../Buttons/LoadToggleButtonProvider";
+import LoadToggleButton from "../Buttons/LoadToggleButton";
 
 export const Comment = ({ comment, isReply }) => {
+
   return (
     <div className="commentDiv">
       <div className="commentInfo">
@@ -12,17 +14,14 @@ export const Comment = ({ comment, isReply }) => {
       </div>
       <div className="commentBody">
         <p>{isReply ? "Reply" : "Comment"}: {comment.comment}</p>
-        {
-          //TODO: polling for new replies
-        }
         {comment.hasComments === false &&
-          <p>There are no replies for this comment</p>
+          <p><b>There are no replies for this {isReply ? "reply" : "comment"}</b></p>
         }
         <ReplyForm comment_id={comment.id} />
         {comment.hasComments === true &&
-
-          //TODO: implement button, which will show/load replies
-          <RepliesSection comment_id={comment.id} />
+          <LoadToggleButtonProvider>
+            <LoadToggleButton id={comment.id} />
+          </LoadToggleButtonProvider>
         }
       </div>
     </div>
