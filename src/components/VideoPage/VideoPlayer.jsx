@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useState } from 'react';
-import useScript from '../services/useScript';
-import useStylesheet from '../services/useStylesheet';
+import { useRef, useEffect, useState } from 'react';
+import useScript from '../../services/script_and_styles_downloader/useScript';
+import useStylesheet from '../../services/script_and_styles_downloader/useStylesheet';
 
 const AzureMediaPlayer = ({ src, options }) => {
   const videoRef = useRef(null);

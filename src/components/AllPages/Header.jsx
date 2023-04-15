@@ -1,4 +1,4 @@
-import "../css/allPagesHeader.css";
+import "../../css/AllPages/allPagesHeader.css";
 
 const Header = () => {
   function handleClick_up() {

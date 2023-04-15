@@ -1,7 +1,7 @@
 import { format } from "date-fns";
-import "../css/oneVideoPage.css";
-import { RepliesSection } from "./RepliesSection";
-import { ReplyForm } from "./ReplyForm";
+import "../../../css/VideoPage/oneVideoPage.css";
+import { RepliesSection } from "../Replies/RepliesSection";
+import { ReplyForm } from "../Replies/ReplyForm";
 
 export const Comment = ({ comment, isReply }) => {
   return (
