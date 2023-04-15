@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { postReplyToComment } from '../services/videoInteractions';
+import { postReplyToComment } from '../../../services/video_endpoints/videoInteractions';
 
 export const ReplyForm = ({comment_id}) => {
     const [replyData, setReplyData] = useState({

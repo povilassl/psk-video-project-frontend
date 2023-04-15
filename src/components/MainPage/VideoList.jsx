@@ -1,8 +1,8 @@
-import { getAllVideos } from "../services/videos";
+import { getAllVideos } from "../../services/video_endpoints/videos";
 import React, { useState, useEffect } from "react";
 import { Video } from "./Video";
-import { getVideoCount } from "../services/videoInteractions";
-import "../css/videoListPage.css";
+import { getVideoCount } from "../../services/video_endpoints/videoInteractions";
+import "../../css/MainPage/videoListPage.css";
 
 export const VideoList = () => {
   /* Container for videos in various fetch states */

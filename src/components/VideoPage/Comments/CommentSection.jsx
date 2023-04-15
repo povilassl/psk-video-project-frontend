@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { getVideoComments } from "../services/videoInteractions";
+import { getVideoComments } from "../../../services/video_endpoints/videoInteractions";
 import { useEffect, useState } from "react";
 import { Comment } from "./Comment";
 

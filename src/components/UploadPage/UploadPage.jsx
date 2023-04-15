@@ -1,4 +1,4 @@
-import { uploadVideo } from "../services/videos";
+import { uploadVideo } from "../../services/video_endpoints/videos";
 import { useState } from 'react';
 
 export function UploadPage() {
