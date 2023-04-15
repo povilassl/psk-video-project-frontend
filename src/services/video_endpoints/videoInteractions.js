@@ -1,4 +1,4 @@
-import { apiUrl } from "./config";
+import { apiUrl } from "../config";
 import axios from "axios";
 
 axios.defaults.headers.post['Content-Type'] = `application/json`;

@@ -1,4 +1,4 @@
-import { apiUrl } from "./config";
+import { apiUrl } from "../config";
 import axios from "axios";
 
 export async function getAllVideos(start = 0, count = 20) {

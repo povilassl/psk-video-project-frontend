@@ -1,13 +1,13 @@
 import { useParams } from "react-router-dom";
-import { getAllVideos } from "../services/videos";
+import { getAllVideos } from "../../services/video_endpoints/videos";
 import { useEffect, useState } from "react";
-import { CommentSection } from "./CommentSection";
-import { CommentForm } from "./CommentForm";
-import { increaseViewCount } from "../services/videoInteractions";
-import LikeButton from "../components/LikeButton";
-import DislikeButton from "../components/DislikeButton";
-import "../css/commonStyles.css";
-import "../css/videoListPage.css";
+import { CommentSection } from "./Comments/CommentSection";
+import { CommentForm } from "./Comments/CommentForm";
+import { increaseViewCount } from "../../services/video_endpoints/videoInteractions";
+import LikeButton from "./Buttons/LikeButton";
+import DislikeButton from "./Buttons/DislikeButton";
+import "../../css/MainPage/commonStyles.css";
+import "../../css/MainPage/videoListPage.css";
 import AzureMediaPlayer from './VideoPlayer';
 
 export const VideoPage = () => {
@@ -45,7 +45,7 @@ export const VideoPage = () => {
                     }
                     <p>Uploaded by: {video.data.username}</p>
                     <div style={{ marginLeft: '5px' }}>
-                        <span className="logoSpan"><img className='Logo' src={require("../assets/eye.png")} alt='eye logo' /></span>
+                        <span className="logoSpan"><img className='Logo' src={require("../../assets/eye.png")} alt='eye logo' /></span>
                         <span className="numberSpan">{video.data.viewCount} </span>
                     </div>
                     <span className="inlineSpan"><LikeButton param={video.data.likeCount} /></span>

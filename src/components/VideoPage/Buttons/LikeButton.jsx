@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import cn from "classnames";
 import { useParams } from "react-router-dom";
-import { addLike, removeLike } from "../services/videoInteractions";
+import { addLike, removeLike } from "../../../services/video_endpoints/videoInteractions";
 
-import "../css/videoLikeDislikeButtonStyle.scss";
+import "../../../css/VideoPage/videoLikeDislikeButtonStyle.scss";
 
 const LikeButton = (likeCount) => {
     const { videoId } = useParams();

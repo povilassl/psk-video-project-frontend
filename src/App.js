@@ -1,9 +1,9 @@
 import "./App.css";
-import { VideoList } from "./components/VideoList";
+import { VideoList } from "./components/MainPage/VideoList";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { VideoPage } from "./components/VideoPage";
-import { UploadPage } from "./components/UploadPage";
-import Header from "./components/Header";
+import { VideoPage } from "./components/VideoPage/VideoPage";
+import { UploadPage } from "./components/UploadPage/UploadPage";
+import Header from "./components/AllPages/Header";
 
 function App() {
   return (

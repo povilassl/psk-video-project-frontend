@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getCommentReplies } from "../services/videoInteractions";
-import { Comment } from "./Comment";
+import { getCommentReplies } from "../../../services/video_endpoints/videoInteractions";
+import { Comment } from "../Comments/Comment";
 
 export const RepliesSection = ({ comment_id }) => {
 
