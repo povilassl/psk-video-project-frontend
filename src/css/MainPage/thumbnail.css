@@ -1,9 +1,8 @@
 .thumbnail_container{
     width: 300px;
-    background: #fff;
-    border: 1px solid #ccc;
+    background: var(--small-text-color);
+    border: 1px solid var(--small-text-color);
     padding: 5px;
     margin: 5px;
     text-align: center;
-    position: relative;
 }

@@ -18,7 +18,7 @@ export const Video = ({ video }) => {
                 <span className="logoSpan"><img className='Logo' src = {require("../../assets/dislike.png")} alt='dislike logo'/></span>
                 <span className="inlineSpan">{video.dislikeCount}</span>
             </div>
-            <p><Link key={video.id} to={`/video/${video.id}`}>Go to video</Link></p>
+            <p><Link style={{color: '#c4c3ca'}} key={video.id} to={`/video/${video.id}`}>Go to video</Link></p>
         </div>
     );
 }

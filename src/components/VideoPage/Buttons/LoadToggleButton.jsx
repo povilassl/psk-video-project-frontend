@@ -6,7 +6,7 @@ const LoadToggleButton = ({id}) => {
 
   return (
     <>
-    <button onClick={toggleButton}>
+    <button className={`sumbitCommentButton ${isButtonPressed ? "pressed" : "not-pressed"}`}  onClick={toggleButton}>
       {isButtonPressed ? "Unload replies" : "Load replies"}
     </button>
     {isButtonPressed && <RepliesSection comment_id={id} />}

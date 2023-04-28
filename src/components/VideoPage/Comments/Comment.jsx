@@ -13,7 +13,7 @@ export const Comment = ({ comment, isReply }) => {
         <p style={{ margin: '0px' }}>{format(new Date(comment.dateTime), "yyyy-MM-dd, H:mm")}</p>
       </div>
       <div className="commentBody">
-        <p>{isReply ? "Reply" : "Comment"}: {comment.comment}</p>
+        <p>{comment.comment}</p>
         {comment.hasComments === false &&
           <p><b>There are no replies for this {isReply ? "reply" : "comment"}</b></p>
         }

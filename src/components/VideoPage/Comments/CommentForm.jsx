@@ -33,15 +33,16 @@ export const CommentForm = ({videoId}) => {
                 <p style={{ color: 'red' }}>Failed to post comment!</p>
             )}
             <form onSubmit={handleSubmit}>
-                <textarea 
-                    className='commentTextArea'
-                    value={commentData.comment}
-                    onChange={(event) =>
-                        setCommentData({ ...commentData, comment: event.target.value })
-                    }
-                    placeholder="Type your comment here..."
-                />
-                <div>
+                <div className='sideBySideHorizontallyByEnd'>
+                    <textarea 
+                        style={{marginLeft: '15px'}}
+                        className='commentTextArea'
+                        value={commentData.comment}
+                        onChange={(event) =>
+                            setCommentData({ ...commentData, comment: event.target.value })
+                        }
+                        placeholder="Type your comment here..."
+                    />
                     <button className='sumbitCommentButton' type="submit" disabled={commentData.status === 'submitting'} >
                         {commentData.status === 'submitting' ? 'Submitting...' : 'Submit'}   
                     </button>

@@ -6,8 +6,8 @@ import { CommentForm } from "./Comments/CommentForm";
 import { increaseViewCount } from "../../services/video_endpoints/videoInteractions";
 import LikeButton from "./Buttons/LikeButton";
 import DislikeButton from "./Buttons/DislikeButton";
-import "../../css/MainPage/commonStyles.css";
-import "../../css/MainPage/videoListPage.css";
+import "../../css/VideoPage/oneVideoPage.css";
+
 import AzureMediaPlayer from './VideoPlayer';
 
 export const VideoPage = () => {
@@ -38,29 +38,46 @@ export const VideoPage = () => {
 
             return (
                 <div className="video_fetched_container">
-                    <AzureMediaPlayer src={video.data.videoURL} options={options}/>
-                    <h3>{video.data.videoName}</h3>
-                    {
-                        //TODO: polling for new likes/dislikes
-                    }
-                    <p>Uploaded by: {video.data.username}</p>
-                    <div style={{ marginLeft: '5px' }}>
-                        <span className="logoSpan"><img className='Logo' src={require("../../assets/eye.png")} alt='eye logo' /></span>
-                        <span className="numberSpan">{video.data.viewCount} </span>
+                    <div className="videoInfoDiv">
+                        <h3>{video.data.videoName}</h3>
+                        <AzureMediaPlayer src={video.data.videoURL} options={options}/>
+                        <div className="infoDiv">
+                        {
+                            //TODO: polling for new likes/dislikes
+                        }
+                            <div className="inEachSideDiv">
+                                <div className="sideBySideHorizontallyModified">
+                                    <i className="icon uil uil-user"></i>
+                                    <p>{video.data.username}</p>
+                                </div>                                
+                            </div>
+
+                            <div className="inEachSideDiv">
+                                <div className="sideBySideHorizontallyModified" >
+                                    <i className="icon uil uil-eye"></i>
+                                    <div className="viewDiv"> {video.data.viewCount} </div>         
+                                </div>
+                                <div className="sideBySideHorizontallyLikeDislike" >
+                                    <span className="inlineSpan"><LikeButton param={video.data.likeCount} /></span>
+                                    <span className="inlineSpan"><DislikeButton param={video.data.dislikeCount} /></span>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
-                    <span className="inlineSpan"><LikeButton param={video.data.likeCount} /></span>
-                    <span className="inlineSpan"><DislikeButton param={video.data.dislikeCount} /></span>
-                    {
-                        //TODO: refetch comments after posting a new one}
-                    }
-                    <CommentForm videoId={videoId} />
-                    {video.data.hasComments === true &&
-                        //TODO: polling for new comments
-                        <CommentSection />
-                    }
-                    {video.data.hasComments === false &&
-                        <h4>There are no comments for this video</h4>
-                    }
+                    <div className="commentSecotionDiv">
+                        {
+                            //TODO: refetch comments after posting a new one}
+                        }
+                        <CommentForm videoId={videoId} />
+                        {video.data.hasComments === true &&
+                            //TODO: polling for new comments
+                            <CommentSection />
+                        }
+                        {video.data.hasComments === false &&
+                            <h4>There are no comments for this video</h4>
+                        }
+                    </div>
                 </div>
             );
         }

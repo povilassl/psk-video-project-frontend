@@ -1,3 +1,5 @@
+@import url('../../css/Colors.css');
+
 div.videos_fetched_container{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -6,15 +8,17 @@ div.videos_fetched_container{
 }
 
 div.oneVideoDiv{
-    background-color: #f8f8f8;
+    background-color: var(--objects-background);
     box-shadow: 0 0 3px #666;
     text-align: center;
+    color: var(--small-text-color);
 }
 
 img.Logo{
     width: 20px;
     height: 20px;
     vertical-align: middle;
+    color: var(--small-text-color);
 
 }
 
@@ -22,6 +26,7 @@ div span.logoSpan{
     display: inline-block;
     padding: 0px;
     vertical-align: middle;
+    color: var(--small-text-color);
 }
 
 div span.numberSpan{
@@ -29,4 +34,13 @@ div span.numberSpan{
     margin-right: 25px;
     padding: 5px;
     vertical-align: middle;
+    color: var(--small-text-color);
+}
+
+.fetch_loading_container, fetch_failed_container{
+    color: var(--accent-color);
+    font-size: large;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
