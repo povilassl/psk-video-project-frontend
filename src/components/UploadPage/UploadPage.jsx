@@ -98,20 +98,20 @@ export function UploadPage() {
                             <label>
                                 Video File:                       
                             </label>
-                            <label class="custom-file-upload">
+                            <label className="custom-file-upload">
                                 <input
                                     type="file"
                                     accept="video/*"
                                     onChange={(e) => setVideoFile(e.target.files[0])}
                                     disabled={isFormDisabled}
                                 />
-                                <i class="uil-file-upload-alt"></i> Upload video file
+                                <i className="uil-file-upload-alt"></i> Upload video file
                             </label>
                         
                             <label>
                                 Thumbnail Image:
                             </label>
-                            <label class="custom-file-upload">
+                            <label className="custom-file-upload">
                                 <input
                                         className="upload-input-style"
                                         type="file"
@@ -119,7 +119,7 @@ export function UploadPage() {
                                         onChange={(e) => setThumbnailImage(e.target.files[0])}
                                         disabled={isFormDisabled}
                                     />
-                                <i class="uil-file-upload-alt"></i> Upload thumbnail file
+                                <i className="uil-file-upload-alt"></i> Upload thumbnail file
                             </label>
                         </div>
                     </form>

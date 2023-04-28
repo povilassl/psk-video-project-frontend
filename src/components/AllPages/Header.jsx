@@ -4,7 +4,7 @@ const Header = () => {
   return (
       <nav className="main-nav">
         <input type="checkbox" id="check" />
-        <label htmlFor="check" for='check' className="menu-btn">
+        <label htmlFor="check" className="menu-btn">
           <i className="fas fa-bars"></i>
         </label>
         <a href="/" className="title">Videoteka</a>
