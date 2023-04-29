@@ -1,5 +1,6 @@
 import { uploadVideo } from "../../services/video_endpoints/videos";
 import { useState } from 'react';
+import "../../css/UploadPage/uploadPage.css";
 
 export function UploadPage() {
     const [videoName, setVideoName] = useState('');
@@ -52,67 +53,79 @@ export function UploadPage() {
     const isFormDisabled = uploadState === 'uploading';
 
     return (
-        <div>
-            <h1>Video Upload</h1>
-            {uploadState === 'failed' && (
-                <p className="error-message">
-                    Please fill in all fields and select the video and thumbnail files. Or there may be an error with the server...
-                </p>
-            )}
-            {uploadState === 'uploading' && <p className="uploading-message">Uploading...</p>}
-            {uploadState === 'success' && <p className="success-message">Upload successful!</p>}
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Video Name:
-                    <input
-                        type="text"
-                        value={videoName}
-                        onChange={(e) => setVideoName(e.target.value)}
-                        disabled={isFormDisabled}
-                    />
-                </label>
-                <br />
-                <label>
-                    Username:
-                    <input
-                        type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        disabled={isFormDisabled}
-                    />
-                </label>
-                <br />
-                <label>
-                    Description:
-                    <textarea
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        disabled={isFormDisabled}
-                    />
-                </label>
-                <br />
-                <label>
-                    Video File:
-                    <input
-                        type="file"
-                        accept="video/*"
-                        onChange={(e) => setVideoFile(e.target.files[0])}
-                        disabled={isFormDisabled}
-                    />
-                </label>
-                <br />
-                <label>
-                    Thumbnail Image:
-                    <input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => setThumbnailImage(e.target.files[0])}
-                        disabled={isFormDisabled}
-                    />
-                </label>
-                <br />
-                <button type="submit" disabled={isFormDisabled}>Upload Video</button>
-            </form>
+        <div className="videoUploadDiv">
+                <div className="videoUploadCard">
+                <h1>Video Upload</h1>
+                {uploadState === 'failed' && (
+                    <p className="error-message">
+                        Please fill in all fields and select the video and thumbnail files. Or there may be an error with the server...
+                    </p>
+                )}
+                {uploadState === 'uploading' && <p className="uploading-message">Uploading...</p>}
+                {uploadState === 'success' && <p className="success-message">Upload successful!</p>}
+                <div className="uploadInputSection">
+                    <form onSubmit={handleSubmit}>
+                        <label>
+                            Video Name:
+                        </label>
+                        <input
+                            className="upload-input-style"
+                            type="text"
+                            value={videoName}
+                            onChange={(e) => setVideoName(e.target.value)}
+                            disabled={isFormDisabled}
+                        />
+                        <label>
+                            Username:  
+                        </label>
+                        <input
+                            className="upload-input-style"
+                            type="text"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            disabled={isFormDisabled}
+                        />
+                        <label>
+                            Description: 
+                        </label>
+                        <textarea
+                            className="upload-input-style"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            disabled={isFormDisabled}
+                        />
+                        <div className="LabelAndUploadDiv">
+                            <label>
+                                Video File:                       
+                            </label>
+                            <label className="custom-file-upload">
+                                <input
+                                    type="file"
+                                    accept="video/*"
+                                    onChange={(e) => setVideoFile(e.target.files[0])}
+                                    disabled={isFormDisabled}
+                                />
+                                <i className="uil-file-upload-alt"></i> Upload video file
+                            </label>
+                        
+                            <label>
+                                Thumbnail Image:
+                            </label>
+                            <label className="custom-file-upload">
+                                <input
+                                        className="upload-input-style"
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={(e) => setThumbnailImage(e.target.files[0])}
+                                        disabled={isFormDisabled}
+                                    />
+                                <i className="uil-file-upload-alt"></i> Upload thumbnail file
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <button className="uploadButton" type="submit" disabled={isFormDisabled}>Upload Video</button>
+            </div>
         </div>
     );
 }

@@ -31,16 +31,19 @@ export const ReplyForm = ({comment_id}) => {
                 <p style={{ color: 'red' }}>Failed to post comment!</p>
             )}
             <form onSubmit={handleSubmit}>
-                <textarea
-                    value={replyData.comment}
-                    onChange={(event) =>
-                        setReplyData({ ...replyData, comment: event.target.value })
-                    }
-                    placeholder="Type your reply here..."
-                />
-                <button type="submit" disabled={replyData.status === 'submitting'}>
-                    {replyData.status === 'submitting' ? 'Submitting...' : 'Submit'}
-                </button>
+                <div className='sideBySideHorizontallyByEnd'>
+                    <textarea
+                        className='commentTextArea'
+                        value={replyData.comment}
+                        onChange={(event) =>
+                            setReplyData({ ...replyData, comment: event.target.value })
+                        }
+                        placeholder="Type your reply here..."
+                    />
+                    <button className='sumbitCommentButton' type="submit" disabled={replyData.status === 'submitting'}>
+                        {replyData.status === 'submitting' ? 'Submitting...' : 'Submit'}
+                    </button>
+                </div>
             </form>
         </div>
     );
