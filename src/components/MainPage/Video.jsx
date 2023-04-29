@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "../../css/MainPage/videoListPage.css";
 import "../../css/MainPage/commonStyles.css";
 import "../../css/MainPage/thumbnail.css"
+import "../../css/Colors.css"
 
 export const Video = ({ video }) => {
     console.log(video);
@@ -18,7 +19,7 @@ export const Video = ({ video }) => {
                 <span className="logoSpan"><img className='Logo' src = {require("../../assets/dislike.png")} alt='dislike logo'/></span>
                 <span className="inlineSpan">{video.dislikeCount}</span>
             </div>
-            <p><Link style={{color: '#c4c3ca'}} key={video.id} to={`/video/${video.id}`}>Go to video</Link></p>
+            <p><Link style={{color: 'var(--small-text-color)'}} key={video.id} to={`/video/${video.id}`}>Go to video</Link></p>
         </div>
     );
 }
