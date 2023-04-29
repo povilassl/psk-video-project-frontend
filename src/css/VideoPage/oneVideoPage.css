@@ -1,3 +1,85 @@
+@import url('../../css/Colors.css');
+@import url('https://unicons.iconscout.com/release/v2.1.9/css/unicons.css');
+
+.video_fetched_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.videoInfoDiv{
+    margin-top: 10px;
+}
+
+.commentSecotionDiv{
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    margin-top: 15px;
+    background-color: var(--primary-color);
+    color: var(--small-text-color);
+    padding-bottom: 70px;
+}
+
+.inEachSideDiv{
+    display: flex;
+    justify-content: space-between;
+}
+
+.sideBySideHorizontallyModified{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: -10px;
+}
+
+.sideBySideHorizontallyLikeDislike{
+    margin-bottom: -10px;
+    margin-top: -10px;
+    padding-bottom: 5px;
+}
+
+.sideBySideHorizontallyByEnd{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    margin-bottom: 10px;
+}
+
+
+.infoDiv {
+    margin-top: 5px;
+    width: 100%;
+    height: 100%;
+    background-color: var(--objects-background);
+    border-radius: 6px;
+}
+
+.sideBySideHorizontallyModified p{
+    color: var(--small-text-color);
+    font-size: 15px;
+    margin-top: 7px;
+}
+
+.icon {
+    font-size: 22px;
+    line-height: 35px;
+    color: var(--small-text-color);
+}
+
+.viewDiv{
+    color: var(--small-text-color);
+    font-weight: 500;
+    margin-top: 4px;
+    font-size: 20px;
+}
+
+div span.inlineSpan{
+    display: inline-block;
+    padding: 5px;
+    vertical-align: middle;
+    color: var(--small-text-color);
+    font-weight: 550;
+}
 
 textarea.commentTextArea{
     margin-left: 5px;
@@ -7,23 +89,23 @@ textarea.commentTextArea{
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
-    background-color: #f8f8f8;
+    background-color: var(--small-text-color);
     font-size: 13px;
     resize: none;
 }
 
 /* dėl šito dar pagalvot */
 .commentDiv{
-    border-left: thick solid #22303f8c;
-    border-bottom: 2px solid #22303f8c; 
+    border-left: thick solid var(--accent-color);
+    /* border-bottom: 2px solid var(--accent-color);  */
 }
 
 .commentInfo {
-    color: rgba(0, 0, 0, 0.5);
+    color: var(--other-text);
     margin-left: 10px;
 }
 .commentAuthor {
-    color: rgba(0, 0, 0, 0.85);
+    color: var(--accent-color);
     font-weight: bold;
     text-decoration: none;
     margin-bottom: 0;
@@ -62,20 +144,27 @@ textarea.commentTextArea{
     background-color: #54a0ff;
 }
 
-
 .sumbitCommentButton {
     border: none;
     cursor: pointer;
     padding: 7px 15px 7px 15px;
-    color: #fff;
+    color: var(--big-text-color);
     font-size: 13px;
     font-weight: 600;
-    background-color: transparent;
-    will-change: background-color;
-    transition: background-color 0.3s, transform 0.3s;
-    background-color: #222f3e;
+    height: 30px;
+    background-color: var(--background-color);
     box-shadow: 0 0 10px #22303f8c;
     border-radius: 8px;
-    margin-bottom: 10px;
     margin-left: 5px;
+    transition: background-color 0.2s ease;
 }
+
+.sumbitCommentButton.pressed {
+    background-color: var(--accent-color);
+  }
+
+h4{
+    margin-left: -28px;
+}
+
+

@@ -1,20 +1,25 @@
+@import url('../../css/Colors.css');
+
 div.videos_fetched_container{
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-row-gap: 10px; 
     grid-column-gap: 10px;
 }
 
 div.oneVideoDiv{
-    background-color: #f8f8f8;
+    background-color: var(--objects-background);
     box-shadow: 0 0 3px #666;
     text-align: center;
+    color: var(--small-text-color);
 }
 
 img.Logo{
     width: 20px;
     height: 20px;
     vertical-align: middle;
+    color: var(--small-text-color);
 
 }
 
@@ -22,6 +27,7 @@ div span.logoSpan{
     display: inline-block;
     padding: 0px;
     vertical-align: middle;
+    color: var(--small-text-color);
 }
 
 div span.numberSpan{
@@ -29,4 +35,22 @@ div span.numberSpan{
     margin-right: 25px;
     padding: 5px;
     vertical-align: middle;
+    color: var(--small-text-color);
+}
+
+.fetch_loading_container, fetch_failed_container{
+    color: var(--accent-color);
+    font-size: large;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 700px) {
+    div.videos_fetched_container{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-row-gap: 10px; 
+        grid-column-gap: 10px;
+    }   
 }
