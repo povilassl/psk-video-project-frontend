@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "../../css/AllPages/mainMeniu.css";
 
 const Header = () => {
@@ -7,11 +8,11 @@ const Header = () => {
         <label htmlFor="check" className="menu-btn">
           <i className="fas fa-bars"></i>
         </label>
-        <a href="/" className="title">Videoteka</a>
+        <Link to="/" className="title">Videoteka</Link>
         <ul className="navlinks" style={{zIndex: '1000'}}>
-          <li><a href="/">All videos</a></li>
-          <li><a href="/video/upload">Upload video</a></li>
-          <li><a href="/login">Join us</a></li>
+          <li><Link to="/">All videos</Link></li>
+          <li><Link to="/video/upload">Upload video</Link></li>
+          <li><Link to="/login">Join us</Link></li>
         </ul>
       </nav>
   );
