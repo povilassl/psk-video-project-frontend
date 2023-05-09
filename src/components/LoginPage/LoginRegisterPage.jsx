@@ -1,7 +1,6 @@
 import "../../css/UsersPages/loginPage.css";
 import { Register } from "./Register";
 import { Login } from "./Login";
-import { UserProvider } from "./UserContext";
 
 export function LoginRegisterPage() {
 
@@ -20,10 +19,8 @@ export function LoginRegisterPage() {
 			<label htmlFor="reg-log"></label>
 			<div className="card-3d-wrap">
 				<div className="card-3d-wrapper">
-					<UserProvider>
 						<Login />
 						<Register />
-					</UserProvider>
 				</div>
 			</div>
 		</div>
