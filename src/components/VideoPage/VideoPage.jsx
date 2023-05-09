@@ -17,11 +17,15 @@ export const VideoPage = () => {
     /* Container for video in various fetch states */
     let container = () => {
         if (video.state === 'fetching') {
-            return <div className="fetch_loading_container">Loading...</div>;
+            return <div className="fetch_loading_container">
+                        <span className="big_loader">L &nbsp; ading</span>
+                    </div>;
         }
 
         else if (video.state === 'failed') {
-            return <div className="fetch_failed_container">Failed to fetch data.</div>;
+            return <div className="fetch_failed_container">
+                        <span className="big_failed">S<i class="big_failed_emoji uil uil-sad-dizzy"></i>mething went wrong</span>
+                    </div>;
         }
 
         else if (video.state === 'fetched') {
