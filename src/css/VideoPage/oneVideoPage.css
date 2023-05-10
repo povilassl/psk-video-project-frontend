@@ -189,13 +189,18 @@ h4{
     
 }
 
-.videoDescriptionWrapper a {
-    padding-left: 5px;
+.seeDescriptionButton {
+    display: inline-block;
+    font-size: 15px;
+    background-color: var(--objects-background);
+    border: none;
     color: var(--small-text-color);
+    text-decoration: underline;
     cursor: pointer;
+    
 }
 
-.videoDescriptionWrapper a:hover{
+.seeDescriptionButton:hover{
     text-decoration: underline;
     color: var(--accent-color);
 }

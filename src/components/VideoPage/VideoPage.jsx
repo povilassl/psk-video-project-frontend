@@ -78,7 +78,7 @@ export const VideoPage = () => {
                             </div>
                             <div className="videoDescriptionWrapper">
                                 <div>
-                                    <a href={() => false} onClick={showHideDescription}>See video description</a>
+                                    <button className="seeDescriptionButton" onClick={showHideDescription}>See video description</button>
                                 </div>
                                 <div id="videoDescriptionDiv"> 
                                     <p>{video.data.description}</p>

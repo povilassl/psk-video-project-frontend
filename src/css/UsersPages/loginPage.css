@@ -263,7 +263,7 @@ display: none;
   position: relative;
   border-width: 3px 2px 3px 2px;
   border-style: solid dotted solid dotted;
-  border-color: #de3500 rgba(255, 255, 255,0.3) #fff rgba(151, 107, 93, 0.3);
+  border-color: var(--accent-color) rgba(255, 255, 255,0.3) var(--big-text-color) rgba(151, 107, 93, 0.3);
   border-radius: 50%;
   box-sizing: border-box;
   animation: 1s rotate linear infinite;
