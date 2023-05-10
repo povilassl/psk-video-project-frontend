@@ -14,6 +14,16 @@ export const VideoPage = () => {
 
     const { videoId } = useParams();
 
+    
+    function showHideDescription() {
+        var x = document.getElementById("videoDescriptionDiv");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+    }
+
     /* Container for video in various fetch states */
     let container = () => {
         if (video.state === 'fetching') {
@@ -66,6 +76,15 @@ export const VideoPage = () => {
                                     <span className="inlineSpan"><DislikeButton param={video.data.dislikeCount} /></span>
                                 </div>
                             </div>
+                            <div className="videoDescriptionWrapper">
+                                <div>
+                                    <a href={() => false} onClick={showHideDescription}>See video description</a>
+                                </div>
+                                <div id="videoDescriptionDiv"> 
+                                    <p>{video.data.description}</p>
+                                </div>
+                            </div>
+                            
                         </div>
                         
                     </div>
