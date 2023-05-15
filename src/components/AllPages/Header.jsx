@@ -25,7 +25,7 @@ const Header = () => {
         <li><Link to={"/video/upload"}>Upload video</Link></li>
         {isAuthenticated ? (
           <li>
-            <button onClick={handleLogout}>Logout</button>
+            <button onClick={handleLogout}>Logout from {localStorage.getItem('user')}</button>
           </li>
         ) : (
           <li>

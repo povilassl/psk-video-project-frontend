@@ -4,7 +4,6 @@ import "../../css/UploadPage/uploadPage.css";
 
 export function UploadPage() {
     const [videoName, setVideoName] = useState('');
-    const [username, setUsername] = useState('');
     const [description, setDescription] = useState('');
     const [videoFile, setVideoFile] = useState(null);
     const [thumbnailImage, setThumbnailImage] = useState(null);
@@ -18,7 +17,7 @@ export function UploadPage() {
         event.preventDefault();
 
         // Check file size and format constraints
-        if (!videoName || !username || !description || !videoFile || !thumbnailImage) {
+        if (!videoName  || !description || !videoFile || !thumbnailImage) {
             setUploadState('failed');
             return;
         }
@@ -34,12 +33,11 @@ export function UploadPage() {
         // Upload video
         setUploadState('uploading');
         try {
-            await uploadVideo(videoName, username, description, videoFile, thumbnailImage);
+            await uploadVideo(videoName, description, videoFile, thumbnailImage);
             setUploadState('success');
 
             // Reset form, if successful
             setVideoName('');
-            setUsername('');
             setDescription('');
             setVideoFile(null);
             setThumbnailImage(null);
@@ -73,16 +71,6 @@ export function UploadPage() {
                             type="text"
                             value={videoName}
                             onChange={(e) => setVideoName(e.target.value)}
-                            disabled={isFormDisabled}
-                        />
-                        <label>
-                            Username:  
-                        </label>
-                        <input
-                            className="upload-input-style"
-                            type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
                             disabled={isFormDisabled}
                         />
                         <label>
@@ -122,9 +110,9 @@ export function UploadPage() {
                                 <i className="uil-file-upload-alt"></i> Upload thumbnail file
                             </label>
                         </div>
+                        <button className="uploadButton" type="submit" disabled={isFormDisabled}>Upload Video</button>
                     </form>
                 </div>
-                <button className="uploadButton" type="submit" disabled={isFormDisabled}>Upload Video</button>
             </div>
         </div>
     );
