@@ -31,7 +31,7 @@ const RegisterState = ({ state }) => {
         <div className="register_state">
             {state === 'failed' && <p><i style={{color:'var(--error-color)'}}>Error in registration</i></p>}
             {state === 'taken' && <p><i style={{color:'var(--error-color)'}}>Username is taken</i></p>}
-            {state === 'loading' && <p><i style={{color:'var(--info-color)'}}>Registering...</i></p>}
+            {state === 'loading' && <span className="small_loader"></span>}
             {state === 'success' && <p><i style={{color:'var(--success-color)'}}>Registration successful</i></p>}
         </div>
     )

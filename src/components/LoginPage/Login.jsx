@@ -9,7 +9,7 @@ const LoginState = ({state}) => {
     return (
         <div className="register_state">
             {state === 'failed' && <p><i style={{ color: 'var(--error-color)' }}>Error in log in</i></p>}
-            {state === 'loading' && <p><i style={{ color: 'var(--info-color)' }}>Logging in...</i></p>}
+            {state === 'loading' && <span className="small_loader"></span>}
             {state === 'success' && <p><i style={{ color: 'var(--success-color)' }}>Log in successful</i></p>}
         </div>
     )

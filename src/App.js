@@ -10,6 +10,9 @@ import { useDispatch, useSelector  } from 'react-redux';
 import PrivateRoute from "./components/Routing/PrivateRoute";
 import { useEffect } from "react";
 import { logout, login } from "./services/user_redux/store";
+import { Notification } from "./components/AllPages/Notification";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { UploadPage } from "./components/UploadPage/UploadPage";
 
 function App() {
@@ -51,6 +54,8 @@ function App() {
     }
   }, [dispatch]);
 
+  
+
   return (
     <div>
       <BackgroundWave />
@@ -62,7 +67,12 @@ function App() {
           <Route  path="/video/upload" element={<PrivateRoute><UploadPage /></PrivateRoute>} />
           <Route path="/login" element={<LoginRegisterPage />} />
           <Route path="/password_change" element={<PasswordChange />} />
+          <Route path="/notifications" element={<Notification/>} />
         </Routes>
+        <ToastContainer position={'top-left'} 
+                        theme={'dark'}
+                        // autoClose={false}
+                        />
       </BrowserRouter>
     </div>
   );

@@ -7,7 +7,7 @@ export const CommentSection = () => {
   /* Container for comments in various fetch states */
   let container = () => {
     if (comments.state === "fetching") {
-      return <div className="fetch_loading_container">Loading...</div>;
+      return <div className="fetch_loading_container"><span class="small_loader"></span></div>;
     } else if (comments.state === "failed") {
       return (
         <div className="fetch_failed_container">Failed to fetch data.</div>

@@ -59,7 +59,7 @@ export function UploadPage() {
                         Please fill in all fields and select the video and thumbnail files. Or there may be an error with the server...
                     </p>
                 )}
-                {uploadState === 'uploading' && <p className="uploading-message">Uploading...</p>}
+                {uploadState === 'uploading' && <span class="small_loader"></span>}
                 {uploadState === 'success' && <p className="success-message">Upload successful!</p>}
                 <div className="uploadInputSection">
                     <form onSubmit={handleSubmit}>
