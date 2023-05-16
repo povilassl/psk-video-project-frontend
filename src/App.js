@@ -13,6 +13,7 @@ import { logout, login } from "./services/user_redux/store";
 import { Notification } from "./components/AllPages/Notification";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { UploadPage } from "./components/UploadPage/UploadPage";
 
 function App() {
 
@@ -63,7 +64,7 @@ function App() {
         <Routes>
           <Route path="/" element={<VideoList />} />
           <Route path="/video/:videoId" element={<VideoPage />} />
-          <Route  path="/video/upload" element={<PrivateRoute  />} />
+          <Route  path="/video/upload" element={<PrivateRoute><UploadPage /></PrivateRoute>} />
           <Route path="/login" element={<LoginRegisterPage />} />
           <Route path="/password_change" element={<PasswordChange />} />
           <Route path="/notifications" element={<Notification/>} />

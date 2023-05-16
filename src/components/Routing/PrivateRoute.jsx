@@ -1,15 +1,18 @@
-import { Outlet, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
-const PrivateRoute = () => {
+const PrivateRoute = ({ children }) => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const navigate = useNavigate();
 
-  if (!isAuthenticated) {
-    navigate('/login');
-  }
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/login');
+    }
+  }, [isAuthenticated, navigate]);
 
-  return <Outlet />;
+  return isAuthenticated ? children : null;
 };
 
 export default PrivateRoute;

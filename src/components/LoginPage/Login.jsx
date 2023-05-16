@@ -3,8 +3,9 @@ import { loginUser } from "../../services/user_endpoints/userInteractions"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { login } from "../../services/user_redux/store"
+import { useNavigate } from 'react-router-dom';
 
-const LoginState = (state) => {
+const LoginState = ({state}) => {
     return (
         <div className="register_state">
             {state === 'failed' && <p><i style={{ color: 'var(--error-color)' }}>Error in log in</i></p>}
@@ -21,18 +22,20 @@ export const Login = () => {
     const [pass, setPass] = useState('');
     const [username, setUsername] = useState('')
     const [state, setState] = useState('')
+    const navigate = useNavigate();
 
     const handleLogin = async () => {
-        console.log("thing");
         setState('loading')
 
-        await loginUser(username, pass)
+        loginUser(username, pass)
             .then((response) => {
                 setState('success')
 
-                let usr = response.data
+                let usr = username
                 localStorage.setItem('user', JSON.stringify(usr))
                 dispatch(login(usr))
+
+                navigate('/login')
             })
             .catch((err) => setState('failed'))
     }
