@@ -8,4 +8,7 @@
     --small-accents: #020305;
     --big-text-color: white;
     --other-text: #a6a6b9;
+    --error-color: red;
+    --info-color: yellow;
+    --success-color: green;
 }

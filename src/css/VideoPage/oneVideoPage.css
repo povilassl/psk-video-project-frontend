@@ -9,6 +9,9 @@
 }
 .videoInfoDiv{
     margin-top: 10px;
+    width: 642px;
+    text-align: center;
+    overflow: hidden;
 }
 
 .commentSecotionDiv{
@@ -167,4 +170,37 @@ h4{
     margin-left: -28px;
 }
 
+#videoDescriptionDiv{
+    display: none;
+    float: left;
+    text-align: left;
+    width: 100%;
+    padding-bottom: 5px;
+    background-color: var(--objects-background);
+    padding-left: 5px;
+    word-wrap: break-word;
+}
 
+.videoDescriptionWrapper {
+    text-align: left;
+    color: var(--small-text-color);
+    padding-bottom: 4px;
+    word-wrap: break-word;
+    
+}
+
+.seeDescriptionButton {
+    display: inline-block;
+    font-size: 15px;
+    background-color: var(--objects-background);
+    border: none;
+    color: var(--small-text-color);
+    text-decoration: underline;
+    cursor: pointer;
+    
+}
+
+.seeDescriptionButton:hover{
+    text-decoration: underline;
+    color: var(--accent-color);
+}
