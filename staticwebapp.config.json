@@ -1,17 +1,16 @@
 {
-    "navigationFallback": {
-      "rewrite": "index.html",
-      "exclude": ["/images/*.{png,jpg,gif,ico}", "/css/*", "/js/*"]
-    },
-    "routes": [
-      {
-        "route": "/*",
-        "serve": "/index.html",
-        "statusCode": 200
-      }
-    ],
-    "globalHeaders": {
-      "Content-Security-Policy": "default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; img-src 'self' data:; connect-src 'self' https:;"
+  "navigationFallback": {
+    "rewrite": "index.html",
+    "exclude": ["/images/*.{png,jpg,gif,ico}", "/css/*", "/js/*"]
+  },
+  "routes": [
+    {
+      "route": "/*",
+      "serve": "/index.html",
+      "statusCode": 200
     }
+  ],
+  "globalHeaders": {
+    "Content-Security-Policy": "default-src *; img-src *; connect-src *; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline';"
   }
-  
+}
