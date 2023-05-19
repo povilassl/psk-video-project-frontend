@@ -18,7 +18,7 @@ export async function registerUser(username, email, password, firstName, lastNam
 }
 
 export async function loginUser(username, password){
-    return await axios.get(`${apiUrl}/UserInteractions/Login?username=${username}&password=${password}`, {withCredentials: true})
+    return await axios.get(`${apiUrl}/UserInteractions/Login?username=${username}&password=${password}`, {withCredentials: true, credentials: 'include'})
 }
 
 export async function changePassword(username, password, newPassword){
