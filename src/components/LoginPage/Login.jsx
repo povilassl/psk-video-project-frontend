@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { login } from "../../services/user_redux/store"
 import { useNavigate } from 'react-router-dom';
-import Cookies from "js-cookie"
+//import Cookies from "js-cookie"
 
 const LoginState = ({state}) => {
     return (
