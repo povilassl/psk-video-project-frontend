@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { login } from "../../services/user_redux/store"
 import { useNavigate } from 'react-router-dom';
-//import Cookies from "js-cookie"
+import Cookies from "js-cookie"
 
 const LoginState = ({state}) => {
     return (
@@ -32,7 +32,18 @@ export const Login = () => {
             .then((response) => {
 
                 if(response.status === 200){
-                    console.log(response);
+                    /*console.log(response.data.setCookie);
+                    let cookieStr = response.data.setCookie;
+
+                    // Parse the cookie string
+                    let cookieArr = cookieStr.split(';');
+                    let cookieNameValue = cookieArr[0].split('=');
+                    let cookieName = cookieNameValue[0];
+                    let cookieValue = cookieNameValue[1];
+
+                    // Now set the cookie
+                    Cookies.set(cookieName, cookieValue);*/
+
                     setState('success')
 
                     let usr = username
@@ -43,7 +54,9 @@ export const Login = () => {
                 }
                 
             })
-            .catch((err) => setState('failed'))
+            .catch((err) => {
+                console.error(err)
+                setState('failed')})
     }
 
     return (
