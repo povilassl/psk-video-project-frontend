@@ -32,7 +32,7 @@ export const Login = () => {
             .then((response) => {
 
                 if(response.status === 200){
-                    console.log(response.headers);
+                    console.log(response);
                     setState('success')
 
                     let usr = username
