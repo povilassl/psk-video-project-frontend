@@ -10,7 +10,8 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    Cookies.remove('VideotekaAuthentication');
+    document.cookie = 'VideotekaAuthentication=; Domain=.videoteka.tech; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Secure; SameSite=None;';
+
     sessionStorage.removeItem('user');
     dispatch(logout());
   };
