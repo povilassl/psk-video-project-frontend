@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { VideoPage } from "./components/VideoPage/VideoPage";
 import Header from "./components/AllPages/Header";
 import BackgroundWave from "./components/AllPages/BackgroundWave"
-import { PasswordChange } from "./components/LoginPage/PasswordChange";
 import { LoginRegisterPage } from "./components/LoginPage/LoginRegisterPage";
 import { useDispatch, useSelector  } from 'react-redux';
 import PrivateRoute from "./components/Routing/PrivateRoute";
@@ -14,6 +13,7 @@ import { Notification } from "./components/AllPages/Notification";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { UploadPage } from "./components/UploadPage/UploadPage";
+import Cookies from 'js-cookie';
 
 function App() {
 
@@ -29,6 +29,7 @@ function App() {
         console.log(user);
         if (now >= sessionExpiresAt) {
           sessionStorage.removeItem('user');
+          Cookies.remove('VideotekaAuthentication')
           dispatch(logout());
         }
       }
@@ -67,7 +68,6 @@ function App() {
           <Route path="/video/:videoId" element={<VideoPage />} />
           <Route  path="/video/upload" element={<PrivateRoute><UploadPage /></PrivateRoute>} />
           <Route path="/login" element={<LoginRegisterPage />} />
-          <Route path="/password_change" element={<PasswordChange />} />
           <Route path="/notifications" element={<Notification/>} />
         </Routes>
         <ToastContainer position={'top-left'} 

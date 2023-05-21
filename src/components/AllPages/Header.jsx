@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "../../css/AllPages/mainMeniu.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from "../../services/user_redux/store";
+import Cookies from 'js-cookie';
 
 const Header = () => {
   
@@ -9,7 +10,8 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    localStorage.removeItem('user');
+    Cookies.remove('VideotekaAuthentication');
+    sessionStorage.removeItem('user');
     dispatch(logout());
   };
 
@@ -26,7 +28,7 @@ const Header = () => {
         <li><Link to={"/video/upload"}>Upload video</Link></li>
         {isAuthenticated ? (
           <li>
-            <button onClick={handleLogout}>Logout from {localStorage.getItem('user')}</button>
+            <button onClick={handleLogout}>Logout from {sessionStorage.getItem('user')}</button>
           </li>
         ) : (
           <li>
