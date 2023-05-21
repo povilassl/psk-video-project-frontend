@@ -32,17 +32,6 @@ export const Login = () => {
             .then((response) => {
 
                 if(response.status === 200){
-                    /*console.log(response.data.setCookie);
-                    let cookieStr = response.data.setCookie;
-
-                    // Parse the cookie string
-                    let cookieArr = cookieStr.split(';');
-                    let cookieNameValue = cookieArr[0].split('=');
-                    let cookieName = cookieNameValue[0];
-                    let cookieValue = cookieNameValue[1];
-
-                    // Now set the cookie
-                    Cookies.set(cookieName, cookieValue);*/
 
                     setState('success')
 

@@ -29,6 +29,7 @@ function App() {
         console.log(user);
         if (now >= sessionExpiresAt) {
           sessionStorage.removeItem('user');
+          Cookies.remove('VideotekaAuthentication')
           dispatch(logout());
         }
       }
