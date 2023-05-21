@@ -5,7 +5,7 @@ import { logout } from "../../services/user_redux/store";
 import Cookies from 'js-cookie';
 
 const Header = () => {
-  
+
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const dispatch = useDispatch();
 
