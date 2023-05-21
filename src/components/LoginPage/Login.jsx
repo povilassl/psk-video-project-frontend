@@ -47,7 +47,7 @@ export const Login = () => {
                     setState('success')
 
                     let usr = username
-                    localStorage.setItem('user', JSON.stringify(usr))
+                    sessionStorage.setItem('user', JSON.stringify(usr))
                     dispatch(login(usr))
 
                     navigate('/login') 
