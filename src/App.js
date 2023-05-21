@@ -22,12 +22,13 @@ function App() {
 
   useEffect(() => {
     const checkSession = () => {
-      const user = JSON.parse(localStorage.getItem('user'));
+      const user = JSON.parse(sessionStorage.getItem('user'));
       if (user) {
         const now = new Date();
         const sessionExpiresAt = new Date(user.cookieExpiration);
+        console.log(user);
         if (now >= sessionExpiresAt) {
-          localStorage.removeItem('user');
+          sessionStorage.removeItem('user');
           dispatch(logout());
         }
       }
@@ -47,7 +48,7 @@ function App() {
 
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
+    const storedUser = sessionStorage.getItem('user');
     if (storedUser) {
       const user = JSON.parse(storedUser);
       dispatch(login(user));
