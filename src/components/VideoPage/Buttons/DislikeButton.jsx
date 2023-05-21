@@ -3,7 +3,7 @@ import cn from "classnames";
 import { useParams } from "react-router-dom";
 import { addDislike, removeDislike } from "../../../services/video_endpoints/videoInteractions";
 import "../../../css/VideoPage/videoLikeDislikeButtonStyle.scss";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const DislikeButton = (dislikeCount) => {
   const { videoId } = useParams();
@@ -38,7 +38,6 @@ const DislikeButton = (dislikeCount) => {
   }
 
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-  const dispatch = useDispatch();
 
   return (
     <div>

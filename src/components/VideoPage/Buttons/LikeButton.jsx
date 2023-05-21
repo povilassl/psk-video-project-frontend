@@ -2,7 +2,7 @@ import { useState } from "react";
 import cn from "classnames";
 import { useParams } from "react-router-dom";
 import { addLike, removeLike } from "../../../services/video_endpoints/videoInteractions";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import "../../../css/VideoPage/videoLikeDislikeButtonStyle.scss";
 
 const LikeButton = (likeCount) => {
@@ -38,7 +38,6 @@ const LikeButton = (likeCount) => {
   }
 
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-  const dispatch = useDispatch();
 
   return (
     <div>
