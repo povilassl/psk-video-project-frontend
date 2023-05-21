@@ -14,6 +14,7 @@ import { Notification } from "./components/AllPages/Notification";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { UploadPage } from "./components/UploadPage/UploadPage";
+import Cookies from 'js-cookie';
 
 function App() {
 
