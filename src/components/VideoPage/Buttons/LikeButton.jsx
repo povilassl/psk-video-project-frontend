@@ -8,7 +8,6 @@ import "../../../css/VideoPage/videoLikeDislikeButtonStyle.scss";
 const LikeButton = (likeCount) => {
   const { videoId } = useParams();
   const [liked, setLiked] = useState(null);
-  //const [clicked, setClicked] = useState(false);
   const [changingClassName, setClass] = useState('like-button-wrapper');
   const [likes, setLikesCount] = useState(likeCount.param);
 

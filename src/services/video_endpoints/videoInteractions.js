@@ -24,7 +24,7 @@ export async function postCommentOnVideo(videoId, comment, username) {
 }
 
 export async function increaseViewCount(videoId) {
-    return await axios.get(`${apiUrl}/VideoInteractions/IncreaseViewCount`, videoId)
+    return await axios.get(`${apiUrl}/VideoInteractions/IncreaseViewCount?videoId=${videoId}`)
 }
 
 export async function addLike(videoId) {

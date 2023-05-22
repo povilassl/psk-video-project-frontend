@@ -7,7 +7,7 @@ import { increaseViewCount } from "../../services/video_endpoints/videoInteracti
 import LikeButton from "./Buttons/LikeButton";
 import DislikeButton from "./Buttons/DislikeButton";
 import "../../css/VideoPage/oneVideoPage.css";
-
+import { useSelector } from "react-redux";
 import AzureMediaPlayer from './VideoPlayer';
 
 export const VideoPage = () => {
@@ -23,6 +23,8 @@ export const VideoPage = () => {
             x.style.display = "none";
         }
     }
+
+    const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
 
     /* Container for video in various fetch states */
     let container = () => {
@@ -95,7 +97,8 @@ export const VideoPage = () => {
                         <CommentForm videoId={videoId} />
                         {video.data.hasComments === true &&
                             //TODO: polling for new comments
-                            <CommentSection />
+                            ({isAuthenticated} ? (<CommentSection />) : (<p>please log in</p>))
+                            
                         }
                         {video.data.hasComments === false &&
                             <h4>There are no comments for this video</h4>
