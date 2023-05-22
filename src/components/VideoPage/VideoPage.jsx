@@ -22,11 +22,11 @@ export const VideoPage = () => {
             x.style.display = "none";
         }
     }
+    const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
 
 
     /* Container for video in various fetch states */
     let container = () => {
-        const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
 
         if (video.state === 'fetching') {
             return <div className="fetch_loading_container">
