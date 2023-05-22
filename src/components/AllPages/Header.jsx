@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import "../../css/AllPages/mainMeniu.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from "../../services/user_redux/store";
-import Cookies from 'js-cookie';
 
 const Header = () => {
 
