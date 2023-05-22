@@ -5,7 +5,7 @@ import { VideoPage } from "./components/VideoPage/VideoPage";
 import Header from "./components/AllPages/Header";
 import BackgroundWave from "./components/AllPages/BackgroundWave"
 import { LoginRegisterPage } from "./components/LoginPage/LoginRegisterPage";
-import { useDispatch, useSelector  } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PrivateRoute from "./components/Routing/PrivateRoute";
 import { useEffect } from "react";
 import { logout, login } from "./services/user_redux/store";
@@ -33,7 +33,7 @@ function App() {
           dispatch(logout());
         }
       }
-    };  
+    };
 
     if (isAuthenticated) {
       const intervalId = setInterval(() => {
@@ -56,7 +56,7 @@ function App() {
     }
   }, [dispatch]);
 
-  
+
 
   return (
     <div>
@@ -66,14 +66,14 @@ function App() {
         <Routes>
           <Route path="/" element={<VideoList />} />
           <Route path="/video/:videoId" element={<VideoPage />} />
-          <Route  path="/video/upload" element={<PrivateRoute><UploadPage /></PrivateRoute>} />
+          <Route path="/video/upload" element={<PrivateRoute><UploadPage /></PrivateRoute>} />
           <Route path="/login" element={<LoginRegisterPage />} />
-          <Route path="/notifications" element={<Notification/>} />
+          <Route path="/notifications" element={<Notification />} />
         </Routes>
-        <ToastContainer position={'top-left'} 
-                        theme={'dark'}
-                        // autoClose={false}
-                        />
+        <ToastContainer position={'top-left'}
+          theme={'dark'}
+        // autoClose={false}
+        />
       </BrowserRouter>
     </div>
   );

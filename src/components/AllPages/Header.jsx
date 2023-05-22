@@ -2,15 +2,15 @@ import { Link } from "react-router-dom";
 import "../../css/AllPages/mainMeniu.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from "../../services/user_redux/store";
-import Cookies from 'js-cookie';
 
 const Header = () => {
-  
+
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    Cookies.remove('VideotekaAuthentication');
+    document.cookie = 'VideotekaAuthentication=; Domain=.videoteka.tech; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Secure; SameSite=None;';
+
     sessionStorage.removeItem('user');
     dispatch(logout());
   };

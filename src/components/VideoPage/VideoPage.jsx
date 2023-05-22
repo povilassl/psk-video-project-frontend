@@ -14,13 +14,13 @@ export const VideoPage = () => {
 
     const { videoId } = useParams();
 
-    
+
     function showHideDescription() {
         var x = document.getElementById("videoDescriptionDiv");
         if (x.style.display === "none") {
-          x.style.display = "block";
+            x.style.display = "block";
         } else {
-          x.style.display = "none";
+            x.style.display = "none";
         }
     }
 
@@ -28,14 +28,14 @@ export const VideoPage = () => {
     let container = () => {
         if (video.state === 'fetching') {
             return <div className="fetch_loading_container">
-                        <span className="big_loader">L &nbsp; ading</span>
-                    </div>;
+                <span className="big_loader">L &nbsp; ading</span>
+            </div>;
         }
 
         else if (video.state === 'failed') {
             return <div className="fetch_failed_container">
-                        <span className="big_failed">S<i class="big_failed_emoji uil uil-sad-dizzy"></i>mething went wrong</span>
-                    </div>;
+                <span className="big_failed">S<i class="big_failed_emoji uil uil-sad-dizzy"></i>mething went wrong</span>
+            </div>;
         }
 
         else if (video.state === 'fetched') {
@@ -54,22 +54,22 @@ export const VideoPage = () => {
                 <div className="video_fetched_container">
                     <div className="videoInfoDiv">
                         <h3>{video.data.videoName}</h3>
-                        <AzureMediaPlayer src={video.data.videoURL} options={options}/>
+                        <AzureMediaPlayer src={video.data.videoURL} options={options} />
                         <div className="infoDiv">
-                        {
-                            //TODO: polling for new likes/dislikes
-                        }
+                            {
+                                //TODO: polling for new likes/dislikes
+                            }
                             <div className="inEachSideDiv">
                                 <div className="sideBySideHorizontallyModified">
                                     <i className="icon uil uil-user"></i>
                                     <p>{video.data.username}</p>
-                                </div>                                
+                                </div>
                             </div>
 
                             <div className="inEachSideDiv">
                                 <div className="sideBySideHorizontallyModified" >
                                     <i className="icon uil uil-eye"></i>
-                                    <div className="viewDiv"> {video.data.viewCount} </div>         
+                                    <div className="viewDiv"> {video.data.viewCount} </div>
                                 </div>
                                 <div className="sideBySideHorizontallyLikeDislike" >
                                     <span className="inlineSpan"><LikeButton param={video.data.likeCount} /></span>
@@ -80,13 +80,13 @@ export const VideoPage = () => {
                                 <div>
                                     <button className="seeDescriptionButton" onClick={showHideDescription}>See video description</button>
                                 </div>
-                                <div id="videoDescriptionDiv"> 
+                                <div id="videoDescriptionDiv">
                                     <p>{video.data.description}</p>
                                 </div>
                             </div>
-                            
+
                         </div>
-                        
+
                     </div>
                     <div className="commentSecotionDiv">
                         {
