@@ -22,14 +22,15 @@ function App() {
 
   useEffect(() => {
     const checkSession = () => {
-      const user = JSON.parse(sessionStorage.getItem('user'));
+      const user = JSON.parse(sessionStorage.getItem('expiration'));
       if (user) {
         const now = new Date();
-        const sessionExpiresAt = new Date(user.cookieExpiration);
+        const sessionExpiresAt = new Date(user);
         console.log(user);
         if (now >= sessionExpiresAt) {
-          sessionStorage.removeItem('user');
-          Cookies.remove('VideotekaAuthentication')
+          localStorage.removeItem('user');
+          localStorage.removeItem('expiration');
+          Cookies.remove('VideotekaAuthentication', { domain: '.videoteka.tech' })
           dispatch(logout());
         }
       }
@@ -49,7 +50,7 @@ function App() {
 
 
   useEffect(() => {
-    const storedUser = sessionStorage.getItem('user');
+    const storedUser = localStorage.getItem('user');
     if (storedUser) {
       const user = JSON.parse(storedUser);
       dispatch(login(user));

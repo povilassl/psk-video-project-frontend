@@ -36,7 +36,13 @@ export const Login = () => {
                     setState('success')
 
                     let usr = username
-                    sessionStorage.setItem('user', JSON.stringify(usr))
+                    localStorage.setItem('user', JSON.stringify(usr))
+
+                    let date = new Date(); // current date
+                    date.setDate(date.getDate() + 10); // add 10 days to the current date
+                    let isoString = date.toISOString();
+                    localStorage.setItem('expiration', JSON.stringify(isoString))
+                    
                     dispatch(login(usr))
 
                     navigate('/login') 
