@@ -22,7 +22,7 @@ function App() {
 
   useEffect(() => {
     const checkSession = () => {
-      const user = JSON.parse(sessionStorage.getItem('expiration'));
+      const user = JSON.parse(localStorage.getItem('expiration'));
       if (user) {
         const now = new Date();
         const sessionExpiresAt = new Date(user);
@@ -48,7 +48,6 @@ function App() {
     }
   }, [isAuthenticated, dispatch]);
 
-
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
@@ -56,8 +55,6 @@ function App() {
       dispatch(login(user));
     }
   }, [dispatch]);
-
-
 
   return (
     <div>

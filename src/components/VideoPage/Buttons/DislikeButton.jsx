@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux';
 const DislikeButton = (dislikeCount) => {
   const { videoId } = useParams();
   const [disliked, setLiked] = useState(null);
-  //const [clicked, setClicked] = useState(false);
   const [changingClassName, setClass] = useState('like-button-wrapper');
   const [dislikes, setDislikesCount] = useState(dislikeCount.param);
 
