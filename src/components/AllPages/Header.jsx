@@ -13,6 +13,7 @@ const Header = () => {
     Cookies.remove('VideotekaAuthentication', { domain: '.videoteka.tech' });
 
     localStorage.removeItem('user');
+    localStorage.removeItem('expiration');
     dispatch(logout());
   };
 

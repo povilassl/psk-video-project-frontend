@@ -14,7 +14,6 @@ export const VideoPage = () => {
 
     const { videoId } = useParams();
 
-
     function showHideDescription() {
         var x = document.getElementById("videoDescriptionDiv");
         if (x.style.display === "none") {
@@ -24,10 +23,11 @@ export const VideoPage = () => {
         }
     }
 
-    const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
 
     /* Container for video in various fetch states */
     let container = () => {
+        const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+
         if (video.state === 'fetching') {
             return <div className="fetch_loading_container">
                 <span className="big_loader">L &nbsp; ading</span>
@@ -94,10 +94,10 @@ export const VideoPage = () => {
                         {
                             //TODO: refetch comments after posting a new one}
                         }
-                        <CommentForm videoId={videoId} />
+                        {isAuthenticated && <CommentForm videoId={videoId} />}
                         {video.data.hasComments === true &&
                             //TODO: polling for new comments
-                            ({isAuthenticated} ? (<CommentSection />) : (<p>please log in</p>))
+                            <CommentSection />
                             
                         }
                         {video.data.hasComments === false &&
