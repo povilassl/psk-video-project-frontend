@@ -94,11 +94,10 @@ export const VideoPage = () => {
                         {
                             //TODO: refetch comments after posting a new one}
                         }
-                        {isAuthenticated && <CommentForm videoId={videoId} />}
+                        {isAuthenticated ? <CommentForm videoId={videoId} /> : <p>please log in</p>}
                         {video.data.hasComments === true &&
                             //TODO: polling for new comments
                             <CommentSection />
-                            
                         }
                         {video.data.hasComments === false &&
                             <h4>There are no comments for this video</h4>
