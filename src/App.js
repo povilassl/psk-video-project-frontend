@@ -17,6 +17,7 @@ import { Profile } from "./components/UserPage/Profile";
 import { logoutUser } from "./services/user_endpoints/userInteractions";
 import * as signalR from "@microsoft/signalr";
 import { apiUrl } from "./services/config";
+import { toast } from 'react-toastify';
 
 function App() {
 
