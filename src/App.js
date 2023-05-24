@@ -70,7 +70,7 @@ function App() {
     // Handle the "ReceiveNotification" event
     connection.on("ReceiveNotification", (message) => {
       console.log("Notification received:", message);
-      () => toast(message)
+      toast(message)
     });
 
     // Clean up the SignalR connection when the component unmounts

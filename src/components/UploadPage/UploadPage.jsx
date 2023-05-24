@@ -1,5 +1,6 @@
 import { uploadVideo } from "../../services/video_endpoints/videos";
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import "../../css/UploadPage/uploadPage.css";
 
 export function UploadPage() {
@@ -43,7 +44,9 @@ export function UploadPage() {
             setThumbnailImage(null);
         } catch (error) {
             setUploadState('failed');
-            console.log(error);
+
+            if(error.response.data === 'Error: this endpoint can be called only in production')
+                toast.error("This endpoint can be called only in production!");
         }
     };
 
