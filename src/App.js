@@ -13,7 +13,11 @@ import { Notification } from "./components/AllPages/Notification";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { UploadPage } from "./components/UploadPage/UploadPage";
-import Cookies from 'js-cookie';
+import { Profile } from "./components/UserPage/Profile";
+import { logoutUser } from "./services/user_endpoints/userInteractions";
+import * as signalR from "@microsoft/signalr";
+import { apiUrl } from "./services/config";
+import { toast } from 'react-toastify';
 
 function App() {
 
@@ -30,7 +34,7 @@ function App() {
         if (now >= sessionExpiresAt) {
           localStorage.removeItem('user');
           localStorage.removeItem('expiration');
-          Cookies.remove('VideotekaAuthentication', { domain: '.videoteka.tech' })
+          logoutUser();
           dispatch(logout());
         }
       }
@@ -47,6 +51,34 @@ function App() {
       };
     }
   }, [isAuthenticated, dispatch]);
+
+  useEffect(() => {
+    // Create the SignalR connection
+    const connection = new signalR.HubConnectionBuilder()
+      .withUrl(`${apiUrl}/notificationHub`, {
+        skipNegotiation: true,
+        transport: signalR.HttpTransportType.WebSockets,
+      })
+      .build();
+
+    // Start the SignalR connection
+    connection
+      .start()
+      .then(() => console.log("Connection established."))
+      .catch((error) => console.error(error));
+
+    // Handle the "ReceiveNotification" event
+    connection.on("ReceiveNotification", (message) => {
+      console.log("Notification received:", message);
+      toast(message)
+    });
+
+    // Clean up the SignalR connection when the component unmounts
+    return () => {
+      connection.off("ReceiveNotification");
+      connection.stop();
+    };
+  }, []);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -67,6 +99,7 @@ function App() {
           <Route path="/video/upload" element={<PrivateRoute><UploadPage /></PrivateRoute>} />
           <Route path="/login" element={<LoginRegisterPage />} />
           <Route path="/notifications" element={<Notification />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
         <ToastContainer position={'top-left'}
           theme={'dark'}

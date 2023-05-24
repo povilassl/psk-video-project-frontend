@@ -1,17 +1,21 @@
 import { Link } from "react-router-dom"
 import { loginUser } from "../../services/user_endpoints/userInteractions"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { login } from "../../services/user_redux/store"
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 //import Cookies from "js-cookie"
 
 const LoginState = ({state}) => {
+    const notifyError = (message) => toast.error(message);
+    const notifySuccess = (message) => toast.success(message);
+
     return (
-        <div className="register_state">
-            {state === 'failed' && <p><i style={{ color: 'var(--error-color)' }}>Error in log in</i></p>}
-            {state === 'loading' && <span className="small_loader"></span>}
-            {state === 'success' && <p><i style={{ color: 'var(--success-color)' }}>Log in successful</i></p>}
+        <div className="login_state">
+            {state === 'failed' && notifyError("Error in log in")  && null}
+            {state === 'loading' && <div className="loaderDiv"><span className="small_loader"></span></div>}
+            {state === 'success' && notifySuccess("Log in successful") && null}
         </div>
     )
 }
@@ -53,6 +57,12 @@ export const Login = () => {
                 console.error(err)
                 setState('failed')})
     }
+
+    useEffect(() => {
+        if (state === 'failed') 
+            setState(''); 
+      }, [state]);
+
 
     return (
         <div className="card-front">
