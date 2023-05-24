@@ -17,10 +17,14 @@ export async function registerUser(username, email, password, firstName, lastNam
     return await axios.post(`${apiUrl}/UserInteractions/RegisterNewUser`, data)
 }
 
-export async function loginUser(username, password){
-    return await axios.get(`${apiUrl}/UserInteractions/Login?username=${username}&password=${password}`, {withCredentials: true, credentials: 'include'})
+export async function loginUser(username, password) {
+    return await axios.get(`${apiUrl}/UserInteractions/Login?username=${username}&password=${password}`, { withCredentials: true, credentials: 'include' })
 }
 
-export async function changePassword(username, password, newPassword){
+export async function changePassword(username, password, newPassword) {
     return await axios.get(`${apiUrl}/UserInteractions/ChangePassword?username=${username}&password=${password}&newPassword=${newPassword}`)
+}
+
+export async function logoutUser() {
+    return await axios.get(`${apiUrl}/UserInteractions/Logout`, { withCredentials: true, credentials: 'include' })
 }

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { registerUser, isUsernameTaken } from "../../services/user_endpoints/userInteractions";
 
-const Checks = ({ password, email }) => {
+const Checks = ({ password, email, username }) => {
     let checks = []
 
     // length is 8 - 20
@@ -19,6 +19,9 @@ const Checks = ({ password, email }) => {
     //email checker
     if(!/^[\w.-]+@[a-zA-Z_-]+?(?:\.[a-zA-Z]{2,})+$/.test(email)) checks.push("Not valid email")
 
+    //username length check
+    if(username.length < 5) checks.push("Too short username")
+    
     return (
         <div className="password_checks">
             {checks.map((check, index) => <p key={index}>{check}</p>)}
@@ -68,7 +71,7 @@ export const Register = () => {
 
     return (
         <div className="card-back">
-            <Checks password={user.password} email={user.email}/>
+            <Checks password={user.password} email={user.email} username={user.username}/>
             <RegisterState state={user.state} />
             <div className="center-wrap">
                 <div className="inputSection">

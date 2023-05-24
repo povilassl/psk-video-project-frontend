@@ -13,7 +13,8 @@ import { Notification } from "./components/AllPages/Notification";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { UploadPage } from "./components/UploadPage/UploadPage";
-import Cookies from 'js-cookie';
+import { Profile } from "./components/UserPage/Profile";
+import { logoutUser } from "./services/user_endpoints/userInteractions";
 
 function App() {
 
@@ -30,7 +31,7 @@ function App() {
         if (now >= sessionExpiresAt) {
           localStorage.removeItem('user');
           localStorage.removeItem('expiration');
-          Cookies.remove('VideotekaAuthentication', { domain: '.videoteka.tech' })
+          logoutUser();
           dispatch(logout());
         }
       }
@@ -67,6 +68,7 @@ function App() {
           <Route path="/video/upload" element={<PrivateRoute><UploadPage /></PrivateRoute>} />
           <Route path="/login" element={<LoginRegisterPage />} />
           <Route path="/notifications" element={<Notification />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
         <ToastContainer position={'top-left'}
           theme={'dark'}
