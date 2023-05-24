@@ -7,21 +7,37 @@ import { increaseViewCount } from "../../services/video_endpoints/videoInteracti
 import LikeButton from "./Buttons/LikeButton";
 import DislikeButton from "./Buttons/DislikeButton";
 import "../../css/VideoPage/oneVideoPage.css";
-
+import { useSelector } from "react-redux";
 import AzureMediaPlayer from './VideoPlayer';
 
 export const VideoPage = () => {
 
     const { videoId } = useParams();
 
+    function showHideDescription() {
+        var x = document.getElementById("videoDescriptionDiv");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+    const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+
+
     /* Container for video in various fetch states */
     let container = () => {
+
         if (video.state === 'fetching') {
-            return <div className="fetch_loading_container">Loading...</div>;
+            return <div className="fetch_loading_container">
+                <span className="big_loader">L &nbsp; ading</span>
+            </div>;
         }
 
         else if (video.state === 'failed') {
-            return <div className="fetch_failed_container">Failed to fetch data.</div>;
+            return <div className="fetch_failed_container">
+                <span className="big_failed">S<i class="big_failed_emoji uil uil-sad-dizzy"></i>mething went wrong</span>
+            </div>;
         }
 
         else if (video.state === 'fetched') {
@@ -40,36 +56,45 @@ export const VideoPage = () => {
                 <div className="video_fetched_container">
                     <div className="videoInfoDiv">
                         <h3>{video.data.videoName}</h3>
-                        <AzureMediaPlayer src={video.data.videoURL} options={options}/>
+                        <AzureMediaPlayer src={video.data.videoURL} options={options} />
                         <div className="infoDiv">
-                        {
-                            //TODO: polling for new likes/dislikes
-                        }
+                            {
+                                //TODO: polling for new likes/dislikes
+                            }
                             <div className="inEachSideDiv">
                                 <div className="sideBySideHorizontallyModified">
                                     <i className="icon uil uil-user"></i>
                                     <p>{video.data.username}</p>
-                                </div>                                
+                                </div>
                             </div>
 
                             <div className="inEachSideDiv">
                                 <div className="sideBySideHorizontallyModified" >
                                     <i className="icon uil uil-eye"></i>
-                                    <div className="viewDiv"> {video.data.viewCount} </div>         
+                                    <div className="viewDiv"> {video.data.viewCount} </div>
                                 </div>
                                 <div className="sideBySideHorizontallyLikeDislike" >
                                     <span className="inlineSpan"><LikeButton param={video.data.likeCount} /></span>
                                     <span className="inlineSpan"><DislikeButton param={video.data.dislikeCount} /></span>
                                 </div>
                             </div>
+                            <div className="videoDescriptionWrapper">
+                                <div>
+                                    <button className="seeDescriptionButton" onClick={showHideDescription}>See video description</button>
+                                </div>
+                                <div id="videoDescriptionDiv">
+                                    <p>{video.data.description}</p>
+                                </div>
+                            </div>
+
                         </div>
-                        
+
                     </div>
                     <div className="commentSecotionDiv">
                         {
                             //TODO: refetch comments after posting a new one}
                         }
-                        <CommentForm videoId={videoId} />
+                        {isAuthenticated ? <CommentForm videoId={videoId} /> : <p>please log in</p>}
                         {video.data.hasComments === true &&
                             //TODO: polling for new comments
                             <CommentSection />

@@ -7,13 +7,13 @@ export async function getAllVideos(start = 0, count = 20) {
   );
 }
 
-export async function uploadVideo(videoName, username, description, videoFile, thumbnailImage) {
+export async function uploadVideo(videoName, description, videoFile, thumbnailImage, sendEmail=false) {
   const formData = new FormData();
   formData.append('VideoName', videoName);
-  formData.append('Username', username);
   formData.append('Description', description);
   formData.append('VideoFile', videoFile);
   formData.append('ThumbnailImage', thumbnailImage);
+  formData.append('sendEmail', sendEmail);
 
   return await axios.post(`${apiUrl}/Video/UploadVideo`, formData, {
     headers: {

@@ -2,6 +2,7 @@ import { apiUrl } from "../config";
 import axios from "axios";
 
 axios.defaults.headers.post['Content-Type'] = `application/json`;
+axios.defaults.withCredentials = true;
 
 export async function getVideoComments(videoId) {
 
@@ -23,7 +24,7 @@ export async function postCommentOnVideo(videoId, comment, username) {
 }
 
 export async function increaseViewCount(videoId) {
-    return await axios.post(`${apiUrl}/VideoInteractions/IncreaseViewCount`, videoId)
+    return await axios.get(`${apiUrl}/VideoInteractions/IncreaseViewCount?videoId=${videoId}`)
 }
 
 export async function addLike(videoId) {
@@ -54,4 +55,8 @@ export async function postReplyToComment(commentId, comment, username) {
     }
 
     return await axios.post(`${apiUrl}/VideoInteractions/ReplyToAComment`, data)
+}
+
+export async function getVideoReaction(videoId) {
+    return await axios.get(`${apiUrl}/VideoInteractions/GetVideoReaction?videoId=${videoId}`)
 }
