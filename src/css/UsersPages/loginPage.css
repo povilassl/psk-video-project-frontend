@@ -137,7 +137,6 @@ display: none;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   position: absolute;
-  border: 1px solid green;
 }
 
 .card-back {
@@ -247,7 +246,6 @@ display: none;
 
 .password_checks, .register_state{
   align-content: center;
-  
   color: white;
 }
 
