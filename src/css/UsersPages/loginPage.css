@@ -299,14 +299,6 @@ display: none;
   color: var(--small-text-color);
 }
 
-.register_state p{
-  margin-bottom: 0px;
-}
-
-.login_state p {
-  margin-bottom: -30px;
-}
-
 .register_state .loaderDiv{
   margin-bottom: -40px;
 }
