@@ -1,41 +1,17 @@
-import { useState } from "react"
+import { useState, useEffect  } from "react"
 import { registerUser, isUsernameTaken } from "../../services/user_endpoints/userInteractions";
-
-const Checks = ({ password, email, username }) => {
-    let checks = []
-
-    // length is 8 - 20
-    if (password.length < 8 || password.length > 20) checks.push("Invalid password length");
-
-    // At least 1 uppercase character
-    if (!/[A-Z]/.test(password)) checks.push("Password should have at least 1 uppercase character");
-
-    // At least 1 lowercase character
-    if (!/[a-z]/.test(password)) checks.push("Password should have at least 1 lowercase character");
-
-    // At least 1 special character
-    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) checks.push("Password should have at least 1 special character");
-
-    //email checker
-    if(!/^[\w.-]+@[a-zA-Z_-]+?(?:\.[a-zA-Z]{2,})+$/.test(email)) checks.push("Not valid email")
-
-    //username length check
-    if(username.length < 5) checks.push("Too short username")
-    
-    return (
-        <div className="password_checks">
-            {checks.map((check, index) => <p key={index}>{check}</p>)}
-        </div>
-    );
-}
+import { toast } from 'react-toastify';
 
 const RegisterState = ({ state }) => {
+    const notifyError = (message) => toast.error(message);
+    const notifySuccess = (message) => toast.success(message);
+    
     return (
         <div className="register_state">
-            {state === 'failed' && <p><i style={{color:'var(--error-color)'}}>Error in registration</i></p>}
-            {state === 'taken' && <p><i style={{color:'var(--error-color)'}}>Username is taken</i></p>}
-            {state === 'loading' && <span className="small_loader"></span>}
-            {state === 'success' && <p><i style={{color:'var(--success-color)'}}>Registration successful</i></p>}
+            {state === 'failed' && notifyError("Error in registration") && null}
+            {state === 'taken' && notifyError("The username is taken") && null}
+            {state === 'loading' && <div className="loaderDiv"><span className="small_loader"></span></div>}
+            {state === 'success' && notifySuccess("Your registration was successful") && null} 
         </div>
     )
 }
@@ -50,6 +26,63 @@ export const Register = () => {
         lastName: '',
         state: null
     });
+
+    const [showRules, setShowRules] = useState(false);
+    const [validPasswordRules, setValidRules] = useState([]);
+    const [invalidEmail, setIvalidEmail] = useState(false);
+    const [showEmail, setShowEmail] = useState(false);
+
+    const handleEmailClick = () => {
+        if(invalidEmail === true)
+            setShowEmail(true);  
+    };
+
+    const handleEmailBlur = () => {
+        setShowEmail(false);
+    };
+
+    useEffect(() => {
+        const emailRegex = /^[\w.-]+@[a-zA-Z_-]+?(?:\.[a-zA-Z]{2,})+$/;
+            setIvalidEmail(!emailRegex.test(user.email));
+
+        
+    }, [user.email, invalidEmail]);
+
+
+    const handlePasswordClick = () => {
+        if(validPasswordRules.length > 0)
+            setShowRules(true);
+    };
+
+    const handleBlur = () => {
+        setShowRules(false);
+    };
+
+    useEffect(() => {
+    const regexArray = [
+        {
+        regex: /[A-Z]/, 
+        message: 'Upper-case letter',
+        },
+        {
+        regex: /[a-z]/, 
+        message: 'Lower-case letter',
+        }, 
+        {
+            regex: /[!@#$%^&*(),.?":{}|<>]/, 
+            message: '1 special symbol',
+        },
+        {
+            regex: /^(.{9,19})$/,
+            message: 'More than 8 characters',
+        }
+    ];
+
+    const validRules = regexArray.filter((rule) => !rule.regex.test(user.password));
+    setValidRules(validRules);
+    }, [user.password]);  
+
+
 
     const handleRegister = () => {
         setUser({ ...user, state: "loading" })
@@ -71,7 +104,6 @@ export const Register = () => {
 
     return (
         <div className="card-back">
-            <Checks password={user.password} email={user.email} username={user.username}/>
             <RegisterState state={user.state} />
             <div className="center-wrap">
                 <div className="inputSection">
@@ -81,13 +113,39 @@ export const Register = () => {
                         <i className="input-icon uil uil-user"></i>
                     </div>
                     <div className="form-group">
-                        <input type="email" className="form-style" placeholder="Email" onChange={(e) => setUser({ ...user, email: e.target.value })} />
+                        <input type="email" 
+                               className="form-style" 
+                               placeholder="Email" 
+                               onChange={(e) => setUser({ ...user, email: e.target.value })}
+                               onClick={handleEmailClick}
+                               onBlur={handleEmailBlur} />
                         <i className="input-icon uil uil-at"></i>
                     </div>
+                    {showEmail && (<div>{invalidEmail === true ?  (
+                    <span className="invalid">Email is invalid</span>) : null}</div>)}
+
                     <div className="form-group">
-                        <input type="password" className="form-style" placeholder="Password" onChange={(e) => setUser({ ...user, password: e.target.value })} />
+                        <input type="password" 
+                               className="form-style" 
+                               placeholder="Password" 
+                               onChange={(e) => setUser({ ...user, password: e.target.value })}
+                               onClick={handlePasswordClick}
+                               onBlur={handleBlur}/>
                         <i className="input-icon uil uil-lock-alt"></i>
                     </div>
+
+                    {showRules && (<div className="form-group">
+                            {validPasswordRules.length > 0 ? (
+                            <div className="password_div">
+                                <span>Password must contain:</span>
+                                    {validPasswordRules.map((rule, index) => (
+                                    <span key={index} className="invalid">
+                                        {rule.message}
+                                </span>))}
+                            </div>
+                            ) : null}
+                    </div>)}
+                    
                     <div className="form-group">
                         <input type="text" className="form-style" placeholder="Name" onChange={(e) => setUser({ ...user, firstName: e.target.value })} />
                         <i className="input-icon uil uil-user"></i>
@@ -100,6 +158,6 @@ export const Register = () => {
                 </div>
             </div>
         </div>
-
+        
     )
 }
