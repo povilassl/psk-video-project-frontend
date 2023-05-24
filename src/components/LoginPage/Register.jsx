@@ -1,30 +1,5 @@
-import { useState } from "react"
+import { useState, useEffect  } from "react"
 import { registerUser, isUsernameTaken } from "../../services/user_endpoints/userInteractions";
-
-const Checks = ({ password, email }) => {
-    let checks = []
-
-    // length is 8 - 20
-    if (password.length < 8 || password.length > 20) checks.push("Invalid password length");
-
-    // At least 1 uppercase character
-    if (!/[A-Z]/.test(password)) checks.push("Password should have at least 1 uppercase character");
-
-    // At least 1 lowercase character
-    if (!/[a-z]/.test(password)) checks.push("Password should have at least 1 lowercase character");
-
-    // At least 1 special character
-    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) checks.push("Password should have at least 1 special character");
-
-    //email checker
-    if(!/^[\w.-]+@[a-zA-Z_-]+?(?:\.[a-zA-Z]{2,})+$/.test(email)) checks.push("Not valid email")
-
-    return (
-        <div className="password_checks">
-            {checks.map((check, index) => <p key={index}>{check}</p>)}
-        </div>
-    );
-}
 
 const RegisterState = ({ state }) => {
     return (
@@ -48,6 +23,63 @@ export const Register = () => {
         state: null
     });
 
+    const [showRules, setShowRules] = useState(false);
+    const [validPasswordRules, setValidRules] = useState([]);
+    const [invalidEmail, setIvalidEmail] = useState(false);
+    const [showEmail, setShowEmail] = useState(false);
+
+    const handleEmailClick = () => {
+        if(invalidEmail === true)
+            setShowEmail(true);  
+    };
+
+    const handleEmailBlur = () => {
+        setShowEmail(false);
+    };
+
+    useEffect(() => {
+        const emailRegex = /^[\w.-]+@[a-zA-Z_-]+?(?:\.[a-zA-Z]{2,})+$/;
+            setIvalidEmail(!emailRegex.test(user.email));
+
+        
+    }, [user.email, invalidEmail]);
+
+
+    const handlePasswordClick = () => {
+        if(validPasswordRules.length > 0)
+            setShowRules(true);
+    };
+
+    const handleBlur = () => {
+        setShowRules(false);
+    };
+
+    useEffect(() => {
+    const regexArray = [
+        {
+        regex: /[A-Z]/, 
+        message: 'Upper-case letter',
+        },
+        {
+        regex: /[a-z]/, 
+        message: 'Lower-case letter',
+        }, 
+        {
+            regex: /[!@#$%^&*(),.?":{}|<>]/, 
+            message: '1 special symbol',
+        },
+        {
+            regex: /^(.{9,19})$/,
+            message: 'More than 8 characters',
+        }
+    ];
+
+    const validRules = regexArray.filter((rule) => !rule.regex.test(user.password));
+    setValidRules(validRules);
+    }, [user.password]);  
+
+
+
     const handleRegister = () => {
         setUser({ ...user, state: "loading" })
 
@@ -68,7 +100,6 @@ export const Register = () => {
 
     return (
         <div className="card-back">
-            <Checks password={user.password} email={user.email}/>
             <RegisterState state={user.state} />
             <div className="center-wrap">
                 <div className="inputSection">
@@ -78,13 +109,39 @@ export const Register = () => {
                         <i className="input-icon uil uil-user"></i>
                     </div>
                     <div className="form-group">
-                        <input type="email" className="form-style" placeholder="Email" onChange={(e) => setUser({ ...user, email: e.target.value })} />
+                        <input type="email" 
+                               className="form-style" 
+                               placeholder="Email" 
+                               onChange={(e) => setUser({ ...user, email: e.target.value })}
+                               onClick={handleEmailClick}
+                               onBlur={handleEmailBlur} />
                         <i className="input-icon uil uil-at"></i>
                     </div>
+                    {showEmail && (<div>{invalidEmail === true ?  (
+                    <span className="invalid">Email is invalid</span>) : null}</div>)}
+
                     <div className="form-group">
-                        <input type="password" className="form-style" placeholder="Password" onChange={(e) => setUser({ ...user, password: e.target.value })} />
+                        <input type="password" 
+                               className="form-style" 
+                               placeholder="Password" 
+                               onChange={(e) => setUser({ ...user, password: e.target.value })}
+                               onClick={handlePasswordClick}
+                               onBlur={handleBlur}/>
                         <i className="input-icon uil uil-lock-alt"></i>
                     </div>
+
+                    {showRules && (<div className="form-group">
+                            {validPasswordRules.length > 0 ? (
+                            <div className="password_div">
+                                <span>Password must contain:</span>
+                                    {validPasswordRules.map((rule, index) => (
+                                    <span key={index} className="invalid">
+                                        {rule.message}
+                                </span>))}
+                            </div>
+                            ) : null}
+                    </div>)}
+                    
                     <div className="form-group">
                         <input type="text" className="form-style" placeholder="Name" onChange={(e) => setUser({ ...user, firstName: e.target.value })} />
                         <i className="input-icon uil uil-user"></i>
@@ -96,7 +153,18 @@ export const Register = () => {
                     <button className="btn mt-4" type="submit" onClick={() => handleRegister()}>Register</button>
                 </div>
             </div>
+            {/* <div className="password_div">
+                <h1>Password must be requirements</h1>
+                <ul>
+						<li id="letter" class="invalid">At least <strong>one letter</strong></li>
+						<li id="capital" class="invalid">At least <strong>one capital letter</strong></li>
+						<li id="number" class="invalid">At least <strong>one number</strong></li>
+						<li id="length" class="invalid">Be at least <strong>8 characters</strong></li>
+						<li id="space" class="invalid">be<strong> use [~,!,@,#,$,%,^,&,*,-,=,.,;,']</strong></li>
+					</ul>
+            </div> */}
         </div>
+        
 
     )
 }

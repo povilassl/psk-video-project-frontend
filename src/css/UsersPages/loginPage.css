@@ -137,6 +137,7 @@ display: none;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   position: absolute;
+  border: 1px solid green;
 }
 
 .card-back {
@@ -149,7 +150,7 @@ display: none;
 
 .checkbox:checked ~ .card-3d-wrap .card-3d-wrapper {
   transform: rotateY(180deg);
-  height: 550px;
+  height: 650px;
 
 }
 
@@ -283,4 +284,14 @@ display: none;
 }
  @keyframes rotate {
   100%{    transform: rotate(360deg)}
+}
+
+.password_div{
+  color: var(--small-text-color);
+}
+
+.invalid{
+  margin-left: 10px;
+  display: block;
+  color: var(--small-text-color);
 }
