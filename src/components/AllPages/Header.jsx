@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "../../css/AllPages/mainMeniu.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from "../../services/user_redux/store";
-import Cookies from "js-cookie";
+import { logoutUser } from "../../services/user_endpoints/userInteractions";
 
 const Header = () => {
 
@@ -10,7 +10,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    Cookies.remove('VideotekaAuthentication', { domain: '.videoteka.tech' });
+    logoutUser().catch((err) => console.log(err));
 
     localStorage.removeItem('user');
     localStorage.removeItem('expiration');
@@ -29,9 +29,14 @@ const Header = () => {
         <li><Link to={"/"}>All videos</Link></li>
         <li><Link to={"/video/upload"}>Upload video</Link></li>
         {isAuthenticated ? (
-          <li>
-            <button onClick={handleLogout}>Logout from {localStorage.getItem('user')}</button>
-          </li>
+          <span>
+            <li>
+              <Link to={"/profile"}>{localStorage.getItem('user')} Profile</Link>
+            </li>    
+            <li>
+              <Link to={"/"} onClick={handleLogout}>Logout</Link>
+            </li>        
+          </span>
         ) : (
           <li>
             <Link to={"/login"}>Join us</Link>
