@@ -244,22 +244,27 @@ display: none;
   box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
 }
 
-.password_checks, .register_state{
+.password_checks, .register_state, .login_state{
   align-content: center;
   color: white;
 }
 
-.password_checks p, .register_state p{
+.password_checks p, .register_state p, .login_state p{
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
+}
+
+.loaderDiv{
+  text-align: center;
+  margin-bottom: -35px;
+  margin-top: 15px;
 }
 
 .small_loader {
   width: 48px;
   height: 48px;
   display: inline-block;
-  position: relative;
   border-width: 3px 2px 3px 2px;
   border-style: solid dotted solid dotted;
   border-color: var(--accent-color) rgba(255, 255, 255,0.3) var(--big-text-color) rgba(151, 107, 93, 0.3);
@@ -292,4 +297,16 @@ display: none;
   margin-left: 10px;
   display: block;
   color: var(--small-text-color);
+}
+
+.register_state p{
+  margin-bottom: 0px;
+}
+
+.login_state p {
+  margin-bottom: -30px;
+}
+
+.register_state .loaderDiv{
+  margin-bottom: -40px;
 }

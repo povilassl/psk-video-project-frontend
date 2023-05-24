@@ -1,13 +1,17 @@
 import { useState, useEffect  } from "react"
 import { registerUser, isUsernameTaken } from "../../services/user_endpoints/userInteractions";
+import { toast } from 'react-toastify';
 
 const RegisterState = ({ state }) => {
+    const notifyError = (message) => toast.error(message);
+    const notifySuccess = (message) => toast.success(message);
+    
     return (
         <div className="register_state">
-            {state === 'failed' && <p><i style={{color:'var(--error-color)'}}>Error in registration</i></p>}
-            {state === 'taken' && <p><i style={{color:'var(--error-color)'}}>Username is taken</i></p>}
-            {state === 'loading' && <span className="small_loader"></span>}
-            {state === 'success' && <p><i style={{color:'var(--success-color)'}}>Registration successful</i></p>}
+            {state === 'failed' && notifyError("Error in registration") && null}
+            {state === 'taken' && notifyError("The username is taken") && null}
+            {state === 'loading' && <div className="loaderDiv"><span className="small_loader"></span></div>}
+            {state === 'success' && notifySuccess("Your registration was successful") && null} 
         </div>
     )
 }
