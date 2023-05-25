@@ -4,6 +4,7 @@ import { getUserInfo, updateUserInfo } from "../../services/user_endpoints/userI
 import "../../css/UsersPages/profilePage.css";
 import { changeUsername } from '../../services/user_redux/store';
 import { useDispatch } from 'react-redux';
+import  ProfileConfirmPopup from '../UserPage/ProfileConfirmPopup';
 
 export const Profile = () => {
     const [user, setUser] = useState({
@@ -14,6 +15,7 @@ export const Profile = () => {
         lastInfoUpdateDateTime: '',
         state: null
     });
+    const [showPopup, setShowPopup] = useState(false);
     
     const dispatch = useDispatch();
 
@@ -31,9 +33,56 @@ export const Profile = () => {
     }
     
     const notifyError = (message) => toast.error(message);
+    const notifySuccess = (message) => toast.success(message);
+
+    const handlePopupClose = (value) => {
+        if(value)
+        {
+            updateUserInfo(user.username, user.email, user.firstName, 
+                user.lastName, user.lastInfoUpdateDateTime, true)
+                 .then((response) => {
+                     setUser({ ...user, state: "success" })
+                     localStorage.setItem('user', JSON.stringify(user.username));
+                     // console.log(response)
+                     notifySuccess("the changes were successful")
+                     setShowPopup(false);
+
+                     dispatch(changeUsername(user.username))
+                 })
+                 .catch((error) => {
+                     if(error.response.status === 400)
+                     {
+                         handleErrorMsg(error.response.data)
+                         setUser({ ...user, state: "data failed" })
+
+                     }    
+                     else
+                     {
+                         setUser({ ...user, state: "data failed" })
+                         // console.log(error.response)
+                     }
+                 })
+        }
+        else
+        {
+            getUserInfo()
+            .then((response) => {
+                setUser({...user, username: response.data.username,
+                                  email: response.data.emailAddress,
+                                  firstName: response.data.firstName,
+                                  lastName: response.data.lastName,
+                                  lastInfoUpdateDateTime: response.data.lastInfoUpdateDateTime})
+                setShowPopup(false);
+            })
+            .catch((error) => {
+                setUser({...user, state: "failed"})
+            });
+        }
+
+      };
+
 
     useEffect(() => {
-        console.log("bandymas");
         getUserInfo()
             .then((response) => {
                 setUser({...user, username: response.data.username,
@@ -56,6 +105,7 @@ export const Profile = () => {
                             setUser({ ...user, state: "success" })
                             localStorage.setItem('user', JSON.stringify(user.username));
                             // console.log(response)
+                            notifySuccess("the changes were successful")
 
                             dispatch(changeUsername(user.username))
                         })
@@ -67,8 +117,9 @@ export const Profile = () => {
                             }    
                             else if(error.response.status === 409) //jei koinfliktas
                             {   
-                                notifyError(error.response.data);
+                                // notifyError(error.response.data);
                                 setUser({ ...user, state: "conflict" })
+                                setShowPopup(true);
                                 // console.log(error.response)
                             }
                             else
@@ -81,6 +132,7 @@ export const Profile = () => {
         
     return (
         <div className="videoProfileDiv">
+            {showPopup && <ProfileConfirmPopup key={showPopup.toString()} onPopupClose={handlePopupClose}/>}
             {user.state === "failed" && notifyError("something went wrong while uploading your data")}
             <div className="videoProfileCard">
                 <img src="https://ionicframework.com/docs/img/demos/avatar.svg" 
