@@ -13,12 +13,15 @@ const userSlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
     },
+    changeUsername: (state, action) => {
+      state.user = action.payload;
+    },
   },
 });
 
-const { login, logout } = userSlice.actions;
+const { login, logout, changeUsername } = userSlice.actions;
 
-export { login, logout };
+export { login, logout, changeUsername };
 
 const store = configureStore({
   reducer: {

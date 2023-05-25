@@ -1,4 +1,4 @@
-import { useState, useEffect  } from "react"
+import { useState, useEffect , useRef, useCallback   } from "react"
 import { registerUser, isUsernameTaken } from "../../services/user_endpoints/userInteractions";
 import { toast } from 'react-toastify';
 
@@ -30,13 +30,28 @@ export const Register = () => {
     const [showRules, setShowRules] = useState(false);
     const [validPasswordRules, setValidRules] = useState([]);
     const [invalidEmail, setIvalidEmail] = useState(false);
-    const [showEmail, setShowEmail] = useState(false);
+    const [showEmail, setShowEmail] = useState(false); 
+    const emailInputRef = useRef(null); 
+    const passwordInputRef = useRef(null);
 
-    const handleEmailClick = () => {
-        if(invalidEmail === true)
-            setShowEmail(true);  
-    };
 
+    const handleEmailClick = useCallback(() => {
+        if (invalidEmail === true)
+          setShowEmail(true);
+      }, [invalidEmail]);
+    
+
+      useEffect(() => {
+        var handleFocus = () => {
+          handleEmailClick();
+        }; 
+        
+        if (emailInputRef.current) {
+          emailInputRef.current.addEventListener('focus', handleFocus);
+        }
+      }, [handleEmailClick]);
+      
+    
     const handleEmailBlur = () => {
         setShowEmail(false);
     };
@@ -49,14 +64,24 @@ export const Register = () => {
     }, [user.email, invalidEmail]);
 
 
-    const handlePasswordClick = () => {
-        if(validPasswordRules.length > 0)
-            setShowRules(true);
-    };
+    const handlePasswordClick = useCallback(() => {
+        if (validPasswordRules.length > 0)
+          setShowRules(true);
+      }, [validPasswordRules]);
 
     const handleBlur = () => {
         setShowRules(false);
     };
+
+    useEffect(() => {
+        var handleFocus = () => {
+            handlePasswordClick();
+          }; 
+          
+          if (passwordInputRef.current) {
+            passwordInputRef.current.addEventListener('focus', handleFocus);
+          }
+      }, [handlePasswordClick]);
 
     useEffect(() => {
     const regexArray = [
@@ -82,7 +107,7 @@ export const Register = () => {
     setValidRules(validRules);
     }, [user.password]);  
 
-
+    
 
     const handleRegister = () => {
         setUser({ ...user, state: "loading" })
@@ -115,9 +140,10 @@ export const Register = () => {
                     <div className="form-group">
                         <input type="email" 
                                className="form-style" 
-                               placeholder="Email" 
+                               placeholder="Email"
                                onChange={(e) => setUser({ ...user, email: e.target.value })}
                                onClick={handleEmailClick}
+                               ref={emailInputRef}
                                onBlur={handleEmailBlur} />
                         <i className="input-icon uil uil-at"></i>
                     </div>
@@ -130,6 +156,7 @@ export const Register = () => {
                                placeholder="Password" 
                                onChange={(e) => setUser({ ...user, password: e.target.value })}
                                onClick={handlePasswordClick}
+                               ref={passwordInputRef}
                                onBlur={handleBlur}/>
                         <i className="input-icon uil uil-lock-alt"></i>
                     </div>

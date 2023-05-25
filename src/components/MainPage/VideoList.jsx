@@ -20,7 +20,7 @@ export const VideoList = () => {
     } else if (videos.state === "fetched") {
       return (
         <div className="videos_fetched_container">
-          {videos.data.map((item) => (
+          {videos.data.length > 0 && videos.data.map((item) => (
             <Video key={item.id} video={item} />
           ))}
         </div>
