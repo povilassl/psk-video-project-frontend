@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { getUserInfo, updateUserInfo } from "../../services/user_endpoints/userInteractions"
 import "../../css/UsersPages/profilePage.css";
+import { changeUsername } from '../../services/user_redux/store';
+import { useDispatch } from 'react-redux';
 
- 
 export const Profile = () => {
     const [user, setUser] = useState({
         username: '',
@@ -13,8 +14,9 @@ export const Profile = () => {
         lastInfoUpdateDateTime: '',
         state: null
     });
-
     
+    const dispatch = useDispatch();
+
     const handleErrorMsg = (errorMsg) => {
         if(errorMsg === 'BadEmail')
             notifyError("Your email is not valid");
@@ -28,7 +30,6 @@ export const Profile = () => {
             notifyError("errorMsg");
     }
     
-
     const notifyError = (message) => toast.error(message);
 
     useEffect(() => {
@@ -47,12 +48,16 @@ export const Profile = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, []);
 
-    const handleUpdateInfo = () => {
+    const handleUpdateInfo = (event) => {
+        event.preventDefault();
         updateUserInfo(user.username, user.email, user.firstName, 
                        user.lastName, user.lastInfoUpdateDateTime)
                         .then((response) => {
                             setUser({ ...user, state: "success" })
+                            localStorage.setItem('user', JSON.stringify(user.username));
                             // console.log(response)
+
+                            dispatch(changeUsername(user.username))
                         })
                         .catch((error) => {
                             if(error.response.status === 400)

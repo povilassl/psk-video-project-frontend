@@ -7,6 +7,7 @@ import { logoutUser } from "../../services/user_endpoints/userInteractions";
 const Header = () => {
 
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -31,7 +32,7 @@ const Header = () => {
         {isAuthenticated ? (
           <span>
             <li>
-              <Link to={"/profile"}>{localStorage.getItem('user')} Profile</Link>
+              <Link to={"/profile"}>"{user}" Profile</Link>
             </li>    
             <li>
               <Link to={"/"} onClick={handleLogout}>Logout</Link>
