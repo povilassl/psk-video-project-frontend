@@ -43,7 +43,6 @@ export const Profile = () => {
                  .then((response) => {
                      setUser({ ...user, state: "success" })
                      localStorage.setItem('user', JSON.stringify(user.username));
-                     // console.log(response)
                      notifySuccess("the changes were successful")
                      setShowPopup(false);
 
@@ -59,7 +58,6 @@ export const Profile = () => {
                      else
                      {
                          setUser({ ...user, state: "data failed" })
-                         // console.log(error.response)
                      }
                  })
         }
@@ -104,7 +102,6 @@ export const Profile = () => {
                         .then((response) => {
                             setUser({ ...user, state: "success" })
                             localStorage.setItem('user', JSON.stringify(user.username));
-                            // console.log(response)
                             notifySuccess("the changes were successful")
 
                             dispatch(changeUsername(user.username))
@@ -117,15 +114,11 @@ export const Profile = () => {
                             }    
                             else if(error.response.status === 409) //jei koinfliktas
                             {   
-                                // notifyError(error.response.data);
                                 setUser({ ...user, state: "conflict" })
-                                setShowPopup(true);
-                                // console.log(error.response)
                             }
                             else
                             {
                                 setUser({ ...user, state: "data failed" })
-                                // console.log(error.response)
                             }
                         })     
     };
@@ -187,7 +180,6 @@ export const Profile = () => {
                             <i className="profileInputIcon uil uil-user"></i>
                         </div>
                         <button className="profileBtn" 
-                                // type="button"
                                 type="submit" 
                                 onClick={handleUpdateInfo}
                         >Submit changes</button>
