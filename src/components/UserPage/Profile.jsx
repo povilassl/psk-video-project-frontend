@@ -16,6 +16,7 @@ export const Profile = () => {
         state: null
     });
     const [showPopup, setShowPopup] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     
     const dispatch = useDispatch();
 
@@ -36,12 +37,13 @@ export const Profile = () => {
     const notifySuccess = (message) => toast.success(message);
 
     const handlePopupClose = (value) => {
+        setIsSubmitting(true);
         if(value)
         {
             updateUserInfo(user.username, user.email, user.firstName, 
                 user.lastName, user.lastInfoUpdateDateTime, true)
                  .then((response) => {
-                     setUser({ ...user, state: "success" })
+                     setUser({ ...user, lastInfoUpdateDateTime: response.data.lastInfoUpdateDateTime, state: "success" })
                      localStorage.setItem('user', JSON.stringify(user.username));
                      notifySuccess("the changes were successful")
                      setShowPopup(false);
@@ -60,6 +62,9 @@ export const Profile = () => {
                          setUser({ ...user, state: "data failed" })
                      }
                  })
+                 .finally(() => {
+                    setIsSubmitting(false);
+                }); 
         }
         else
         {
@@ -97,13 +102,15 @@ export const Profile = () => {
 
     const handleUpdateInfo = (event) => {
         event.preventDefault();
+        setIsSubmitting(true);
+
         updateUserInfo(user.username, user.email, user.firstName, 
                        user.lastName, user.lastInfoUpdateDateTime)
                         .then((response) => {
-                            setUser({ ...user, state: "success" })
+                            setUser({ ...user, lastInfoUpdateDateTime: response.data.lastInfoUpdateDateTime, state: "success" })
                             localStorage.setItem('user', JSON.stringify(user.username));
                             notifySuccess("the changes were successful")
-
+                            console.log(response.data);
                             dispatch(changeUsername(user.username))
                         })
                         .catch((error) => {
@@ -121,7 +128,10 @@ export const Profile = () => {
                             {
                                 setUser({ ...user, state: "data failed" })
                             }
-                        })     
+                        })
+                        .finally(() => {
+                            setIsSubmitting(false);
+                        });     
     };
         
     return (
@@ -183,6 +193,7 @@ export const Profile = () => {
                         <button className="profileBtn" 
                                 type="submit" 
                                 onClick={handleUpdateInfo}
+                                disabled={isSubmitting}
                         >Submit changes</button>
                     </form>
                 </div>
