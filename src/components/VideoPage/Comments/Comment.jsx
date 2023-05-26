@@ -6,7 +6,7 @@ import LoadToggleButton from "../Buttons/LoadToggleButton";
 import { useSelector } from 'react-redux';
 import { ReplySubmitProvider } from "../Replies/ReplySubmitContext"
 
-const Container = ({ comment, isReply }) => {
+const Container = ({ comment }) => {
 
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
 
@@ -27,12 +27,11 @@ const Container = ({ comment, isReply }) => {
   )
 }
 
-
-export const Comment = ({ comment, isReply }) => {
+export const Comment = ({ comment }) => {
   return (
     <LoadToggleButtonProvider>
       <ReplySubmitProvider>
-        <Container comment={comment} isReply={isReply} />
+        <Container comment={comment} />
       </ReplySubmitProvider>
     </LoadToggleButtonProvider>
   )
