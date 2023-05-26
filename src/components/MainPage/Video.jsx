@@ -17,7 +17,9 @@ export const Video = ({ video }) => {
                 <span className="logoSpan"><img className='Logo' src = {require("../../assets/like.png")} alt='like logo'/></span>
                 <span className="numberSpan"> {video.likeCount}</span>
                 <span className="logoSpan"><img className='Logo' src = {require("../../assets/dislike.png")} alt='dislike logo'/></span>
-                <span className="inlineSpan">{video.dislikeCount}</span>
+                <span className="numberSpan">{video.dislikeCount}</span>
+                <span className="logoSpan"><img className='Logo' src = {require("../../assets/duration.png")} alt='duration logo'/></span>
+                <span className="inlineSpan" style={{fontWeight: 400}}>{video.videoDurationInSeconds} s.</span>
             </div>
             <p><Link style={{color: 'var(--small-text-color)'}} key={video.id} to={`/video/${video.id}`}>Go to video</Link></p>
         </div>
