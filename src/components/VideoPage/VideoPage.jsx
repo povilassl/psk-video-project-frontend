@@ -4,11 +4,10 @@ import { useEffect, useState } from "react";
 import { CommentSection } from "./Comments/CommentSection";
 import { CommentForm } from "./Comments/CommentForm";
 import { increaseViewCount } from "../../services/video_endpoints/videoInteractions";
-import LikeButton from "./Buttons/LikeButton";
-import DislikeButton from "./Buttons/DislikeButton";
 import "../../css/VideoPage/oneVideoPage.css";
 import { useSelector } from "react-redux";
 import AzureMediaPlayer from './VideoPlayer';
+import LikeAndDislikeButtons from "./Buttons/LikeAndDislikeButtons";
 
 export const VideoPage = () => {
 
@@ -73,10 +72,11 @@ export const VideoPage = () => {
                                     <i className="icon uil uil-eye"></i>
                                     <div className="viewDiv"> {video.data.viewCount} </div>
                                 </div>
-                                <div className="sideBySideHorizontallyLikeDislike" >
+                                <LikeAndDislikeButtons videoId={videoId} likes={video.data.likeCount} dislikes={video.data.dislikeCount}/>
+                                {/* <div className="sideBySideHorizontallyLikeDislike" >
                                     <span className="inlineSpan"><LikeButton param={video.data.likeCount} /></span>
                                     <span className="inlineSpan"><DislikeButton param={video.data.dislikeCount} /></span>
-                                </div>
+                                </div> */}
                             </div>
                             <div className="videoDescriptionWrapper">
                                 <div>

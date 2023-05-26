@@ -1,5 +1,5 @@
 import { uploadVideo } from "../../services/video_endpoints/videos";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import "../../css/UploadPage/uploadPage.css";
 
@@ -50,6 +50,14 @@ export function UploadPage() {
         }
     };
 
+    useEffect(() => {
+        if (uploadState === 'success') {
+          toast.success('Upload successful!');
+        } else if (uploadState === 'failed') {
+          toast.error('Upload failed. Please fill in all fields and select the video and thumbnail files.');
+        }
+      }, [uploadState]);
+
     //disable upload button while uploading, to prevent spamming
     const isFormDisabled = uploadState === 'uploading';
 
@@ -57,13 +65,7 @@ export function UploadPage() {
         <div className="videoUploadDiv">
                 <div className="videoUploadCard">
                 <h1>Video Upload</h1>
-                {uploadState === 'failed' && (
-                    <p className="error-message">
-                        Please fill in all fields and select the video and thumbnail files. Or there may be an error with the server...
-                    </p>
-                )}
-                {uploadState === 'uploading' && <span class="small_loader"></span>}
-                {uploadState === 'success' && <p className="success-message">Upload successful!</p>}
+                {uploadState === 'uploading' && <span className="small_loader"></span>}
                 <div className="uploadInputSection">
                     <form onSubmit={handleSubmit}>
                         <label>
@@ -96,7 +98,13 @@ export function UploadPage() {
                                     onChange={(e) => setVideoFile(e.target.files[0])}
                                     disabled={isFormDisabled}
                                 />
-                                <i className="uil-file-upload-alt"></i> Upload video file
+                                {videoFile ? (
+                                    <span className="file-selected">{videoFile.name}</span>
+                                ) : (
+                                    <>
+                                        <i className="uil-file-upload-alt"></i> Upload video file
+                                    </>
+                                )}
                             </label>
                         
                             <label>
@@ -110,7 +118,13 @@ export function UploadPage() {
                                         onChange={(e) => setThumbnailImage(e.target.files[0])}
                                         disabled={isFormDisabled}
                                     />
-                                <i className="uil-file-upload-alt"></i> Upload thumbnail file
+                                {thumbnailImage ? (
+                                    <span className="file-selected">{thumbnailImage.name}</span>
+                                ) : (
+                                    <>
+                                        <i className="uil-file-upload-alt"></i> Upload thumbnail file
+                                    </>
+                                )}
                             </label>
                         </div>
                         <button className="uploadButton" type="submit" disabled={isFormDisabled}>Upload Video</button>

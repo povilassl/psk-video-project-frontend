@@ -18,6 +18,7 @@ import { logoutUser } from "./services/user_endpoints/userInteractions";
 import * as signalR from "@microsoft/signalr";
 import { apiUrl } from "./services/config";
 import { toast } from 'react-toastify';
+import { PasswordChange } from "./components/LoginPage/PasswordChange";
 
 function App() {
 
@@ -97,9 +98,10 @@ function App() {
           <Route path="/" element={<VideoList />} />
           <Route path="/video/:videoId" element={<VideoPage />} />
           <Route path="/video/upload" element={<PrivateRoute><UploadPage /></PrivateRoute>} />
-          <Route path="/login" element={<LoginRegisterPage />} />
+          <Route path="/login" element={ <LoginRegisterPage />} />
           <Route path="/notifications" element={<Notification />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<PrivateRoute> <Profile /> </PrivateRoute>} />
+          <Route path="/password_change" element={<PasswordChange />} />
         </Routes>
         <ToastContainer position={'top-left'}
           theme={'dark'}
