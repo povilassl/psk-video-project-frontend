@@ -5,36 +5,40 @@ import { addLike, removeLike } from "../../../services/video_endpoints/videoInte
 import { useSelector } from 'react-redux';
 import "../../../css/VideoPage/videoLikeDislikeButtonStyle.scss";
 
-const LikeButton = (likeCount) => {
-  const { videoId } = useParams();
-  const [liked, setLiked] = useState(null);
-  const [changingClassName, setClass] = useState('like-button-wrapper');
-  const [likes, setLikesCount] = useState(likeCount.param);
+const LikeButton = ({likes, liked, handleLike}) => {
+  // const { videoId } = useParams();
+  // const [liked, setLiked] = useState(null);
+  // const [changingClassName, setClass] = useState('like-button-wrapper');
+  // const [likes, setLikesCount] = useState(likeCount.param);
 
-  function addOrRemove(liked) {
-    if (liked) {
-      addLike(videoId)
-        .then(
-          setLiked(liked),
-          setClass(cn("like-button-wrapper", {
-            liked
-          })),
-          setLikesCount(likes + 1)
-        )
-        .catch((error) => { console.log(error) });
-    }
-    else {
-      removeLike(videoId)
-        .then(
-          setLiked(liked),
-          setClass(cn("like-button-wrapper", {
-            liked
-          })),
-          setLikesCount(likes - 1)
-        )
-        .catch((error) => { console.log(error) });
-    }
-  }
+  const buttonClassName = cn("like-button-wrapper", {
+    liked: liked,
+  });
+
+  // function addOrRemove(liked) {
+  //   if (liked) {
+  //     addLike(videoId)
+  //       .then(
+  //         setLiked(liked),
+  //         setClass(cn("like-button-wrapper", {
+  //           liked
+  //         })),
+  //         setLikesCount(likes + 1)
+  //       )
+  //       .catch((error) => { console.log(error) });
+  //   }
+  //   else {
+  //     removeLike(videoId)
+  //       .then(
+  //         setLiked(liked),
+  //         setClass(cn("like-button-wrapper", {
+  //           liked
+  //         })),
+  //         setLikesCount(likes - 1)
+  //       )
+  //       .catch((error) => { console.log(error) });
+  //   }
+  // }
 
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
 
@@ -43,11 +47,8 @@ const LikeButton = (likeCount) => {
       {isAuthenticated ? (
         <div>
           <span className="inlineSpan">
-            <button
-              onClick={() => {
-                addOrRemove(!liked)
-              }}
-              className={changingClassName}>
+            <button onClick={handleLike}
+                    className={buttonClassName}>
               <div className="like-button">
                 <span>Like</span>
                 <span className={cn("suffix", { liked })}>d</span>

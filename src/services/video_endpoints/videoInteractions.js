@@ -40,7 +40,7 @@ export async function addDislike(videoId) {
 }
 
 export async function removeDislike(videoId) {
-    return await axios.post(`${apiUrl}/VideoInteractions/RemoveDislike`, videoId)
+    return await axios.post(`${apiUrl}/VideoInteractions/RemoveDislike`, videoId, { withCredentials: true, credentials: 'include' })
 }
 
 export async function getCommentReplies(commentId) {
