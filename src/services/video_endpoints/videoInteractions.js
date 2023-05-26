@@ -28,19 +28,19 @@ export async function increaseViewCount(videoId) {
 }
 
 export async function addLike(videoId) {
-    return await axios.post(`${apiUrl}/VideoInteractions/AddLike`, videoId)
+    return await axios.post(`${apiUrl}/VideoInteractions/AddLike?videoId=${videoId}`, { withCredentials: true, credentials: 'include' })
 }
 
 export async function removeLike(videoId) {
-    return await axios.post(`${apiUrl}/VideoInteractions/RemoveLike`, videoId)
+    return await axios.post(`${apiUrl}/VideoInteractions/RemoveLike?videoId=${videoId}`, { withCredentials: true, credentials: 'include' })
 }
 
 export async function addDislike(videoId) {
-    return await axios.post(`${apiUrl}/VideoInteractions/AddDislike`, videoId)
+    return await axios.post(`${apiUrl}/VideoInteractions/AddDislike?videoId=${videoId}`, { withCredentials: true, credentials: 'include' })
 }
 
 export async function removeDislike(videoId) {
-    return await axios.post(`${apiUrl}/VideoInteractions/RemoveDislike`, videoId)
+    return await axios.post(`${apiUrl}/VideoInteractions/RemoveDislike?videoId=${videoId}`, { withCredentials: true, credentials: 'include' })
 }
 
 export async function getCommentReplies(commentId) {
