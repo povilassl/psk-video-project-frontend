@@ -89,9 +89,6 @@ export const VideoPage = () => {
                     </div>
                     <div className="commentSecotionDiv">
                         <CommentSubmitProvider>
-                            {
-                                //TODO: refetch comments after posting a new one}
-                            }
                             {isAuthenticated ? <CommentForm videoId={videoId} /> : <p>please log in</p>}
                             {video.data.hasComments === true &&
                                 //TODO: polling for new comments
@@ -115,7 +112,6 @@ export const VideoPage = () => {
         }
     );
 
-
     useEffect(() => {
 
         //TODO: live peržiūrų kitimas?
@@ -136,6 +132,8 @@ export const VideoPage = () => {
         return () => clearTimeout(timer);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+
     console.log(video);
     return (
         <div>
