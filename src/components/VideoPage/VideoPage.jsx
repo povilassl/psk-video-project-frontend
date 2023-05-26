@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import { CommentSection } from "./Comments/CommentSection";
 import { CommentForm } from "./Comments/CommentForm";
 import { increaseViewCount } from "../../services/video_endpoints/videoInteractions";
-import LikeButton from "./Buttons/LikeButton";
-import DislikeButton from "./Buttons/DislikeButton";
 import "../../css/VideoPage/oneVideoPage.css";
 import { useSelector } from "react-redux";
 import AzureMediaPlayer from './VideoPlayer';
