@@ -27,11 +27,10 @@ function App() {
 
   useEffect(() => {
     const checkSession = () => {
-      const user = JSON.parse(localStorage.getItem('expiration'));
-      if (user) {
+      const expiration = JSON.parse(localStorage.getItem('expiration'));
+      if (expiration) {
         const now = new Date();
-        const sessionExpiresAt = new Date(user);
-        console.log(user);
+        const sessionExpiresAt = new Date(expiration);
         if (now >= sessionExpiresAt) {
           localStorage.removeItem('user');
           localStorage.removeItem('expiration');
@@ -40,6 +39,12 @@ function App() {
         }
       }
     };
+
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+      dispatch(login(user));
+    }
 
     if (isAuthenticated) {
       const intervalId = setInterval(() => {
@@ -98,7 +103,7 @@ function App() {
           <Route path="/" element={<VideoList />} />
           <Route path="/video/:videoId" element={<VideoPage />} />
           <Route path="/video/upload" element={<PrivateRoute><UploadPage /></PrivateRoute>} />
-          <Route path="/login" element={ <LoginRegisterPage />} />
+          <Route path="/login" element={<LoginRegisterPage />} />
           <Route path="/notifications" element={<Notification />} />
           <Route path="/profile" element={<PrivateRoute> <Profile /> </PrivateRoute>} />
           <Route path="/password_change" element={<PasswordChange />} />

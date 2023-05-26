@@ -27,9 +27,9 @@ const Header = () => {
       <Link to="/" className="title">Videoteka</Link>
       <ul className="navlinks" style={{ zIndex: '1000' }}>
         <li><Link to={"/"}>All videos</Link></li>
-        <li><Link to={"/video/upload"}>Upload video</Link></li>
         {isAuthenticated ? (
           <span>
+            <li><Link to={"/video/upload"}>Upload video</Link></li>
             <li>
               <Link to={"/profile"}>"{user}" Profile</Link>
             </li>    
