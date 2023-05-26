@@ -8,6 +8,7 @@ import "../../css/VideoPage/oneVideoPage.css";
 import { useSelector } from "react-redux";
 import AzureMediaPlayer from './VideoPlayer';
 import LikeAndDislikeButtons from "./Buttons/LikeAndDislikeButtons";
+import { CommentSubmitProvider } from "./Comments/CommentSubmitContext";
 
 export const VideoPage = () => {
 
@@ -73,10 +74,6 @@ export const VideoPage = () => {
                                     <div className="viewDiv"> {video.data.viewCount} </div>
                                 </div>
                                 <LikeAndDislikeButtons videoId={videoId} likes={video.data.likeCount} dislikes={video.data.dislikeCount}/>
-                                {/* <div className="sideBySideHorizontallyLikeDislike" >
-                                    <span className="inlineSpan"><LikeButton param={video.data.likeCount} /></span>
-                                    <span className="inlineSpan"><DislikeButton param={video.data.dislikeCount} /></span>
-                                </div> */}
                             </div>
                             <div className="videoDescriptionWrapper">
                                 <div>
@@ -91,17 +88,16 @@ export const VideoPage = () => {
 
                     </div>
                     <div className="commentSecotionDiv">
-                        {
-                            //TODO: refetch comments after posting a new one}
-                        }
-                        {isAuthenticated ? <CommentForm videoId={videoId} /> : <p>please log in</p>}
-                        {video.data.hasComments === true &&
-                            //TODO: polling for new comments
-                            <CommentSection />
-                        }
-                        {video.data.hasComments === false &&
-                            <h4>There are no comments for this video</h4>
-                        }
+                        <CommentSubmitProvider>
+                            {isAuthenticated ? <CommentForm videoId={videoId} /> : <p>please log in</p>}
+                            {video.data.hasComments === true &&
+                                //TODO: polling for new comments
+                                <CommentSection />
+                            }
+                            {video.data.hasComments === false &&
+                                <h4>There are no comments for this video</h4>
+                            }                            
+                        </CommentSubmitProvider>
                     </div>
                 </div>
             );
@@ -115,7 +111,6 @@ export const VideoPage = () => {
             data: null
         }
     );
-
 
     useEffect(() => {
 
@@ -137,6 +132,8 @@ export const VideoPage = () => {
         return () => clearTimeout(timer);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+
     console.log(video);
     return (
         <div>

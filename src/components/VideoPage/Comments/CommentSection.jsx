@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { getVideoComments } from "../../../services/video_endpoints/videoInteractions";
 import { useEffect, useState } from "react";
 import { Comment } from "./Comment";
+import { useCommentSubmit } from "./CommentSubmitContext";
 
 export const CommentSection = () => {
   /* Container for comments in various fetch states */
@@ -26,6 +27,8 @@ export const CommentSection = () => {
 
   const { videoId } = useParams();
 
+  const { isCommentSubmitted, setIsCommentSubmitted } = useCommentSubmit();
+
   /* Fetching videos */
   const [comments, setComments] = useState({
     state: null,
@@ -46,6 +49,23 @@ export const CommentSection = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(comments);
+
+  useEffect(() => {
+    // to fetch comments again if comment is submitted
+    if (isCommentSubmitted) {
+      setComments({ ...comments, state: "fetching" });
+      getVideoComments(videoId)
+        .then((response) => {
+          setComments({ state: "fetched", data: response.data });
+        })
+        .catch((error) => {
+          setComments({ ...comments, state: "failed" });
+        });
+
+        setIsCommentSubmitted(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isCommentSubmitted]);
+
   return <div>{container()}</div>;
 };
