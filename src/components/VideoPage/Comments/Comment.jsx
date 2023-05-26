@@ -4,11 +4,12 @@ import { ReplyForm } from "../Replies/ReplyForm";
 import { LoadToggleButtonProvider } from "../Buttons/LoadToggleButtonProvider";
 import LoadToggleButton from "../Buttons/LoadToggleButton";
 import { useSelector } from 'react-redux';
+import { ReplySubmitProvider } from "../Replies/ReplySubmitContext"
 
-export const Comment = ({ comment, isReply }) => {
+const Container = ({ comment, isReply }) => {
 
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-  
+
   return (
     <div className="commentDiv">
       <div className="commentInfo">
@@ -17,16 +18,22 @@ export const Comment = ({ comment, isReply }) => {
       </div>
       <div className="commentBody">
         <p>{comment.comment}</p>
-        {comment.hasComments === false &&
-          <p><b>There are no replies for this {isReply ? "reply" : "comment"}</b></p>
-        }
+        
         {isAuthenticated ? (<ReplyForm comment_id={comment.id} />) : (<p>please log in to reply</p>)}
-        {comment.hasComments === true &&
-          <LoadToggleButtonProvider>
-            <LoadToggleButton id={comment.id} />
-          </LoadToggleButtonProvider>
-        }
+        
+        <LoadToggleButton id={comment.id} />
       </div>
     </div>
+  )
+}
+
+
+export const Comment = ({ comment, isReply }) => {
+  return (
+    <LoadToggleButtonProvider>
+      <ReplySubmitProvider>
+        <Container comment={comment} isReply={isReply} />
+      </ReplySubmitProvider>
+    </LoadToggleButtonProvider>
   )
 } 

@@ -67,24 +67,5 @@ export const CommentSection = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCommentSubmitted]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setComments({ ...comments, state: "fetching" });
-      getVideoComments(videoId)
-        .then((response) => {
-          console.log("Comments fetched successfully! (polling)");
-          setComments({ state: "fetched", data: response.data });
-        })
-        .catch((error) => {
-          setComments({ ...comments, state: "failed" });
-        });
-    }, 30000); // Polling interval: 0,5 minute
-
-    return () => {
-      clearInterval(interval);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return <div>{container()}</div>;
 };

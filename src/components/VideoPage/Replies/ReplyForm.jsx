@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { postReplyToComment } from '../../../services/video_endpoints/videoInteractions';
+import { useReplySubmit } from './ReplySubmitContext';
 
 export const ReplyForm = ({comment_id}) => {
     const [replyData, setReplyData] = useState({
@@ -7,16 +8,24 @@ export const ReplyForm = ({comment_id}) => {
         status: null,
     });
 
+    const { isReplySubmitted, setIsReplySubmitted } = useReplySubmit();
+
+    useEffect(() => {
+        if (replyData.status === 'success') {
+            setIsReplySubmitted(!isReplySubmitted);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [replyData.status]);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
-        setReplyData({ ...replyData, status: 'submitting' });
-
+        setReplyData({ ...replyData, status: 'submitting' })
         try {
             await postReplyToComment(comment_id, replyData.comment, 'username');
-            console.log('Comment posted successfully!');
+            console.log('reply posted successfully!');
             setReplyData({ comment: '', status: 'success' });
         } catch (error) {
-            console.error('Failed to post comment!');
+            console.error('Failed to post reply!');
             setReplyData({ ...replyData, status: 'failed' });
         }
     };
