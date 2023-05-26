@@ -2,12 +2,15 @@ import { useState } from 'react';
 import { postCommentOnVideo } from '../../../services/video_endpoints/videoInteractions';
 import "../../../css/VideoPage/videoLikeDislikeButtonStyle.scss";
 import "../../../css/VideoPage/oneVideoPage.css";
+import { useCommentSubmit } from "./CommentSubmitContext";
 
 export const CommentForm = ({videoId}) => {
     const [commentData, setCommentData] = useState({
         comment: '',
         status: null,
     });
+
+    const { setIsCommentSubmitted } = useCommentSubmit();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -17,6 +20,7 @@ export const CommentForm = ({videoId}) => {
             await postCommentOnVideo(videoId, commentData.comment, 'username');
             console.log('Comment posted successfully!');
             setCommentData({ comment: '', status: 'success' });
+            setIsCommentSubmitted(true);
         } catch (error) {
             console.error('Failed to post comment!');
             setCommentData({ ...commentData, status: 'failed' });
