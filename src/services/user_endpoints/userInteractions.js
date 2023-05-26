@@ -18,12 +18,21 @@ export async function registerUser(username, email, password, firstName, lastNam
 }
 
 export async function loginUser(username, password) {
-    return await axios.get(`${apiUrl}/UserInteractions/Login?username=${username}&password=${password}`, { withCredentials: true, credentials: 'include' })
+    const encodedUsername = encodeURIComponent(username);
+    const encodedPassword = encodeURIComponent(password);
+    const url = `${apiUrl}/UserInteractions/Login?username=${encodedUsername}&password=${encodedPassword}`;
+
+    return await axios.get(url, { withCredentials: true, credentials: 'include' });
 }
 
 export async function changePassword(username, password, newPassword) {
-    return await axios.get(`${apiUrl}/UserInteractions/ChangePassword?username=${username}&password=${password}&newPassword=${newPassword}`)
-}
+    const encodedUsername = encodeURIComponent(username);
+    const encodedPassword = encodeURIComponent(password);
+    const encodedNewPassword = encodeURIComponent(newPassword);
+    const url = `${apiUrl}/UserInteractions/ChangePassword?username=${encodedUsername}&password=${encodedPassword}&newPassword=${encodedNewPassword}`;
+  
+    return await axios.get(url);
+  }  
 
 export async function logoutUser() {
     return await axios.get(`${apiUrl}/UserInteractions/Logout`, { withCredentials: true, credentials: 'include' })
