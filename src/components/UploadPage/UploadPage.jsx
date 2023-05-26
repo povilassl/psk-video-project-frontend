@@ -98,7 +98,13 @@ export function UploadPage() {
                                     onChange={(e) => setVideoFile(e.target.files[0])}
                                     disabled={isFormDisabled}
                                 />
-                                <i className="uil-file-upload-alt"></i> Upload video file
+                                {videoFile ? (
+                                    <span className="file-selected">{videoFile.name}</span>
+                                ) : (
+                                    <>
+                                        <i className="uil-file-upload-alt"></i> Upload video file
+                                    </>
+                                )}
                             </label>
                         
                             <label>
@@ -112,7 +118,13 @@ export function UploadPage() {
                                         onChange={(e) => setThumbnailImage(e.target.files[0])}
                                         disabled={isFormDisabled}
                                     />
-                                <i className="uil-file-upload-alt"></i> Upload thumbnail file
+                                {thumbnailImage ? (
+                                    <span className="file-selected">{thumbnailImage.name}</span>
+                                ) : (
+                                    <>
+                                        <i className="uil-file-upload-alt"></i> Upload thumbnail file
+                                    </>
+                                )}
                             </label>
                         </div>
                         <button className="uploadButton" type="submit" disabled={isFormDisabled}>Upload Video</button>
