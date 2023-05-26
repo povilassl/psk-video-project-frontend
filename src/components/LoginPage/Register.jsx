@@ -2,16 +2,39 @@ import { useState, useEffect , useRef, useCallback   } from "react"
 import { registerUser, isUsernameTaken } from "../../services/user_endpoints/userInteractions";
 import { toast } from 'react-toastify';
 
-const RegisterState = ({ state }) => {
+const RegisterState = ({ state, err }) => {
     const notifyError = (message) => toast.error(message);
     const notifySuccess = (message) => toast.success(message);
     
+    useEffect(() => {
+        const handleErrorMsg = (errorMsg) => {
+            if(errorMsg === 'BadEmail')
+                notifyError("Your email is not valid");
+            else if(errorMsg === 'BadUsername')
+                notifyError("Your username is not valid");
+            else if(errorMsg === 'BadFirstName')
+                notifyError("Your first name is not valid");
+            else if(errorMsg === 'BadLastName')
+                notifyError("Your last name is not valid");
+            else
+                notifyError(errorMsg);
+        }
+
+        if (state === 'failed') {
+            if(err.length > 0)
+                handleErrorMsg(err);
+            else
+                notifyError('something went wrong, check your input data')
+        } else if (state === 'taken') {
+            notifyError("The username is taken");
+        } else if (state === 'success') {
+            notifySuccess("Your registration was successful");
+        }
+      }, [state, err]);
+
     return (
         <div className="register_state">
-            {state === 'failed' && notifyError("Error in registration") && null}
-            {state === 'taken' && notifyError("The username is taken") && null}
             {state === 'loading' && <div className="loaderDiv"><span className="small_loader"></span></div>}
-            {state === 'success' && notifySuccess("Your registration was successful") && null} 
         </div>
     )
 }
@@ -33,7 +56,7 @@ export const Register = () => {
     const [showEmail, setShowEmail] = useState(false); 
     const emailInputRef = useRef(null); 
     const passwordInputRef = useRef(null);
-
+    const [errorMsg, setErrorMsg] = useState(''); 
 
     const handleEmailClick = useCallback(() => {
         if (invalidEmail === true)
@@ -121,7 +144,12 @@ export const Register = () => {
                 else{
                     registerUser(user.username, user.email, user.password, user.firstName, user.lastName)
                         .then((response) => setUser({ ...user, state: "success" }))
-                        .catch((error) => setUser({ ...user, state: "failed" }))                    
+                        .catch((error) => {
+                            setUser({ ...user, state: "failed" })
+                            console.log(error.response)
+                            console.log(error.response.data)
+                            setErrorMsg(error.response.data)
+                        })                    
                 }
             })
             .catch((error) => setUser({ ...user, state: "failed" }))
@@ -129,7 +157,7 @@ export const Register = () => {
 
     return (
         <div className="card-back">
-            <RegisterState state={user.state} />
+            <RegisterState state={user.state} err={errorMsg}/>
             <div className="center-wrap">
                 <div className="inputSection">
                     <h3>Sign Up</h3>
