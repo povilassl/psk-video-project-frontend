@@ -49,7 +49,7 @@ export const Login = () => {
                     
                     dispatch(login(usr))
 
-                    navigate('/login') 
+                    navigate('/') 
                 }
                 
             })
