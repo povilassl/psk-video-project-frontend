@@ -22,21 +22,21 @@ const ProfileConfirmPopup = ({onPopupClose}) => {
         <button className="close" onClick={handleCancel}>
           &times;
         </button>
-        <div className="header"> Version conflicts occurred </div>
+        <div className="header"> Info possibly changed in another tab or device </div>
         <div className="content">
-            Do you want to save the latest changes?
+            What do you want to do?
         </div>
         <div className="actions">
           <button
             className="popupButton"
             onClick={handleConfirm}>
-            Confirm
+            Save latest changes
           </button>
 
           <button
             className="popupButton"
             onClick={handleCancel}>
-            Cancel
+            Refresh and not save
           </button>
         </div>
       </div>
