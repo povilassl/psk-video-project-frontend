@@ -7,10 +7,10 @@ const PrivateRoute = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (localStorage.getItem('user') === null) {
       navigate('/login');
     }
-  }, [isAuthenticated, navigate]);
+  }, [navigate]);
 
   return isAuthenticated ? children : null;
 };

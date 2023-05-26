@@ -13,6 +13,8 @@ div.oneVideoDiv{
     box-shadow: 0 0 3px #666;
     text-align: center;
     color: var(--small-text-color);
+    padding-top: 25px;
+    padding-bottom: 25px;
 }
 
 img.Logo{
