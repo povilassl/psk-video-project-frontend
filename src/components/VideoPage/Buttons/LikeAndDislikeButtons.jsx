@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 import { addLike, removeLike, addDislike, removeDislike, getVideoReaction } from "../../../services/video_endpoints/videoInteractions";
 
 const LikeAndDislikeButtons = ({videoId, likes, dislikes}) => {
-    const [liked, setLiked] = useState(null);
-    const [disliked, setDisliked] = useState(null);
-    const [interactionInProgress, setInteractionInProgress] = useState(false);
+    const [liked, setLiked] = useState(false);
+    const [disliked, setDisliked] = useState(false);
+    const [local_likes, setLikes] = useState(likes);
+    const [local_dislikes, setDislikes] = useState(dislikes);
 
     useEffect(() => {
          console.log(videoId);
@@ -14,21 +15,16 @@ const LikeAndDislikeButtons = ({videoId, likes, dislikes}) => {
             .then((response) => { 
                 if(response.data === 0) //liked
                 {
-                    console.log("veikia like");
                     setLiked(true);
                     setDisliked(false);
                 }
                 else if(response.data === 1) //disliked
                 {
-                    console.log("veikia dislike");
                     setLiked(false);
                     setDisliked(true);
-                    console.log(disliked);
-                    console.log(liked);
                 }
                 else if(response.data === 2) //none
                 {
-                    console.log("veikia");
                     setLiked(false);
                     setDisliked(false);
                 }
@@ -41,18 +37,23 @@ const LikeAndDislikeButtons = ({videoId, likes, dislikes}) => {
     }, [videoId]);
 
     const handleLike = () => {
-        if (!interactionInProgress) {
-            // console.log(liked);
-            // console.log(!liked);
-          setLiked(!liked);
-          setDisliked(false);
-        //   console.log("buvo like");
+        if(disliked === true){
+            setDislikes(local_dislikes - 1);
         }
+        setLiked(!liked);
+        setDisliked(false);
+        handleLikeDb(!liked);   //paduodam priesinga nes setLiked nesuveikia is karto
+        
+    };
 
-        if(liked)
+    const handleLikeDb = (like) => {
+        if(like)
         {
             addLike(videoId)
-                .then((response) => {console.log(response)})
+                .then((response) => {
+                    console.log(response);
+                    setLikes(local_likes + 1);
+                })
                 .catch((error) => { 
                     console.log(error)
                  });
@@ -60,52 +61,60 @@ const LikeAndDislikeButtons = ({videoId, likes, dislikes}) => {
         else
         {
             removeLike(videoId)
-                .then((response) => {console.log(response)})
+                .then((response) => {
+                    console.log(response);
+                    setLikes(local_likes - 1);
+                })
                 .catch((error) => { 
                     console.log(error)
                  });
         }
-    };
+    }
     
     const handleDislike = () => {
-        if (!interactionInProgress) {
-            console.log("buvo dislike - pries", disliked)
-          setDisliked(!disliked);
-          setLiked(false);
-          console.log("buvo dislike - dabar", disliked)
+        if(liked === true){
+            setLikes(local_likes - 1);
         }
+        setDisliked(!disliked);
+        setLiked(false);
+        handleDislikeDb(!disliked);  //paduodam priesinga nes setDisliked nesuveikia is karto
+    };
 
-        if(disliked)
-        {
-            console.log("bandom adint dislike");
+    const handleDislikeDb = (dislike) => {
+        if(dislike)
+        {  
             addDislike(videoId)
-                .then((response) => {console.log(response)})
+                .then((response) => {
+                    console.log(response);
+                    setDislikes(local_dislikes + 1);
+                })
                 .catch((error) => { 
                     console.log(error)
                  });
         }
         else
-        {   console.log("bandom removint dislike");
+        {  
             removeDislike(videoId)
-                .then((response) => {console.log(response)})
+                .then((response) => {
+                    console.log(response);
+                    setDislikes(local_dislikes - 1);
+                })
                 .catch((error) => { 
                     console.log(error)
                  });
         }
-    };
-    // console.log(likes)
-    // console.log(dislikes)
+    }
+
     return (
         <div className="sideBySideHorizontallyLikeDislike" >
             <span className="inlineSpan">
-                <LikeButton likes={likes} liked={liked} handleLike={handleLike}/>
+                <LikeButton likes={local_likes} liked={liked} handleLike={handleLike}/>
             </span>
             <span className="inlineSpan">
-                <DislikeButton dislikes={dislikes} disliked={disliked} handleDislike={handleDislike} />
+                <DislikeButton dislikes={local_dislikes} disliked={disliked} handleDislike={handleDislike} />
             </span>
         </div>  
     );
-
 }
 
 export default LikeAndDislikeButtons;
