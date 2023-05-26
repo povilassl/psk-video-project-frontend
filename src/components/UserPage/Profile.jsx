@@ -115,6 +115,7 @@ export const Profile = () => {
                             else if(error.response.status === 409) //jei koinfliktas
                             {   
                                 setUser({ ...user, state: "conflict" })
+                                setShowPopup(true)
                             }
                             else
                             {
