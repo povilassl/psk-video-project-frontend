@@ -75,7 +75,6 @@ function App() {
 
     // Handle the "ReceiveNotification" event
     connection.on("ReceiveNotification", (message) => {
-      console.log("Notification received:", message);
       toast(message)
     });
 

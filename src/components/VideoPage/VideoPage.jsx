@@ -73,7 +73,7 @@ export const VideoPage = () => {
                                     <i className="icon uil uil-eye"></i>
                                     <div className="viewDiv"> {video.data.viewCount} </div>
                                 </div>
-                                <LikeAndDislikeButtons videoId={videoId} likes={video.data.likeCount} dislikes={video.data.dislikeCount}/>
+                                <LikeAndDislikeButtons videoId={videoId} likes={video.data.likeCount} dislikes={video.data.dislikeCount} />
                             </div>
                             <div className="videoDescriptionWrapper">
                                 <div>
@@ -96,7 +96,7 @@ export const VideoPage = () => {
                             }
                             {video.data.hasComments === false &&
                                 <h4>There are no comments for this video</h4>
-                            }                            
+                            }
                         </CommentSubmitProvider>
                     </div>
                 </div>
@@ -133,12 +133,9 @@ export const VideoPage = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-
-    console.log(video);
     return (
         <div>
             {container()}
         </div>
     );
-
 }

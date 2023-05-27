@@ -4,7 +4,7 @@ $dark: var(--primary-color); // #222f3e;
 $darkLower: #22303f8c;
 $grey: #8395a7;
 $white: #fff;
-$primary: var(--accent-color);//#54a0ff;
+$primary: var(--accent-color); //#54a0ff;
 
 .like-button-wrapper {
   position: relative;
@@ -12,7 +12,8 @@ $primary: var(--accent-color);//#54a0ff;
   place-items: center;
   border: none;
   cursor: pointer;
-  padding: 7px 15px 7px 10px; /*top right bottom left*/
+  padding: 7px 15px 7px 10px;
+  /*top right bottom left*/
   color: $white;
   font-size: 13px;
   font-weight: 600;
@@ -53,7 +54,7 @@ $primary: var(--accent-color);//#54a0ff;
     transform: translateX(3px);
   }
 
- 
+
   .suffix {
     opacity: 0;
     transition: opacity 300ms, transform 300ms;
@@ -70,4 +71,3 @@ $primary: var(--accent-color);//#54a0ff;
     }
   }
 }
-

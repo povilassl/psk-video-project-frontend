@@ -7,13 +7,13 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 //import Cookies from "js-cookie"
 
-const LoginState = ({state}) => {
+const LoginState = ({ state }) => {
     const notifyError = (message) => toast.error(message);
     const notifySuccess = (message) => toast.success(message);
 
     return (
         <div className="login_state">
-            {state === 'failed' && notifyError("Error in log in")  && null}
+            {state === 'failed' && notifyError("Error in log in") && null}
             {state === 'loading' && <div className="loaderDiv"><span className="small_loader"></span></div>}
             {state === 'success' && notifySuccess("Log in successful") && null}
         </div>
@@ -35,7 +35,7 @@ export const Login = () => {
         loginUser(username, pass)
             .then((response) => {
 
-                if(response.status === 200){
+                if (response.status === 200) {
 
                     setState('success')
 
@@ -46,22 +46,23 @@ export const Login = () => {
                     date.setDate(date.getDate() + 10); // add 10 days to the current date
                     let isoString = date.toISOString();
                     localStorage.setItem('expiration', JSON.stringify(isoString))
-                    
+
                     dispatch(login(usr))
 
-                    navigate('/') 
+                    navigate('/')
                 }
-                
+
             })
             .catch((err) => {
                 console.error(err)
-                setState('failed')})
+                setState('failed')
+            })
     }
 
     useEffect(() => {
-        if (state === 'failed') 
-            setState(''); 
-      }, [state]);
+        if (state === 'failed')
+            setState('');
+    }, [state]);
 
 
     return (

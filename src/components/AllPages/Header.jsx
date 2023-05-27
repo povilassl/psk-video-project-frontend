@@ -32,10 +32,10 @@ const Header = () => {
             <li><Link to={"/video/upload"}>Upload video</Link></li>
             <li>
               <Link to={"/profile"}>"{user}" Profile</Link>
-            </li>    
+            </li>
             <li>
               <Link to={"/"} onClick={handleLogout}>Logout</Link>
-            </li>        
+            </li>
           </span>
         ) : (
           <li>

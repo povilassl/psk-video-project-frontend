@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { postReplyToComment } from '../../../services/video_endpoints/videoInteractions';
 import { useReplySubmit } from './ReplySubmitContext';
 
-export const ReplyForm = ({comment_id}) => {
+export const ReplyForm = ({ comment_id }) => {
     const [replyData, setReplyData] = useState({
         comment: '',
         status: null,
@@ -32,7 +32,7 @@ export const ReplyForm = ({comment_id}) => {
 
     return (
         <div>
-            <p>Write reply:</p> 
+            <p>Write reply:</p>
             {replyData.status === 'success' && (
                 <p style={{ color: 'green' }}>Comment posted successfully!</p>
             )}

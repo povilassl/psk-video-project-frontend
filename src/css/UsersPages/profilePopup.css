@@ -1,76 +1,79 @@
 @import url('../../css/Colors.css');
+
 .modal {
-    font-size: 18px;
-  }
-  .modal > .header {
-    width: 100%;
-    border-bottom: 1px solid var(--accent-color);
-    font-size: 25px;
-    text-align: center;
-    padding-bottom: 10px;
-    padding-top: 5px;
-  }
-  .modal > .content {
-    width: 100%;
-    text-align: center;
-    padding: 10px 5px;
-  }
-  .modal > .actions {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
+  font-size: 18px;
+}
 
-  .modal > .close {
-    cursor: pointer;
-    position: absolute;
-    display: block;
-    padding: 2px 5px;
-    line-height: 20px;
-    right: -10px;
-    top: -10px;
-    font-size: 24px;
-    background: var(--accent-color);
-    border-radius: 18px;
-    border: px solid var(--primary-color);
-  }
+.modal>.header {
+  width: 100%;
+  border-bottom: 1px solid var(--accent-color);
+  font-size: 25px;
+  text-align: center;
+  padding-bottom: 10px;
+  padding-top: 5px;
+}
 
-  .popupButton {
-    border: none;
-    cursor: pointer;
-    padding: 7px 15px 7px 15px;
-    color: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    background-color: transparent;
-    will-change: background-color;
-    transition: background-color 0.3s, transform 0.3s;
-    background-color: var(--primary-color);
-    box-shadow: 0 0 10px #22303f8c;
-    border-radius: 8px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    margin-left:  10px;
+.modal>.content {
+  width: 100%;
+  text-align: center;
+  padding: 10px 5px;
+}
+
+.modal>.actions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.modal>.close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: var(--accent-color);
+  border-radius: 18px;
+  border: px solid var(--primary-color);
+}
+
+.popupButton {
+  border: none;
+  cursor: pointer;
+  padding: 7px 15px 7px 15px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  background-color: transparent;
+  will-change: background-color;
+  transition: background-color 0.3s, transform 0.3s;
+  background-color: var(--primary-color);
+  box-shadow: 0 0 10px #22303f8c;
+  border-radius: 8px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .popupButton:hover,
 .popupButton:focus,
 .popupButton:active {
-    cursor: pointer;
-    background-color: var(--accent-color);
+  cursor: pointer;
+  background-color: var(--accent-color);
 }
 
-.popup-content{
-    margin:auto;
-    color: var(--small-text-color);
-    background: var(--background-color);
-    width:50%;
-    padding:5px;
-    border: 3px solid var(--objects-background);
+.popup-content {
+  margin: auto;
+  color: var(--small-text-color);
+  background: var(--background-color);
+  width: 50%;
+  padding: 5px;
+  border: 3px solid var(--objects-background);
 }
 
-.popup-overlay{
-    background:rgba(0, 0, 0, 0.63)
+.popup-overlay {
+  background: rgba(0, 0, 0, 0.63)
 }
-
