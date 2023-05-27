@@ -17,7 +17,8 @@ import { Profile } from "./components/UserPage/Profile";
 import { logoutUser } from "./services/user_endpoints/userInteractions";
 import { toast } from 'react-toastify';
 import { PasswordChange } from "./components/LoginPage/PasswordChange";
-import { connection_user, connection } from "./services/SignalR/connect";
+import * as signalR from "@microsoft/signalr";
+import { apiUrl } from "./services/config";
 
 function App() {
 
@@ -25,6 +26,13 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const connection_user = new signalR.HubConnectionBuilder()
+      .withUrl(`${apiUrl}/notificationHub`, {
+        skipNegotiation: true,
+        transport: signalR.HttpTransportType.WebSockets,
+      })
+      .build();
+
     const createSignalRConnection = () => {
       // Stop the existing connection (if any)
       connection_user.stop();
@@ -36,9 +44,11 @@ function App() {
         .catch((error) => console.error(error));
     };
 
-    if (isAuthenticated) {
-      createSignalRConnection(); // Call the function to create a new SignalR connection
-    }
+    createSignalRConnection(); // Call the function to create a new SignalR connection
+
+    connection_user.on("ReceiveNotification", (message) => {
+      toast(message)
+    });
 
     // Clean up the SignalR connection when the component unmounts
     return () => {
@@ -79,25 +89,25 @@ function App() {
       };
     }
   }, [isAuthenticated, dispatch]);
-
-  useEffect(() => {
-    // Start the SignalR connection
-    connection
-      .start()
-      .then(() => console.log("Connection established."))
-      .catch((error) => console.error(error));
-
-    // Handle the "ReceiveNotification" event
-    connection.on("ReceiveNotification", (message) => {
-      toast(message)
-    });
-
-    // Clean up the SignalR connection when the component unmounts
-    return () => {
-      connection.off("ReceiveNotification");
-      connection.stop();
-    };
-  }, []);
+  /*
+    useEffect(() => {
+      // Start the SignalR connection
+      connection
+        .start()
+        .then(() => console.log("Connection established. (basic)"))
+        .catch((error) => console.error(error));
+  
+      // Handle the "ReceiveNotification" event
+      connection.on("ReceiveNotification", (message) => {
+        toast(message)
+      });
+  
+      // Clean up the SignalR connection when the component unmounts
+      return () => {
+        connection.off("ReceiveNotification");
+        connection.stop();
+      };
+    }, []);*/
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
