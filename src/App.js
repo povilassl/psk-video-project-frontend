@@ -15,15 +15,84 @@ import 'react-toastify/dist/ReactToastify.css';
 import { UploadPage } from "./components/UploadPage/UploadPage";
 import { Profile } from "./components/UserPage/Profile";
 import { logoutUser } from "./services/user_endpoints/userInteractions";
-import * as signalR from "@microsoft/signalr";
-import { apiUrl } from "./services/config";
 import { toast } from 'react-toastify';
 import { PasswordChange } from "./components/LoginPage/PasswordChange";
+import * as signalR from "@microsoft/signalr";
+import { apiUrl } from "./services/config";
 
 function App() {
 
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      const connection_user = new signalR.HubConnectionBuilder()
+        .withUrl(`${apiUrl}/notificationHub`, {
+          skipNegotiation: true,
+          transport: signalR.HttpTransportType.WebSockets,
+        })
+        .build();
+
+      const createSignalRConnection = () => {
+        // Stop the existing connection (if any)
+        connection_user.stop();
+
+        // Create a new connection with the updated user token
+        connection_user
+          .start()
+          .then(() => console.log("Connection established."))
+          .catch((error) => console.error(error));
+      };
+
+      createSignalRConnection(); // Call the function to create a new SignalR connection
+
+      connection_user.on("ReceiveNotification", (message) => {
+        toast(message)
+      });
+
+      // Clean up the SignalR connection when the component unmounts
+      return () => {
+        connection_user.off("ReceiveNotification");
+        connection_user.stop();
+      };
+    }
+  }, [isAuthenticated]);
+
+  useEffect(() => {
+    const u = JSON.parse(localStorage.getItem('user'));
+    if (!u) {
+      const connection_user = new signalR.HubConnectionBuilder()
+        .withUrl(`${apiUrl}/notificationHub`, {
+          skipNegotiation: true,
+          transport: signalR.HttpTransportType.WebSockets,
+        })
+        .build();
+
+      const createSignalRConnection = () => {
+        // Stop the existing connection (if any)
+        connection_user.stop();
+
+        // Create a new connection with the updated user token
+        connection_user
+          .start()
+          .then(() => console.log("Connection established."))
+          .catch((error) => console.error(error));
+      };
+
+      createSignalRConnection(); // Call the function to create a new SignalR connection
+
+      connection_user.on("ReceiveNotification", (message) => {
+        toast(message)
+      });
+
+      // Clean up the SignalR connection when the component unmounts
+      return () => {
+        connection_user.off("ReceiveNotification");
+        connection_user.stop();
+      };
+    }
+  }, []);
 
   useEffect(() => {
     const checkSession = () => {
@@ -57,33 +126,6 @@ function App() {
       };
     }
   }, [isAuthenticated, dispatch]);
-
-  useEffect(() => {
-    // Create the SignalR connection
-    const connection = new signalR.HubConnectionBuilder()
-      .withUrl(`${apiUrl}/notificationHub`, {
-        skipNegotiation: true,
-        transport: signalR.HttpTransportType.WebSockets,
-      })
-      .build();
-
-    // Start the SignalR connection
-    connection
-      .start()
-      .then(() => console.log("Connection established."))
-      .catch((error) => console.error(error));
-
-    // Handle the "ReceiveNotification" event
-    connection.on("ReceiveNotification", (message) => {
-      toast(message)
-    });
-
-    // Clean up the SignalR connection when the component unmounts
-    return () => {
-      connection.off("ReceiveNotification");
-      connection.stop();
-    };
-  }, []);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
