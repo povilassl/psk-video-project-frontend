@@ -7,15 +7,10 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const LoginState = ({ state }) => {
-    const notifyError = (message) => toast.error(message);
-    const notifySuccess = (message) => toast.success(message);
-
+    
     return (
         <div className="login_state">
-            {state === 'failed' && notifyError("Error in log in") && null}
-            {state === 'failed_creadentials' && notifyError("Could not authenticate with the supplied credentials. Username or password is incorrect") && null}
             {state === 'loading' && <div className="loaderDiv"><span className="small_loader"></span></div>}
-            {state === 'success' && notifySuccess("Log in successful") && null}
         </div>
     )
 }
@@ -28,6 +23,9 @@ export const Login = () => {
     const [username, setUsername] = useState('')
     const [state, setState] = useState('')
     const navigate = useNavigate();
+
+    const notifyError = (message) => toast.error(message);
+    const notifySuccess = (message) => toast.success(message);
 
     const handleLogin = async () => {
         setState('loading')
@@ -65,10 +63,14 @@ export const Login = () => {
     }
 
     useEffect(() => {
-        if (state === 'failed')
-            setState('');
+        if (state === 'failed') {
+            notifyError("Error in log in");
+        } else if (state === 'failed_creadentials') {
+            notifyError("Could not authenticate with the supplied credentials. Username or password is incorrect");
+        } else if (state === 'success') {
+            notifySuccess("Log in successful");
+        }
     }, [state]);
-
 
     return (
         <div className="card-front">
