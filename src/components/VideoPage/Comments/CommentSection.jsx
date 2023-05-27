@@ -62,7 +62,7 @@ export const CommentSection = () => {
           setComments({ ...comments, state: "failed" });
         });
 
-        setIsCommentSubmitted(false);
+      setIsCommentSubmitted(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCommentSubmitted]);

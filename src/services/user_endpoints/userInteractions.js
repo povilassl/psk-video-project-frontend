@@ -30,9 +30,9 @@ export async function changePassword(username, password, newPassword) {
     const encodedPassword = encodeURIComponent(password);
     const encodedNewPassword = encodeURIComponent(newPassword);
     const url = `${apiUrl}/UserInteractions/ChangePassword?username=${encodedUsername}&password=${encodedPassword}&newPassword=${encodedNewPassword}`;
-  
+
     return await axios.get(url);
-  }  
+}
 
 export async function logoutUser() {
     return await axios.get(`${apiUrl}/UserInteractions/Logout`, { withCredentials: true, credentials: 'include' })

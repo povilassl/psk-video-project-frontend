@@ -4,7 +4,7 @@ import "../../../css/VideoPage/videoLikeDislikeButtonStyle.scss";
 import "../../../css/VideoPage/oneVideoPage.css";
 import { useCommentSubmit } from "./CommentSubmitContext";
 
-export const CommentForm = ({videoId}) => {
+export const CommentForm = ({ videoId }) => {
     const [commentData, setCommentData] = useState({
         comment: '',
         status: null,
@@ -38,8 +38,8 @@ export const CommentForm = ({videoId}) => {
             )}
             <form onSubmit={handleSubmit}>
                 <div className='sideBySideHorizontallyByEnd'>
-                    <textarea 
-                        style={{marginLeft: '15px'}}
+                    <textarea
+                        style={{ marginLeft: '15px' }}
                         className='commentTextArea'
                         value={commentData.comment}
                         onChange={(event) =>
@@ -48,10 +48,10 @@ export const CommentForm = ({videoId}) => {
                         placeholder="Type your comment here..."
                     />
                     <button className='sumbitCommentButton' type="submit" disabled={commentData.status === 'submitting'} >
-                        {commentData.status === 'submitting' ? 'Submitting...' : 'Submit'}   
+                        {commentData.status === 'submitting' ? 'Submitting...' : 'Submit'}
                     </button>
                 </div>
-               
+
             </form>
         </div>
     );

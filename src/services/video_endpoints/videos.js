@@ -7,7 +7,7 @@ export async function getAllVideos(start = 0, count = 20) {
   );
 }
 
-export async function uploadVideo(videoName, description, videoFile, thumbnailImage, sendEmail=false) {
+export async function uploadVideo(videoName, description, videoFile, thumbnailImage, sendEmail = false) {
   const formData = new FormData();
   formData.append('VideoName', videoName);
   formData.append('Description', description);
