@@ -19,7 +19,7 @@ const Container = ({ comment }) => {
       <div className="commentBody">
         <p>{comment.comment}</p>
 
-        {isAuthenticated ? (<ReplyForm comment_id={comment.id} />) : (<p>please log in to reply</p>)}
+        {isAuthenticated ? (<ReplyForm comment_id={comment.id} />) : (<p style={{marginBottom: "15px"}}>please log in to reply</p>)}
 
         <LoadToggleButton id={comment.id} />
       </div>
