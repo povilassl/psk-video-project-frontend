@@ -52,7 +52,7 @@ export function UploadPage() {
 
     useEffect(() => {
         if (uploadState === 'success') {
-            toast.success('Upload successful!');
+            toast.success('Upload successful! Video encoding started in server. You will get a notification when it is done.');
         } else if (uploadState === 'failed') {
             toast.error('Upload failed. Please fill in all fields and select the video and thumbnail files.');
         }
