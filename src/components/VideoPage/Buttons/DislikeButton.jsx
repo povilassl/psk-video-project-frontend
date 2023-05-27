@@ -1,6 +1,5 @@
 import cn from "classnames";
 import "../../../css/VideoPage/videoLikeDislikeButtonStyle.scss";
-import { useSelector } from 'react-redux';
 
 const DislikeButton = ({ dislikes, disliked, handleDislike }) => {
 
@@ -8,12 +7,8 @@ const DislikeButton = ({ dislikes, disliked, handleDislike }) => {
     disliked: disliked,
   });
 
-  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-
   return (
     <div>
-      {isAuthenticated ? (
-        <div>
           <span className="inlineSpan">
             <button onClick={handleDislike}
               className={buttonClassName}>
@@ -25,9 +20,6 @@ const DislikeButton = ({ dislikes, disliked, handleDislike }) => {
 
           </span>
           <span className="inlineSpan">{dislikes}</span>
-        </div>
-      ) : <p>please log in</p>}
-
     </div>
   );
 };
