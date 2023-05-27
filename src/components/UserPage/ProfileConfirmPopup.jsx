@@ -2,8 +2,8 @@ import React from 'react';
 import Popup from 'reactjs-popup';
 import { useState } from 'react';
 import '../../css/UsersPages/profilePopup.css';
-// C:\Users\riuna\Desktop\Github\psk-video-project-frontend\node_modules\reactjs-popup
-const ProfileConfirmPopup = ({onPopupClose}) => {
+
+const ProfileConfirmPopup = ({ onPopupClose }) => {
   const [showPopup, setShowPopup] = useState(true);
 
   const handleConfirm = () => {
@@ -24,7 +24,7 @@ const ProfileConfirmPopup = ({onPopupClose}) => {
         </button>
         <div className="header"> Info possibly changed in another tab or device </div>
         <div className="content">
-            What do you want to do?
+          What do you want to do?
         </div>
         <div className="actions">
           <button
@@ -41,7 +41,7 @@ const ProfileConfirmPopup = ({onPopupClose}) => {
         </div>
       </div>
     </Popup>
-    );
+  );
 }
 
 export default ProfileConfirmPopup;

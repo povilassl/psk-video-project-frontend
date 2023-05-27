@@ -9,12 +9,12 @@ export const VideoList = () => {
   let container = () => {
     if (videos.state === "fetching") {
       return <div className="fetch_loading_container">
-                <span className="big_loader">L &nbsp; ading</span>
-              </div>;
+        <span className="big_loader">L &nbsp; ading</span>
+      </div>;
     } else if (videos.state === "failed") {
       return (
         <div className="fetch_failed_container">
-            <span className="big_failed">S<i class="big_failed_emoji uil uil-sad-dizzy"></i>mething went wrong</span>
+          <span className="big_failed">S<i class="big_failed_emoji uil uil-sad-dizzy"></i>mething went wrong</span>
         </div>
       );
     } else if (videos.state === "fetched") {
@@ -59,7 +59,7 @@ export const VideoList = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
-  
+
+
   return <div className="videos_container">{container()}</div>;
 };

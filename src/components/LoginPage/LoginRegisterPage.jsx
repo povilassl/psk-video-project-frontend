@@ -19,8 +19,8 @@ export function LoginRegisterPage() {
 			<label htmlFor="reg-log"></label>
 			<div className="card-3d-wrap">
 				<div className="card-3d-wrapper">
-						<Login />
-						<Register />
+					<Login />
+					<Register />
 				</div>
 			</div>
 		</div>

@@ -1,10 +1,10 @@
-import { useState, createContext, useContext  } from 'react';
+import { useState, createContext, useContext } from 'react';
 
 const ReplySubmitContext = createContext();
 
 const useReplySubmit = () => {
-    return useContext(ReplySubmitContext);
-  };
+  return useContext(ReplySubmitContext);
+};
 
 const ReplySubmitProvider = ({ children }) => {
   const [isReplySubmitted, setIsReplySubmitted] = useState(false);

@@ -1,20 +1,21 @@
 @import url('../../css/Colors.css');
 @import url('https://unicons.iconscout.com/release/v2.1.9/css/unicons.css');
 
-.video_fetched_container{
+.video_fetched_container {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
 }
-.videoInfoDiv{
+
+.videoInfoDiv {
     margin-top: 10px;
     width: 642px;
     text-align: center;
     overflow: hidden;
 }
 
-.commentSecotionDiv{
+.commentSecotionDiv {
     margin: 0;
     width: 100%;
     height: 100%;
@@ -24,24 +25,24 @@
     padding-bottom: 70px;
 }
 
-.inEachSideDiv{
+.inEachSideDiv {
     display: flex;
     justify-content: space-between;
 }
 
-.sideBySideHorizontallyModified{
+.sideBySideHorizontallyModified {
     display: flex;
     flex-direction: row;
     margin-bottom: -10px;
 }
 
-.sideBySideHorizontallyLikeDislike{
+.sideBySideHorizontallyLikeDislike {
     margin-bottom: -10px;
     margin-top: -10px;
     padding-bottom: 5px;
 }
 
-.sideBySideHorizontallyByEnd{
+.sideBySideHorizontallyByEnd {
     display: flex;
     flex-direction: row;
     align-items: flex-end;
@@ -57,7 +58,7 @@
     border-radius: 6px;
 }
 
-.sideBySideHorizontallyModified p{
+.sideBySideHorizontallyModified p {
     color: var(--small-text-color);
     font-size: 15px;
     margin-top: 7px;
@@ -69,14 +70,14 @@
     color: var(--small-text-color);
 }
 
-.viewDiv{
+.viewDiv {
     color: var(--small-text-color);
     font-weight: 500;
     margin-top: 4px;
     font-size: 20px;
 }
 
-div span.inlineSpan{
+div span.inlineSpan {
     display: inline-block;
     padding: 5px;
     vertical-align: middle;
@@ -84,7 +85,7 @@ div span.inlineSpan{
     font-weight: 550;
 }
 
-textarea.commentTextArea{
+textarea.commentTextArea {
     margin-left: 5px;
     width: 280px;
     height: 70px;
@@ -98,7 +99,7 @@ textarea.commentTextArea{
 }
 
 /* dėl šito dar pagalvot */
-.commentDiv{
+.commentDiv {
     border-left: thick solid var(--accent-color);
     /* border-bottom: 2px solid var(--accent-color);  */
 }
@@ -107,6 +108,7 @@ textarea.commentTextArea{
     color: var(--other-text);
     margin-left: 10px;
 }
+
 .commentAuthor {
     color: var(--accent-color);
     font-weight: bold;
@@ -164,13 +166,13 @@ textarea.commentTextArea{
 
 .sumbitCommentButton.pressed {
     background-color: var(--accent-color);
-  }
+}
 
-h4{
+h4 {
     margin-left: -28px;
 }
 
-#videoDescriptionDiv{
+#videoDescriptionDiv {
     display: none;
     float: left;
     text-align: left;
@@ -186,7 +188,7 @@ h4{
     color: var(--small-text-color);
     padding-bottom: 4px;
     word-wrap: break-word;
-    
+
 }
 
 .seeDescriptionButton {
@@ -197,10 +199,10 @@ h4{
     color: var(--small-text-color);
     text-decoration: underline;
     cursor: pointer;
-    
+
 }
 
-.seeDescriptionButton:hover{
+.seeDescriptionButton:hover {
     text-decoration: underline;
     color: var(--accent-color);
 }

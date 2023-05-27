@@ -14,11 +14,11 @@ export function UploadPage() {
 
         const videoFileSizeLimit = 10e6; // 10 MB
         const imageFileSizeLimit = 1e6; // 1 MB
-        
+
         event.preventDefault();
 
         // Check file size and format constraints
-        if (!videoName  || !description || !videoFile || !thumbnailImage) {
+        if (!videoName || !description || !videoFile || !thumbnailImage) {
             setUploadState('failed');
             return;
         }
@@ -45,25 +45,25 @@ export function UploadPage() {
         } catch (error) {
             setUploadState('failed');
 
-            if(error.response.data === 'Error: this endpoint can be called only in production')
+            if (error.response.data === 'Error: this endpoint can be called only in production')
                 toast.error("This endpoint can be called only in production!");
         }
     };
 
     useEffect(() => {
         if (uploadState === 'success') {
-          toast.success('Upload successful!');
+            toast.success('Upload successful!');
         } else if (uploadState === 'failed') {
-          toast.error('Upload failed. Please fill in all fields and select the video and thumbnail files.');
+            toast.error('Upload failed. Please fill in all fields and select the video and thumbnail files.');
         }
-      }, [uploadState]);
+    }, [uploadState]);
 
     //disable upload button while uploading, to prevent spamming
     const isFormDisabled = uploadState === 'uploading';
 
     return (
         <div className="videoUploadDiv">
-                <div className="videoUploadCard">
+            <div className="videoUploadCard">
                 <h1>Video Upload</h1>
                 {uploadState === 'uploading' && <span className="small_loader"></span>}
                 <div className="uploadInputSection">
@@ -79,7 +79,7 @@ export function UploadPage() {
                             disabled={isFormDisabled}
                         />
                         <label>
-                            Description: 
+                            Description:
                         </label>
                         <textarea
                             className="upload-input-style"
@@ -89,7 +89,7 @@ export function UploadPage() {
                         />
                         <div className="LabelAndUploadDiv">
                             <label>
-                                Video File:                       
+                                Video File:
                             </label>
                             <label className="custom-file-upload">
                                 <input
@@ -106,18 +106,18 @@ export function UploadPage() {
                                     </>
                                 )}
                             </label>
-                        
+
                             <label>
                                 Thumbnail Image:
                             </label>
                             <label className="custom-file-upload">
                                 <input
-                                        className="upload-input-style"
-                                        type="file"
-                                        accept="image/*"
-                                        onChange={(e) => setThumbnailImage(e.target.files[0])}
-                                        disabled={isFormDisabled}
-                                    />
+                                    className="upload-input-style"
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={(e) => setThumbnailImage(e.target.files[0])}
+                                    disabled={isFormDisabled}
+                                />
                                 {thumbnailImage ? (
                                     <span className="file-selected">{thumbnailImage.name}</span>
                                 ) : (

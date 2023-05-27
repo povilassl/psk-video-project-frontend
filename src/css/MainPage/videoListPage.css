@@ -1,14 +1,14 @@
 @import url('../../css/Colors.css');
 
-div.videos_fetched_container{
+div.videos_fetched_container {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-row-gap: 10px; 
+    grid-row-gap: 10px;
     grid-column-gap: 10px;
 }
 
-div.oneVideoDiv{
+div.oneVideoDiv {
     background-color: var(--objects-background);
     box-shadow: 0 0 3px #666;
     text-align: center;
@@ -17,7 +17,7 @@ div.oneVideoDiv{
     padding-bottom: 25px;
 }
 
-img.Logo{
+img.Logo {
     width: 20px;
     height: 20px;
     vertical-align: middle;
@@ -25,14 +25,14 @@ img.Logo{
 
 }
 
-div span.logoSpan{
+div span.logoSpan {
     display: inline-block;
     padding: 0px;
     vertical-align: middle;
     color: var(--small-text-color);
 }
 
-div span.numberSpan{
+div span.numberSpan {
     display: inline-block;
     margin-right: 25px;
     padding: 5px;
@@ -40,7 +40,8 @@ div span.numberSpan{
     color: var(--small-text-color);
 }
 
-.fetch_loading_container, .fetch_failed_container{
+.fetch_loading_container,
+.fetch_failed_container {
     color: var(--accent-color);
     font-size: large;
     display: flex;
@@ -50,12 +51,12 @@ div span.numberSpan{
 }
 
 @media (max-width: 700px) {
-    div.videos_fetched_container{
+    div.videos_fetched_container {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
-        grid-row-gap: 10px; 
+        grid-row-gap: 10px;
         grid-column-gap: 10px;
-    }   
+    }
 }
 
 .big_loader {
@@ -68,7 +69,7 @@ div span.numberSpan{
 }
 
 .big_loader::before {
-    content: '';  
+    content: '';
     position: absolute;
     left: 34px;
     bottom: 8px;
@@ -80,16 +81,17 @@ div span.numberSpan{
     box-sizing: border-box;
     animation: rotation 0.6s linear infinite;
 }
-  
+
 @keyframes rotation {
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }
-} 
-  
+}
+
 .big_failed {
     display: inline-block;
     font-size: 45px;

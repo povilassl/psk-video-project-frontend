@@ -3,7 +3,7 @@ import { RepliesSection } from "../Replies/RepliesSection";
 import { useReplySubmit } from '../Replies/ReplySubmitContext';
 import { useEffect } from 'react';
 
-const LoadToggleButton = ({id}) => {
+const LoadToggleButton = ({ id }) => {
   const { isButtonPressed, toggleButton } = useButtonContext();
   const { isReplySubmitted, setIsReplySubmitted } = useReplySubmit();
 
@@ -15,7 +15,7 @@ const LoadToggleButton = ({id}) => {
   }, [isReplySubmitted]);
 
   useEffect(() => {
-    if(!isButtonPressed){
+    if (!isButtonPressed) {
       setIsReplySubmitted(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -23,10 +23,10 @@ const LoadToggleButton = ({id}) => {
 
   return (
     <>
-    <button className={`sumbitCommentButton ${isButtonPressed ? "pressed" : "not-pressed"}`}  onClick={toggleButton}>
-      {(isButtonPressed || isReplySubmitted) ? "Unload replies" : "Load replies"}
-    </button>
-    {(isButtonPressed || isReplySubmitted) && <RepliesSection comment_id={id} />}
+      <button className={`sumbitCommentButton ${isButtonPressed ? "pressed" : "not-pressed"}`} onClick={toggleButton}>
+        {(isButtonPressed || isReplySubmitted) ? "Unload replies" : "Load replies"}
+      </button>
+      {(isButtonPressed || isReplySubmitted) && <RepliesSection comment_id={id} />}
     </>
   );
 };

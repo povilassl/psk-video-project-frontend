@@ -44,7 +44,8 @@ header {
 }
 
 .navlinks li a:hover {
-  color: var(--accent-color); /*#7ebcb9;*/
+  color: var(--accent-color);
+  /*#7ebcb9;*/
   padding-bottom: 7px;
   border-bottom: 2px solid var(--accent-color);
 }
@@ -90,8 +91,7 @@ header {
     display: block;
   }
 
-  #check:checked ~ .navlinks {
+  #check:checked~.navlinks {
     right: 0;
   }
 }
-

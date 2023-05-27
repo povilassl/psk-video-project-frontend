@@ -1,10 +1,10 @@
-import { useState, createContext, useContext  } from 'react';
+import { useState, createContext, useContext } from 'react';
 
 const CommentSubmitContext = createContext();
 
 const useCommentSubmit = () => {
-    return useContext(CommentSubmitContext);
-  };
+  return useContext(CommentSubmitContext);
+};
 
 const CommentSubmitProvider = ({ children }) => {
   const [isCommentSubmitted, setIsCommentSubmitted] = useState(false);
