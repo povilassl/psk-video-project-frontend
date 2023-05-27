@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux"
 import { login } from "../../services/user_redux/store"
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-//import Cookies from "js-cookie"
 
 const LoginState = ({ state }) => {
     const notifyError = (message) => toast.error(message);
@@ -14,6 +13,7 @@ const LoginState = ({ state }) => {
     return (
         <div className="login_state">
             {state === 'failed' && notifyError("Error in log in") && null}
+            {state === 'failed_creadentials' && notifyError("Could not authenticate with the supplied credentials. Username or password is incorrect") && null}
             {state === 'loading' && <div className="loaderDiv"><span className="small_loader"></span></div>}
             {state === 'success' && notifySuccess("Log in successful") && null}
         </div>
@@ -54,8 +54,13 @@ export const Login = () => {
 
             })
             .catch((err) => {
-                console.error(err)
-                setState('failed')
+                if (err.response.status === 401)
+                    setState('failed_creadentials')
+                else {
+                    console.error(err)
+                    setState('failed')
+                }
+
             })
     }
 
