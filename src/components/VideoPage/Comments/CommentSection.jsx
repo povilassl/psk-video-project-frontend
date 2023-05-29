@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Comment } from "./Comment";
 import { useCommentSubmit } from "./CommentSubmitContext";
 
-export const CommentSection = () => {
+export const CommentSection = ({ hasComments }) => {
   /* Container for comments in various fetch states */
   let container = () => {
     if (comments.state === "fetching") {
@@ -28,6 +28,7 @@ export const CommentSection = () => {
   const { videoId } = useParams();
 
   const { isCommentSubmitted, setIsCommentSubmitted } = useCommentSubmit();
+  const [hasC, setHasC] = useState(hasComments);
 
   /* Fetching videos */
   const [comments, setComments] = useState({
@@ -62,10 +63,22 @@ export const CommentSection = () => {
           setComments({ ...comments, state: "failed" });
         });
 
+        setHasC(true);
+
       setIsCommentSubmitted(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCommentSubmitted]);
 
-  return <div>{container()}</div>;
+  return (
+    <div>
+      {hasC === false &&
+        <h4>There are no comments for this video</h4>
+      }
+      {hasC === true &&
+        container() 
+      }
+    </div>   
+  )
+
 };

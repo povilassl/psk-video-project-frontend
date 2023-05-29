@@ -90,13 +90,11 @@ export const VideoPage = () => {
                     <div className="commentSecotionDiv">
                         <CommentSubmitProvider>
                             {isAuthenticated ? <CommentForm videoId={videoId} /> : <p>please log in</p>}
-                            {video.data.hasComments === true &&
-                                //TODO: polling for new comments
-                                <CommentSection />
+
+                            { //TODO: polling for new comments
                             }
-                            {video.data.hasComments === false &&
-                                <h4>There are no comments for this video</h4>
-                            }
+                            <CommentSection hasComments={video.data.hasComments}/>
+                            
                         </CommentSubmitProvider>
                     </div>
                 </div>
