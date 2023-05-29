@@ -25,7 +25,7 @@ const Header = () => {
         <i className="fas fa-bars"></i>
       </label>
       <Link to="/" className="title">Videoteka</Link>
-      <ul className="navlinks" style={{ zIndex: '1000' }}>
+      <ul className="navlinks" style={{ zIndex: '3000' }}>
         <li><Link to={"/"}>All videos</Link></li>
         {isAuthenticated ? (
           <span>

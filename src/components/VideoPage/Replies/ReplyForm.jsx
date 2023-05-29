@@ -22,11 +22,9 @@ export const ReplyForm = ({ comment_id }) => {
         setReplyData({ ...replyData, status: 'submitting' })
         try {
             await postReplyToComment(comment_id, replyData.comment);
-            console.log('reply posted successfully!');
             setReplyData({ comment: '', status: 'success' });
         } catch (error) {
             console.error('Failed to post reply!');
-            setReplyData({ ...replyData, status: 'failed' });
         }
     };
 

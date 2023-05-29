@@ -55,7 +55,6 @@ export const Login = () => {
                 if (err.response.status === 401)
                     setState('failed_creadentials')
                 else {
-                    console.error(err)
                     setState('failed')
                 }
 
