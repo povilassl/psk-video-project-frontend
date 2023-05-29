@@ -323,3 +323,15 @@ h3 {
 .register_state .loaderDiv {
   margin-bottom: -40px;
 }
+
+@media (max-width: 700px) {
+  .card-3d-wrap, .card-3d-wrap-back, .card-front, .card-back{
+    width: 450px;
+    text-align: center;
+  }
+
+  .inputSection{
+    margin-left: -10px;
+  }
+  
+}
