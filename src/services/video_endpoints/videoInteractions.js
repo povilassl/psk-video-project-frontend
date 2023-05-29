@@ -13,14 +13,13 @@ export async function getVideoCount() {
     return await axios.get(`${apiUrl}/VideoInteractions/GetCountOfAllVideos`)
 }
 
-export async function postCommentOnVideo(videoId, comment, username) {
+export async function postCommentOnVideo(videoId, comment) {
     let data = {
         videoId: videoId,
-        comment: comment,
-        username: username
+        comment: comment
     }
 
-    return await axios.post(`${apiUrl}/VideoInteractions/CommentOnAVideo`, data)
+    return await axios.post(`${apiUrl}/VideoInteractions/CommentOnAVideo`, data, { withCredentials: true, credentials: 'include' })
 }
 
 export async function increaseViewCount(videoId) {
@@ -50,11 +49,10 @@ export async function getCommentReplies(commentId) {
 export async function postReplyToComment(commentId, comment, username) {
     let data = {
         commentId: commentId,
-        comment: comment,
-        username: username
+        comment: comment
     }
 
-    return await axios.post(`${apiUrl}/VideoInteractions/ReplyToAComment`, data)
+    return await axios.post(`${apiUrl}/VideoInteractions/ReplyToAComment`, data, { withCredentials: true, credentials: 'include' })
 }
 
 export async function getVideoReaction(videoId) {
