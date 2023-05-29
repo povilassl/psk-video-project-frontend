@@ -17,7 +17,7 @@ export const CommentForm = ({ videoId }) => {
         setCommentData({ ...commentData, status: 'submitting' });
 
         try {
-            await postCommentOnVideo(videoId, commentData.comment, 'username');
+            await postCommentOnVideo(videoId, commentData.comment);
             console.log('Comment posted successfully!');
             setCommentData({ comment: '', status: 'success' });
             setIsCommentSubmitted(true);

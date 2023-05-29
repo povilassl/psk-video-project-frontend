@@ -9,7 +9,7 @@ export const Video = ({ video }) => {
         <div className="oneVideoDiv">
             <h3> {video.videoName}</h3>
             <img className="thumbnail_container" src={video.thumbnailURL} alt="thumbnail" />
-            <p>Uploaded by: {video.username}</p>
+            <p style={{marginBottom: "5px"}}>Uploaded by: {video.username}</p>
             <div>
                 <span className="logoSpan"><img className='Logo' src={require("../../assets/eye.png")} alt='eye logo' /></span>
                 <span className="numberSpan">{video.viewCount} </span>

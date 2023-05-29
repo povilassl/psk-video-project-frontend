@@ -21,7 +21,7 @@ export const ReplyForm = ({ comment_id }) => {
         event.preventDefault();
         setReplyData({ ...replyData, status: 'submitting' })
         try {
-            await postReplyToComment(comment_id, replyData.comment, 'username');
+            await postReplyToComment(comment_id, replyData.comment);
             console.log('reply posted successfully!');
             setReplyData({ comment: '', status: 'success' });
         } catch (error) {
@@ -32,7 +32,7 @@ export const ReplyForm = ({ comment_id }) => {
 
     return (
         <div>
-            <p>Write reply:</p>
+            <p style={{marginBottom: "10px"}}>Write reply:</p>
             {replyData.status === 'success' && (
                 <p style={{ color: 'green' }}>Comment posted successfully!</p>
             )}
