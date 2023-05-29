@@ -216,3 +216,14 @@ h4 {
         height: 250px;
     }
 }
+
+@media (max-width: 400px) {
+    .videoInfoDiv{
+        width: 350px;
+    }
+
+    .azuremediaplayer{
+        width: 350px;
+        height: 250px;
+    }
+}

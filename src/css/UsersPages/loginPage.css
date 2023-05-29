@@ -335,3 +335,16 @@ h3 {
   }
   
 }
+
+@media (max-width: 400px) {
+  .card-3d-wrap, .card-3d-wrap-back, .card-front, .card-back{
+    width: 350px;
+    text-align: center;
+    z-index: 0;
+  }
+
+  .form-style{
+    width: 75%;
+  }
+  
+}
