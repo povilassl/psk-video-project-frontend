@@ -145,7 +145,6 @@ export const Register = () => {
                         .then((response) => setUser({ ...user, state: "success" }))
                         .catch((error) => {
                             setUser({ ...user, state: "failed" })
-                            console.log(error.response.data)
                             setErrorMsg(error.response.data)
                         })
                 }

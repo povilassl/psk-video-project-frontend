@@ -42,7 +42,7 @@ function App() {
         connection_user
           .start()
           .then(() => console.log("Connection established."))
-          .catch((error) => console.error(error));
+          .catch((error) => null);
       };
 
       createSignalRConnection(); // Call the function to create a new SignalR connection
@@ -77,7 +77,7 @@ function App() {
         connection_user
           .start()
           .then(() => console.log("Connection established."))
-          .catch((error) => console.error(error));
+          .catch((error) => null);
       };
 
       createSignalRConnection(); // Call the function to create a new SignalR connection

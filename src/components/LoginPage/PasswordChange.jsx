@@ -43,7 +43,6 @@ export function PasswordChange() {
 
             })
             .catch((err) => {
-                console.error(err)
                 toast.error("Something went wrong")
                 setState('failed')
             })
